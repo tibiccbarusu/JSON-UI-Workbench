@@ -1,0 +1,183 @@
+name: Publish 0.16.1 source ZIP
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/release-0161.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jsonui-workbench-release-0.16.1
+  cancel-in-progress: false
+
+env:
+  RELEASE_REPOSITORY: tibiccbarusu/JSON-UI-Workbench
+  RELEASE_COMMIT: fdc87ca5d5ce506ca7f1985fe7dbb8aa8e35066f
+  RELEASE_VERSION: 0.16.1
+  RELEASE_TAG: v0.16.1
+  RELEASE_ARCHIVE: jsonui-workbench-0.16.1-source.zip
+
+jobs:
+  build:
+    if: github.repository == 'tibiccbarusu/JSON-UI-Workbench' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fdc87ca5d5ce506ca7f1985fe7dbb8aa8e35066f
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check source identity and public files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
+          node --input-type=module -e 'import fs from "node:fs"; import assert from "node:assert/strict"; assert.equal(JSON.parse(fs.readFileSync("package.json", "utf8")).version, process.env.RELEASE_VERSION);'
+          node scripts/release/audit-public.mjs
+      - name: Build and verify the distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/release/package_public.py --output-dir dist
+          node scripts/release/audit-public.mjs "dist/jsonui-workbench-$RELEASE_VERSION" --verify-manifest
+          python - <<'PY'
+          import hashlib, json, os, stat, zipfile
+          from pathlib import Path, PurePosixPath
+          version = os.environ['RELEASE_VERSION']
+          folder = f'jsonui-workbench-{version}'
+          archive = Path('dist') / os.environ['RELEASE_ARCHIVE']
+          output = Path('dist') / folder
+          expected = {p.relative_to(output).as_posix(): p.read_bytes() for p in output.rglob('*') if p.is_file()}
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None, 'ZIP integrity check failed'
+              names = z.namelist()
+              assert len(names) == len(set(names)), 'Duplicate ZIP entries'
+              assert set(names) == {f'{folder}/{p}' for p in expected}, 'ZIP inventory differs from audited directory'
+              for info in z.infolist():
+                  path = PurePosixPath(info.filename)
+                  assert not path.is_absolute() and '..' not in path.parts and '\\' not in info.filename, 'Unsafe ZIP path'
+                  assert not stat.S_ISLNK(info.external_attr >> 16), 'ZIP contains a symbolic link'
+                  relative = path.relative_to(folder).as_posix()
+                  assert z.read(info.filename) == expected[relative], f'ZIP content mismatch: {relative}'
+          digest = hashlib.sha256(archive.read_bytes()).hexdigest()
+          checksum = archive.with_suffix(archive.suffix + '.sha256').read_text('ascii')
+          assert checksum == f'{digest}  {archive.name}\n', 'Checksum sidecar mismatch'
+          print(json.dumps({'archive': archive.name, 'bytes': archive.stat().st_size, 'files': len(expected), 'sha256': digest, 'status': 'passed'}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jsonui-workbench-0.16.1-release-assets
+          path: |
+            dist/jsonui-workbench-0.16.1-source.zip
+            dist/jsonui-workbench-0.16.1-source.zip.sha256
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    needs: build
+    if: github.repository == 'tibiccbarusu/JSON-UI-Workbench' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: jsonui-workbench-0.16.1-release-assets
+          path: release-assets
+      - name: Create draft, verify uploaded files, and publish
+        shell: bash
+        working-directory: release-assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: tibiccbarusu/JSON-UI-Workbench
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "$RELEASE_REPOSITORY"
+          sha256sum --check "$RELEASE_ARCHIVE.sha256"
+          existing_release="$(gh api "repos/$GH_REPO/releases?per_page=100" --jq '.[] | select(.tag_name == "v0.16.1") | .id')"
+          if [ -n "$existing_release" ]; then
+            echo 'Release v0.16.1 already exists; refusing to overwrite it.' >&2
+            exit 1
+          fi
+          existing_tag="$(gh api "repos/$GH_REPO/git/matching-refs/tags/v0.16.1" --jq '.[] | select(.ref == "refs/tags/v0.16.1") | .object.sha')"
+          if [ -n "$existing_tag" ] && [ "$existing_tag" != "$RELEASE_COMMIT" ]; then
+            echo 'Tag v0.16.1 points to an unexpected object; refusing to move it.' >&2
+            exit 1
+          fi
+          cat > "$RUNNER_TEMP/release-notes-0.16.1.md" <<'NOTES'
+          ## 日本語
+
+          Minecraft: Bedrock Edition の Classic JSON UI をゲーム外で読み込み・描画・検査する JSON UI Workbench 0.16.1 のソース配布です。
+
+          - 日英の説明書・仕様書・注意事項・ライセンス説明を同梱しています。
+          - CLI、Node.js API、ローカル HTTP API を利用できます。GUI は実験版です。
+          - Node.js 22.14.0 以降が必要です。ZIP を全て展開し、`package.json` のある場所で `npm ci --ignore-scripts`、`npm start` の順に実行してください。
+          - Classic UI 専用です。Pocket・タッチ UI とスマートフォンでの利用は非対応です。Minecraft 実機との完全一致を保証しません。
+          - 独自部分は PolyForm Noncommercial 1.0.0 です。商用目的の利用は許可しません。第三者ライブラリや読み込む素材には各条件が適用されます。Minecraft 素材は同梱していません。
+
+          ZIP は自動検査に合格したコミット `fdc87ca5d5ce506ca7f1985fe7dbb8aa8e35066f` から生成しました。描画実装は 0.16.0 と同じです。先に提供した 0.16.1 ZIP との違いは GitHub CI に必須の PNG 画素検査を追加したことです。このため ZIP の SHA-256 は以前の ZIP と異なります。
+
+          添付した `jsonui-workbench-0.16.1-source.zip` を使用してください。同名の `.sha256` はダウンロード後の照合用です。ZIP 内の `PUBLIC-DISTRIBUTION.json` にはファイル一覧と SHA-256 を記録しています。
+
+          ## English
+
+          Source distribution of JSON UI Workbench 0.16.1, a tool for loading, rendering and inspecting Minecraft: Bedrock Edition Classic JSON UI outside the game.
+
+          - Includes Japanese and English user guides, technical specifications, limitations and license explanations.
+          - Provides a CLI, a Node.js API and a local HTTP API. The GUI is experimental.
+          - Requires Node.js 22.14.0 or newer. Extract the complete ZIP, open a terminal in the folder containing `package.json`, and run `npm ci --ignore-scripts`, then `npm start`.
+          - Supports Classic UI only. Pocket/touch UI and smartphone use are unsupported. Complete parity with Minecraft is not guaranteed.
+          - Original portions use PolyForm Noncommercial 1.0.0; commercial purposes are not permitted. Third-party libraries and imported assets retain their own terms. Minecraft assets are not included.
+
+          Built from the tested commit `fdc87ca5d5ce506ca7f1985fe7dbb8aa8e35066f`. The rendering implementation is unchanged from 0.16.0. Compared with the previously supplied 0.16.1 ZIP, GitHub CI now requires a PNG pixel check, so the ZIP SHA-256 differs.
+
+          Download the attached `jsonui-workbench-0.16.1-source.zip`. Its `.sha256` sidecar checks the downloaded archive. `PUBLIC-DISTRIBUTION.json` inside the ZIP lists files and their SHA-256 hashes.
+          NOTES
+          gh release create "$RELEASE_TAG" --repo "$GH_REPO" --target "$RELEASE_COMMIT" --title "JSON UI Workbench $RELEASE_VERSION" --notes-file "$RUNNER_TEMP/release-notes-0.16.1.md" --draft
+          gh release upload "$RELEASE_TAG" "$RELEASE_ARCHIVE" "$RELEASE_ARCHIVE.sha256" --repo "$GH_REPO"
+          release_id="$(gh api "repos/$GH_REPO/releases?per_page=100" --jq '.[] | select(.tag_name == "v0.16.1") | .id')"
+          [[ "$release_id" =~ ^[0-9]+$ ]]
+          gh api "repos/$GH_REPO/releases/$release_id" > "$RUNNER_TEMP/release-0.16.1.json"
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          data = json.loads((Path(os.environ['RUNNER_TEMP']) / 'release-0.16.1.json').read_text())
+          assert data['draft'] is True and data['tag_name'] == os.environ['RELEASE_TAG']
+          assert data['target_commitish'] == os.environ['RELEASE_COMMIT']
+          expected = {os.environ['RELEASE_ARCHIVE'], os.environ['RELEASE_ARCHIVE'] + '.sha256'}
+          assert len(data['assets']) == len(expected) and {a['name'] for a in data['assets']} == expected
+          for asset in data['assets']:
+              assert asset['state'] == 'uploaded'
+              assert asset['size'] == Path(asset['name']).stat().st_size
+              if asset.get('digest'):
+                  assert asset['digest'] == 'sha256:' + hashlib.sha256(Path(asset['name']).read_bytes()).hexdigest()
+          PY
+          mkdir "$RUNNER_TEMP/release-0.16.1-download"
+          gh release download "$RELEASE_TAG" --repo "$GH_REPO" --pattern "$RELEASE_ARCHIVE*" --dir "$RUNNER_TEMP/release-0.16.1-download"
+          cmp "$RELEASE_ARCHIVE.sha256" "$RUNNER_TEMP/release-0.16.1-download/$RELEASE_ARCHIVE.sha256"
+          cmp "$RELEASE_ARCHIVE" "$RUNNER_TEMP/release-0.16.1-download/$RELEASE_ARCHIVE"
+          (cd "$RUNNER_TEMP/release-0.16.1-download" && sha256sum --check "$RELEASE_ARCHIVE.sha256")
+          gh release edit "$RELEASE_TAG" --repo "$GH_REPO" --target "$RELEASE_COMMIT" --draft=false --latest
+          uploaded_tag="$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq '.object.sha')"
+          test "$uploaded_tag" = "$RELEASE_COMMIT"
+          gh api "repos/$GH_REPO/releases/$release_id" > "$RUNNER_TEMP/release-0.16.1-published.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads((Path(os.environ['RUNNER_TEMP']) / 'release-0.16.1-published.json').read_text())
+          assert data['draft'] is False and data['prerelease'] is False
+          assert data['tag_name'] == os.environ['RELEASE_TAG'] and data['target_commitish'] == os.environ['RELEASE_COMMIT']
+          assert len(data['assets']) == 2 and all(a['state'] == 'uploaded' for a in data['assets'])
+          print(json.dumps({'url': data['html_url'], 'tag': data['tag_name'], 'draft': data['draft'], 'assets': [{k: a.get(k) for k in ('name', 'size', 'digest', 'browser_download_url')} for a in data['assets']]}))
+          PY
