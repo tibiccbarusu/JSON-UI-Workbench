@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/wrapped"
+    },
+    {
+      "$ref": "#/definitions/bare"
+    }
+  ],
+  "definitions": {
+    "bare": {
+      "additionalProperties": true,
+      "description": "Variables at the root object level (keys should start with $).",
+      "patternProperties": {
+        "^\\$": {}
+      },
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "format_version": {
+          "type": "number"
+        }
+      },
+      "title": "Bare format",
+      "type": "object"
+    },
+    "varMap": {
+      "additionalProperties": true,
+      "description": "Variable map (keys should start with $). Values may be strings, numbers, booleans, arrays, or objects.",
+      "patternProperties": {
+        "^\\$": {}
+      },
+      "type": "object"
+    },
+    "wrapped": {
+      "additionalProperties": true,
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "format_version": {
+          "type": "number"
+        },
+        "variables": {
+          "$ref": "#/definitions/varMap"
+        }
+      },
+      "required": [
+        "format_version",
+        "variables"
+      ],
+      "title": "Wrapped format",
+      "type": "object"
+    }
+  },
+  "description": "Schema for ui/_global_variables.json. This editor supports both wrapped and bare formats (see definitions).",
+  "title": "ui/_global_variables.json (Bedrock JSON UI; editor subset)"
+}

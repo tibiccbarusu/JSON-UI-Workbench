@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "JSON UI revision12 demo",
+    "description": "独自の小さなClassic UI検証パック。ゲーム内画面を置換しません。",
+    "uuid": "23e6dafe-7061-4ad3-8d13-328b247c3f8c",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "fdacb4e1-1e57-46e1-90b6-5b4e66d1c2c7",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ]
+}

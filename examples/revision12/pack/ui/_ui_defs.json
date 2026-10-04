@@ -1,0 +1,6 @@
+{
+  "ui_defs": [
+    "ui/demo.json",
+    "ui/inherited.json"
+  ]
+}

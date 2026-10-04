@@ -1,0 +1,8 @@
+{
+  "ui_defs": [
+    "ui/demo13.json",
+    "ui/widgets.json",
+    "ui/pocket/demo13_pocket.json",
+    "ui/unused.json"
+  ]
+}

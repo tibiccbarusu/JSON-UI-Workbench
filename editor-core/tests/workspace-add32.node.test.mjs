@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {insertionParent32,setAddType32,setInsertionRelation32,beginAdd32,currentAdd32,finishAdd32} from '../src/ui/workspace-add-intent32.js';
+import {structureIdentity31,screenStructureOperation31} from '../src/ui/workspace-structure-intent31.js';
+const state=()=>({workspaceId:'w',revision:'r',addType:'',addGeneration32:0,mode:'edit',editScope:'screen',editTargetMode:'interaction',activePath:'ui/a.json',activeSourceId:'p',selectedPointer:'/a/controls/0/picture',previewSelection:{fileId:'a',nodeId:'a/picture',path:'ui/a.json',sourceId:'p',pointer:'/a/controls/0/picture',effectivePointer:'/a/controls/0/picture',screen:{path:'ui/a.json',pointer:'/a',sourceId:'p'}}});
+const nodes={root:{id:'root',type:'screen',children:['panel']},panel:{id:'panel',type:'panel',children:['picture']},picture:{id:'picture',type:'image',children:[]}};
+test('R32 通常パネルの内部追加',()=>assert.equal(insertionParent32({nodesById:nodes,selectedId:'panel'}).id,'panel'));
+test('R32 画像を内部追加先として無断使用しない',()=>assert.throws(()=>insertionParent32({nodesById:nodes,selectedId:'picture'}),{code:'WORKSPACE_ADD_PARENT_REQUIRED'}));
+test('R32 同じ階層を明示すると実際の親へ追加',()=>assert.equal(insertionParent32({nodesById:nodes,selectedId:'picture',relation:'sibling'}).id,'panel'));
+test('R32 選択なしでファイル最初の定義を親にしない',()=>assert.throws(()=>insertionParent32({nodesById:nodes,selectedId:''}),{code:'WORKSPACE_ADD_PARENT_REQUIRED'}));
+for(const type of ['stack_panel','grid','factory'])test(`R32 ${type}へ自由配置と偽らない`,()=>assert.throws(()=>insertionParent32({nodesById:{auto:{id:'auto',type}},selectedId:'auto'}),{code:'WORKSPACE_ADD_FLOW_LAYOUT'}));
+test('R32 拒否後も種類を保持し親だけ変更して再試行',()=>{const s=state();setAddType32(s,'label');const a=beginAdd32(s);finishAdd32(s,a,{error:Error('親を選ぶ')});assert.equal(s.addType,'label');assert.equal(s.addStatus32.modeRetained,true);setInsertionRelation32(s,'sibling');const b=beginAdd32(s);assert(b&&b.id!==a.id);finishAdd32(s,b,{accepted:true});assert.equal(s.addType,'');});
+test('R32 確認中の二重クリックは二つ目の要求を作らない',()=>{const s=state();setAddType32(s,'image');const a=beginAdd32(s);assert(a);assert.equal(beginAdd32(s),null);});
+test('R32 中止後の古い成功応答でモードを再開しない',()=>{const s=state();setAddType32(s,'image');const a=beginAdd32(s);setAddType32(s,'');assert.equal(currentAdd32(s,a),false);finishAdd32(s,a,{accepted:true});assert.equal(s.addType,'');assert.equal(s.addStatus32.status,'cancelled');});
+test('R32 新種類を古い成功応答で消さない',()=>{const s=state();setAddType32(s,'image');const a=beginAdd32(s);setAddType32(s,'button');finishAdd32(s,a,{accepted:true});assert.equal(s.addType,'button');assert.equal(s.addStatus32.status,'ready');});
+test('R32 新種類を古い拒否応答で戻さない',()=>{const s=state();setAddType32(s,'image');const a=beginAdd32(s);setAddType32(s,'label');finishAdd32(s,a,{error:Error('old')});assert.equal(s.addType,'label');});
+test('R32 元revisionが変わると保留した追加は古くなる',()=>{const s=state();setAddType32(s,'label');const a=beginAdd32(s);s.revision='new';assert.equal(currentAdd32(s,a),false);});
+test('R32 明示追加先は元の画像選択と独立し、同じ画面へ固定',()=>{const s=state();const parent={...s.previewSelection,nodeId:'a',pointer:'/a',effectivePointer:'/a'};const op=screenStructureOperation31(s,{type:'add',name:'n',value:{type:'label'}},parent);assert.equal(op.parentPointer,'/a');assert.equal(s.previewSelection.nodeId,'a/picture');assert.equal(op.scope,'screen');});
+test('R32 別画面の親を追加先として送れない',()=>{const s=state();const parent={...s.previewSelection,screen:{path:'ui/a.json',pointer:'/other'}};assert.throws(()=>screenStructureOperation31(s,{type:'add'},parent),{code:'WORKSPACE_STRUCTURE_TARGET_STALE'});});
+test('R32 削除単位や追加世代の変更で古い計画を再利用しない',()=>{const s=state(),before=structureIdentity31(s);s.deleteUnit32='functional';assert.notEqual(structureIdentity31(s),before);const next=structureIdentity31(s);setAddType32(s,'label');assert.notEqual(structureIdentity31(s),next);});
+
+test('R32 別workspaceへ切り替わった後の成功で新しい入力を消さない',()=>{const s=state();setAddType32(s,'image');const a=beginAdd32(s);s.workspaceId='other';finishAdd32(s,a,{accepted:true});assert.equal(s.addType,'image');assert.equal(s.addFlight32,null);});

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>S023 PackSource Overlay Fixture</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .fixture {
+        padding: 16px;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 12px;
+        border-radius: 8px;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="fixture">
+      <h1>S023 PackSource Overlay Fixture</h1>
+      <p>
+        This fixture validates the S023 overlay rule: <strong>imported overrides win</strong>,
+        otherwise fall back to vanilla.
+      </p>
+      <pre id="out">Running…</pre>
+    </main>
+
+    <script type="module">
+      import { MemoryPackSource } from '../../src/pack-io/memory-pack-source.js';
+      import { createOverlayPackSource } from '../../src/pack-io/overlay-pack-source.js';
+
+      const outEl = document.getElementById('out');
+
+      function line(s = '') {
+        outEl.textContent += `${s}\n`;
+      }
+
+      function pass(label) {
+        line(`PASS: ${label}`);
+      }
+
+      function fail(label, details) {
+        line(`FAIL: ${label}`);
+        if (details) line(`  ${details}`);
+      }
+
+      async function run() {
+        outEl.textContent = '';
+
+        // "Vanilla" base source.
+        const vanilla = new MemoryPackSource({
+          id: 'vanilla',
+          files: {
+            'ui/demo.json': { text: '{"from":"vanilla"}' },
+            'ui/only-vanilla.json': { text: '{"only":"vanilla"}' },
+            'textures/demo.txt': { blob: new Blob(['VANILLA_BLOB'], { type: 'text/plain' }) },
+          },
+        });
+
+        // "Imported" overrides source.
+        const imported = new MemoryPackSource({
+          id: 'imported',
+          files: {
+            'ui/demo.json': { text: '{"from":"imported"}' },
+            'ui/only-imported.json': { text: '{"only":"imported"}' },
+            'textures/demo.txt': { blob: new Blob(['IMPORTED_BLOB'], { type: 'text/plain' }) },
+          },
+        });
+
+        const overlay = createOverlayPackSource({
+          id: 'overlay',
+          base: vanilla,
+          overrides: imported,
+        });
+
+        // 1) Overridden path resolves to imported.
+        try {
+          const text = await overlay.readText('ui/demo.json');
+          if (text === '{"from":"imported"}') pass('readText override wins (ui/demo.json)');
+          else fail('readText override wins (ui/demo.json)', `Expected imported, got: ${text}`);
+        } catch (e) {
+          fail('readText override wins (ui/demo.json)', e && e.message ? e.message : String(e));
+        }
+
+        // 2) Base-only path resolves to vanilla.
+        try {
+          const text = await overlay.readText('ui/only-vanilla.json');
+          if (text === '{"only":"vanilla"}') pass('readText falls back to base (ui/only-vanilla.json)');
+          else fail('readText falls back to base (ui/only-vanilla.json)', `Expected vanilla, got: ${text}`);
+        } catch (e) {
+          fail('readText falls back to base (ui/only-vanilla.json)', e && e.message ? e.message : String(e));
+        }
+
+        // 3) Blob override resolves to imported.
+        try {
+          const blob = await overlay.readBlob('textures/demo.txt', { mimeType: 'text/plain' });
+          const text = await blob.text();
+          if (text === 'IMPORTED_BLOB') pass('readBlob override wins (textures/demo.txt)');
+          else fail('readBlob override wins (textures/demo.txt)', `Expected imported blob, got: ${text}`);
+        } catch (e) {
+          fail('readBlob override wins (textures/demo.txt)', e && e.message ? e.message : String(e));
+        }
+
+        // 4) listFiles returns union.
+        try {
+          const lst = await overlay.listFiles();
+          const got = new Set(lst.paths);
+          const expected = [
+            'textures/demo.txt',
+            'ui/demo.json',
+            'ui/only-imported.json',
+            'ui/only-vanilla.json',
+          ];
+
+          const missing = expected.filter((p) => !got.has(p));
+          if (!missing.length) pass('listFiles returns union of base + overrides');
+          else fail('listFiles returns union of base + overrides', `Missing: ${missing.join(', ')}`);
+        } catch (e) {
+          fail('listFiles returns union of base + overrides', e && e.message ? e.message : String(e));
+        }
+
+        // 5) Missing path returns PACK_NOT_FOUND.
+        try {
+          await overlay.readText('ui/does-not-exist.json');
+          fail('readText missing returns PACK_NOT_FOUND', 'Expected an error, but readText succeeded');
+        } catch (e) {
+          const msg = e && e.message ? e.message : String(e);
+          if (msg === 'PACK_NOT_FOUND') pass('readText missing returns PACK_NOT_FOUND');
+          else fail('readText missing returns PACK_NOT_FOUND', `Expected PACK_NOT_FOUND, got: ${msg}`);
+        }
+
+        line('');
+        line('DONE');
+      }
+
+      run();
+    </script>
+  </body>
+</html>

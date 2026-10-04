@@ -1,0 +1,154 @@
+{
+  "editable_properties_by_type": {
+    "button": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible",
+      "text",
+      "font_type",
+      "font_size",
+      "text_alignment",
+      "shadow"
+    ],
+    "collection_panel": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "dropdown": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible",
+      "text",
+      "font_type",
+      "font_size",
+      "text_alignment",
+      "shadow"
+    ],
+    "edit_box": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible",
+      "text",
+      "font_type",
+      "font_size",
+      "text_alignment",
+      "shadow"
+    ],
+    "grid": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "image": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "input_panel": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "label": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible",
+      "text",
+      "font_type",
+      "font_size",
+      "text_alignment",
+      "shadow"
+    ],
+    "panel": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "screen": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "scroll_track": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "scroll_view": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "scrollbar_box": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "stack_panel": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ],
+    "toggle": [
+      "offset",
+      "size",
+      "anchor_from",
+      "anchor_to",
+      "visible"
+    ]
+  },
+  "notes": [
+    "Generated from src/model/element-registry.js and src/model/ui-screen-model.js.",
+    "This is not a complete Bedrock JSON UI specification; it is an editor-aligned subset.",
+    "Schemas allow unknown fields via additionalProperties=true to reduce false positives."
+  ],
+  "schema_bundle_version": 2,
+  "schema_dialect": "draft-07",
+  "schema_dialect_uri": "https://json-schema.org/draft-07/schema",
+  "supported_element_types": [
+    "screen",
+    "panel",
+    "collection_panel",
+    "label",
+    "button",
+    "dropdown",
+    "image",
+    "input_panel",
+    "stack_panel",
+    "grid",
+    "scroll_view",
+    "edit_box",
+    "toggle",
+    "scroll_track",
+    "scrollbar_box"
+  ]
+}

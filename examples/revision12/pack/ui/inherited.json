@@ -1,0 +1,8 @@
+{
+  "namespace": "demo_child",
+  "inherited@demo.second": {
+    "$page_title": "demo.inherited",
+    "$right_label": "demo.next",
+    "$right_action": "demo.open_second"
+  }
+}

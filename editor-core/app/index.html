@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>JSON UI Workbench · GUI 実験版</title>
+    <meta
+      name="description"
+      content="Minecraft Bedrockのリソースパックをローカルで読み込み、ファイルとUI定義を選んでClassic UIをプレビューします。"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self' blob: data:; worker-src 'self' blob:; connect-src 'self' https://raw.githubusercontent.com; object-src 'none'; base-uri 'none'"
+    />
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./studio35.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#route-root">作業画面へ移動</a>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title"><span class="brand-mark" aria-hidden="true">J</span> JSON UI Workbench <span class="brand-product">for Minecraft Bedrock · Unofficial</span></div>
+        <div class="brand-subtitle">Classic UI · プレビュー・原文編集・要素配置・選択書き出し</div>
+      </div>
+
+      <nav class="topnav" aria-label="メインメニュー">
+        <a href="#/editor" data-route="editor">プレビュー</a>
+        <a href="#/help" data-route="help">使い方</a>
+        <a href="#/logs" data-route="logs">ログ・診断</a>
+      </nav>
+
+      <div class="topbar-actions">
+        <span class="local-edition-badge">EXPERIMENTAL GUI</span>
+        <button
+          id="btn-lang"
+          type="button"
+          class="btn"
+          disabled
+          title="表示言語を切り替え"
+        >
+          EN
+        </button>
+      </div>
+    </header>
+
+    <aside class="experimental-gui-notice" role="note">
+      <span lang="ja"><strong>GUI 実験版（未完成）</strong> — 画面での編集には不具合が残っています。書き出す前に変更結果を確認してください。</span>
+      <span lang="en"><strong>Experimental GUI (unfinished)</strong> — Visual editing still has known issues. Review your changes before exporting.</span>
+    </aside>
+
+    <main class="main" aria-label="JSON UI作業画面">
+      <noscript>
+        <div class="noscript">
+          このアプリにはJavaScriptが必要です。ブラウザでJavaScriptを有効にしてから、起動BATで開き直してください。
+        </div>
+      </noscript>
+      <div id="route-root" class="route-root" tabindex="-1"></div>
+    </main>
+
+    <footer class="statusbar" aria-label="処理状況" aria-live="polite">
+      <div id="studio-progress26" class="studio-progress26" aria-live="off" hidden><progress max="100" aria-label="処理の進捗"></progress><span></span><a href="#/logs">状況を確認</a></div>
+      <span id="status-text">準備完了。ZIP または MCPACK のリソースパックを選択してください。</span>
+    </footer>
+
+    <!-- Vendored zip.js 2.8.16. Loaded as a classic script so it attaches to window.zip. -->
+    <script src="../vendor/zip.js-2.8.16/zip.min.js"></script>
+
+    <!-- Vendored jsonc-parser 3.3.1. Loaded as a classic script so it attaches to window.jsoncParser. -->
+    <script src="../vendor/jsonc-parser-3.3.1/main.js"></script>
+
+    <!-- Buildless entrypoint: native ES modules -->
+    <script type="module" src="../src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+SETUP_ARCH_UNSUPPORTED: この初期導入は Windows x64 / ARM64 に対応します。local-node\START-ja.md を確認してください。
+SETUP_DOWNLOAD: 公式 Node.js 24.21.0 を取得します。試行は最大 2 回、各回の期限は 180 秒です。
+SETUP_POLICY_FAILED: 初回準備を実行できません。OS のスクリプト実行ポリシーは変更していません。local-node\START-ja.md を確認してください。
+SETUP_EXISTING_RUNTIME_INVALID: 専用 Node を検証できません。上書きしていません。local-node\START-ja.md を確認してください。
+SETUP_SHA256_MISMATCH: SHA-256 が一致しません。取得したプログラムは実行しません。
+SETUP_PATH_LONG: 展開先が長すぎます。ZIP 一式を短いフォルダーへ展開してください。
+SETUP_PACKAGE_INCOMPLETE: 必要なアプリファイルがありません。ZIP 全体を書き込み可能なフォルダーへ展開し、その中の start.bat を実行してください。
+SETUP_FAILED: 初回準備に失敗しました。.jsonui\bootstrap.log と local-node\START-ja.md を確認してください。
+SETUP_VERIFYING: 受信が完了しました。公式の SHA-256 と照合しています。検証完了後に起動します。
+SETUP_FALLBACK_FAILED: 代替の初回準備または起動に失敗しました。直前の詳細コードと .jsonui\bootstrap.log を確認してください。OS のポリシーは変更していません。
+SETUP_LAUNCH_FAILED: サイトの起動または終了に失敗しました。.jsonui\launcher.log と .jsonui\server.log を確認し、同じ start.bat で再実行してください。

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>JSONUI - Unit Tests</title>
+
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        margin: 16px;
+        line-height: 1.4;
+      }
+      header {
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        flex-wrap: wrap;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      #summary {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        padding: 8px 10px;
+        border: 1px solid rgba(127, 127, 127, 0.35);
+        border-radius: 8px;
+        margin-top: 12px;
+        white-space: pre-wrap;
+      }
+      #results {
+        margin-top: 12px;
+        padding-left: 20px;
+      }
+      .pass {
+        color: #0a7a00;
+      }
+      .fail {
+        color: #b00020;
+      }
+      .meta {
+        opacity: 0.8;
+        font-size: 12px;
+      }
+      .details {
+        margin-top: 4px;
+        padding: 6px 8px;
+        border-left: 3px solid rgba(127, 127, 127, 0.4);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>JSONUI Web Editor - Unit Tests</h1>
+      <div class="meta">Browser-runnable (no build step). Open DevTools Console for extra logs.</div>
+    </header>
+
+    <div id="summary">Loading tests…</div>
+    <ol id="results"></ol>
+
+    <script type="module" src="./test-runner.js"></script>
+  </body>
+</html>

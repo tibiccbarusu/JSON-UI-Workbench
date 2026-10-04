@@ -1,0 +1,11 @@
+SETUP_ARCH_UNSUPPORTED: This bootstrap supports Windows x64 and ARM64. See local-node\START-ja.md.
+SETUP_DOWNLOAD: Downloading official Node.js 24.21.0. Up to 2 attempts, with a 180-second limit each.
+SETUP_POLICY_FAILED: Setup could not run. OS script policy is unchanged. See local-node\START-ja.md.
+SETUP_EXISTING_RUNTIME_INVALID: The private runtime could not be verified. It was not overwritten. See local-node\START-ja.md.
+SETUP_SHA256_MISMATCH: SHA-256 mismatch. The downloaded program will not be executed.
+SETUP_PATH_LONG: The extraction path is too long. Extract the complete package to a shorter folder.
+SETUP_PACKAGE_INCOMPLETE: Required application files are missing. Extract the complete ZIP to a writable folder, then run start.bat there.
+SETUP_FAILED: Setup failed. See .jsonui\bootstrap.log and local-node\START-ja.md.
+SETUP_VERIFYING: Download complete. Checking the pinned official SHA-256 before startup.
+SETUP_FALLBACK_FAILED: Fallback setup or startup failed. Check the preceding detailed code and .jsonui\bootstrap.log. OS policy was not changed.
+SETUP_LAUNCH_FAILED: Site startup or shutdown failed. Check .jsonui\launcher.log and .jsonui\server.log, then run the same start.bat again.

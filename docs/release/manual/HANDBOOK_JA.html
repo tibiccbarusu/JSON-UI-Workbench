@@ -1,0 +1,1508 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JSON UI Workbench 0.16.1 日本語ハンドブック</title><style>
+:root{color-scheme:light;--ink:#172c3c;--muted:#526476;--accent:#145b73;--line:#d6e1e7;--paper:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#edf2f5;color:var(--ink);font:16px/1.85 system-ui,-apple-system,"Segoe UI","Noto Sans CJK JP","Yu Gothic","Hiragino Sans",Meiryo,sans-serif;overflow-wrap:anywhere}
+header,main,footer{max-width:1040px;margin:auto;background:var(--paper);padding:36px 54px}header{border-top:7px solid var(--accent);padding-bottom:22px}main{padding-top:12px}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.eyebrow{font-size:.82rem;letter-spacing:.08em;color:var(--accent);margin:0}h1{font-size:2rem;line-height:1.35;margin:.35em 0}h2{font-size:1.62rem;line-height:1.5;border-bottom:2px solid var(--line);padding-bottom:.35em;margin-top:1.3em}h3{font-size:1.24rem;line-height:1.5;margin-top:1.8em}h4{font-size:1.08rem;line-height:1.5}p{margin:.8em 0}a{color:#075e86;text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:3px solid #f0a33c;outline-offset:4px}li{margin:.35em 0}strong{font-weight:700}
+.scope-note{border-left:4px solid var(--accent);padding:10px 16px;background:#eef6f9}.meta{color:var(--muted)}details{border:1px solid var(--line);padding:12px 18px;margin-top:20px}summary{cursor:pointer;font-weight:600}.toc{padding-left:1.5em}.toc li{margin:.25em 0}.chapter{padding-top:22px;margin-top:24px;border-top:1px solid var(--line)}.chapter:first-child{border-top:0;margin-top:8px;padding-top:0}
+code{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;background:#f0f4f7;padding:.12em .28em;border-radius:3px;overflow-wrap:anywhere}pre{background:#142b3a;color:#eff7fc;padding:17px 20px;border-radius:5px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;margin:1em 0;max-width:100%}pre code{color:inherit;background:none;padding:0;border:0;border-radius:0;font-size:.86rem;white-space:inherit}blockquote{margin:1em 0;padding:.3em 1.2em;border-left:3px solid var(--line);color:var(--muted)}
+.table-wrap{max-width:100%;overflow-x:auto;margin:1.1em 0;overscroll-behavior:contain}table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.7}th,td{border:1px solid var(--line);padding:9px 11px;vertical-align:top;text-align:left;overflow-wrap:anywhere}th{background:#eaf1f5;color:#193e52}tr:nth-child(even) td{background:#f8fafb}table code{font-size:.9em}img{max-width:100%;height:auto}hr{border:0;border-top:1px solid var(--line);margin:1.5em 0}.top-link{font-size:.88rem;margin-top:24px}
+@media(max-width:640px){header,main,footer{padding:22px 18px}body{font-size:15px}h1{font-size:1.62rem}h2{font-size:1.38rem}h3{font-size:1.12rem}pre{padding:13px 12px}th,td{padding:7px 8px}table{min-width:580px}details{padding:10px 12px}}
+@media print{html{scroll-behavior:auto}body{background:#fff;font-size:10pt;line-height:1.6}header,main,footer{max-width:none;padding:0}header{border-top:0}.chapter{break-before:page;border-top:0;padding-top:0;margin-top:0}.chapter:first-child{break-before:auto}details,.top-link{display:none}h2,h3,h4{break-after:avoid}pre{background:#f2f5f7;color:#172c3c;break-inside:auto;font-size:8pt}pre code{font-size:8pt}.table-wrap{overflow:visible}table{min-width:0;font-size:8pt}thead{display:table-header-group}tr{break-inside:avoid}a{color:inherit;text-decoration:underline}footer{margin-top:1em}@page{size:A4;margin:18mm}}
+</style></head><body><header id="top"><p class="eyebrow">JSON UI WORKBENCH · 0.16.1</p><h1>JSON UI Workbench<br>日本語ハンドブック</h1><p class="meta">説明書 → 仕様書 → 注意事項 → ライセンスの順に収録しました。文書・ライセンス整備版で、描画実装は 0.16.0 のままです。教材の実行には完全なソース ZIP を使用してください。本文はこの HTML だけで読めます。補助リンク先は配布 ZIP にあります。</p><p class="scope-note"><strong>Classic UI 専用。Pocket・タッチ向け UI と、スマートフォン上での本ツールの利用は非対応です。GUI 編集は実験版です。</strong></p><details><summary>目次を開く</summary><ol class="toc"><li><a href="#guide">JSON UI Workbench 0.16.1 — 日本語説明書</a></li><li><a href="#spec">JSON UI Workbench 0.16.1 技術仕様書</a></li><li><a href="#limitations">JSON UI Workbench 0.16.1 — 注意事項・対応範囲</a></li><li><a href="#scope">License / ライセンス — JSON UI Workbench 0.16.1</a></li><li><a href="#license">ライセンスの日本語説明 — 0.16.1</a></li><li><a href="#thirdparty">第三者の権利表示 — JSON UI Workbench 0.16.1</a></li><li><a href="#official">PolyForm Noncommercial License 1.0.0</a></li></ol></details></header><main><section class="chapter" aria-labelledby="guide"><h2 id="guide">JSON UI Workbench 0.16.1 — 日本語説明書</h2>
+<p><a href="HANDBOOK_EN.html#guide">English</a> · <a href="#spec">仕様書</a> · <a href="#limitations">注意事項</a> · <a href="#scope">ライセンス</a></p>
+<p>このアプリは、Minecraft Bedrock のリソースパックに書かれた <strong>Classic JSON UI</strong> を読み、見た目と代表的な状態をゲームの外で調べるツールです。ゲームを起動したり、アドオンの JavaScript を実行したりするものではありません。まず付属の小さな例で「取込み → 画面選択 → プレビュー → 編集 → 書出し」を試してください。</p>
+<p><strong>対応するのは Classic UI のプレビューです。Pocket UI・スマートフォンで通常使われるタッチ向け UI のプレビューには対応していません。</strong> この配布物は PC 上の Node.js で使う構成で、スマートフォン用アプリでもありません。端末の種類と Minecraft の UI プロファイルは別の条件です。詳しくは <a href="#limitations">注意事項</a> を参照してください。</p>
+<h3 id="guide-1-最初に選ぶ使い方">1. 最初に選ぶ使い方</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>使いたい方法</th>
+<th>入口</th>
+<th>向いている作業</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ターミナルにコマンドを入力する</td>
+<td>CLI・本書の標準手順</td>
+<td>検査、画像作成、原文編集、パック書出し</td>
+</tr>
+<tr>
+<td>プログラムから繰り返し呼び出す</td>
+<td>Node API</td>
+<td>同じパックの繰り返し描画、AI との連携</td>
+</tr>
+<tr>
+<td>Python 等から HTTP で呼び出す</td>
+<td>HTTP API</td>
+<td>常駐するローカルサービスへの要求</td>
+</tr>
+<tr>
+<td>マウスで見ながら編集する</td>
+<td>GUI・実験版</td>
+<td>手動の確認と編集。未完成なので結果確認が必要</td>
+</tr>
+</tbody></table></div>
+<p><code>npm start</code> は <strong>CLI の案内を表示して終了</strong>します。ブラウザーを開くには <code>npm run gui</code> を使います。従来の <code>start.bat</code> も GUI 用の互換入口です。CLI と API は自動でブラウザーを開きません。</p>
+<h3 id="guide-2-インストールして準備する">2. インストールして準備する</h3>
+<ol>
+<li>配布 ZIP をすべて展開します。ZIP の中から直接実行せず、たとえば <code>C:\Tools\jsonui-workbench-0.16.1</code> に置きます。</li>
+<li><a href="https://nodejs.org/en/download">Node.js 公式サイト</a>から <strong>22.14.0 以上</strong>の対応する Node.js と npm を用意します。初期検証の基準は Node.js 22.14.0 です。</li>
+<li>Windows では、そのフォルダーをエクスプローラーで開き、アドレス欄に <code>powershell</code> と入力して Enter を押します。これで、このフォルダーを作業場所にしたターミナルが開きます。</li>
+<li>次を一行ずつ実行します。</li>
+</ol>
+<pre><code class="language-powershell">node --version
+npm --version
+npm ci --ignore-scripts
+node local-node/cli.mjs help
+</code></pre>
+<p><code>npm ci</code> は同梱の <code>package-lock.json</code> に従って依存を入れます。<code>--ignore-scripts</code> は依存のインストール時スクリプトを実行しない指定です。初回はパッケージ取得の通信が必要です。<strong>既存の <code>node_modules</code> は <code>npm ci</code> により置き換わる</strong>ので、自分の別プロジェクトでは実行しないでください。JSON と SVG の検査とは別に、PNG には任意依存の <code>@napi-rs/canvas</code> が必要です。</p>
+<p>Windows で <code>npm.ps1</code> が実行ポリシーにより拒否されたら、同じフォルダーで <code>npm.cmd ci --ignore-scripts</code>、<code>npm.cmd run gui</code> のように <code>npm.cmd</code> を使えます。実行ポリシーを変更する必要はありません。</p>
+<p>Windows で「<code>node</code> が認識されない」と出たら、インストール後にターミナルを開き直して <code>node --version</code> を確認します。<code>start.bat</code> がアプリ専用 Node を用意している場合は、<code>node</code> の代わりに <code>.\.jsonui\runtime\node.exe</code> を指定できます。GUI 用ランチャーだけでは npm と PNG 依存の導入まで完了したとは限りません。</p>
+<p>macOS/Linux ではターミナルで展開先へ <code>cd</code> し、同じ <code>node</code> と <code>npm</code> のコマンドを使います。本書のコマンド中の <code>/</code> は PowerShell と POSIX シェルの双方で使えます。Windows 固有の <code>Get-Content</code> や <code>Invoke-RestMethod</code> は POSIX シェルのコマンドではありません。</p>
+<h3 id="guide-3-ファイルの場所と名前を区別する">3. ファイルの場所と名前を区別する</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>例</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>outputs/manual-demo.mcpack</code></td>
+<td>PC 上の入力パック。通常の相対パスは、現在の作業フォルダーが基準</td>
+</tr>
+<tr>
+<td><code>outputs/manual-session.json</code></td>
+<td>CLI の作業記録。元パックの場所・ハッシュ・設定・編集差分を保存</td>
+</tr>
+<tr>
+<td><code>ui/manual_demo.json</code></td>
+<td><strong>パックの中</strong>の UI ファイル。PC 上に同名ファイルがなくてもよい</td>
+</tr>
+<tr>
+<td><code>manual.screen</code></td>
+<td>ファイルの中の UI 定義名。名前空間 <code>manual</code> と定義 <code>screen</code> の組合せ</td>
+</tr>
+<tr>
+<td><code>/screen/controls/2/card</code></td>
+<td>JSON Pointer。原文 JSON の中の編集対象を指定する経路</td>
+</tr>
+</tbody></table></div>
+<p>パスに空白がある場合は <code>&quot;C:\My Packs\sample.mcpack&quot;</code> のように引用符で囲みます。以後は毎回同じ <code>--session</code> を指定してください。省略すると、現在の作業フォルダーにある <code>.jsonui-cli/session.json</code> が使われます。</p>
+<h3 id="guide-4-付属の例で初めてのプレビューを作る">4. 付属の例で初めてのプレビューを作る</h3>
+<p>この例は、本書用の JSON、白い 1 ピクセルの画像、付属の人工 OGG 音を使います。Minecraft の画像・フォントは必要ありません。文字を含まない小さな画面なので、PNG の環境確認にも使えます。<strong>ゲームの中でフォームを開く完成アドオンではありません。</strong></p>
+<pre><code class="language-powershell">node docs/release/manual/examples/build-demo.mjs
+node local-node/cli.mjs import --pack outputs/manual-demo.mcpack --session outputs/manual-session.json
+node local-node/cli.mjs list --session outputs/manual-session.json
+node local-node/cli.mjs definitions --file ui/manual_demo.json --session outputs/manual-session.json
+node local-node/cli.mjs settings --file docs/release/manual/examples/settings-demo.json --session outputs/manual-session.json
+</code></pre>
+<p><code>build-demo.mjs</code> は <code>outputs/manual-demo.mcpack</code> を新しく作ります。同名ファイルがあると停止し、勝手に上書きしません。やり直すときは、別名を指定します。</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/build-demo.mjs outputs/manual-demo-2.mcpack
+</code></pre>
+<p>一覧で <code>ui/manual_demo.json</code> と <code>manual.screen</code> を確認したら、次を実行します。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs validate --file ui/manual_demo.json --definition manual.screen --strict-semantics --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format json --strict-semantics --out outputs/manual-frame.json --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format svg --strict-semantics --out outputs/manual-frame.svg --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format png --strict-semantics --out outputs/manual-frame.png --session outputs/manual-session.json
+</code></pre>
+<p><code>outputs/manual-frame.png</code> を開くと、暗い背景、上の横帯、左のカード、下のスイッチが見えます。右側の詳細は、スイッチを操作するまで非表示です。幅 640・高さ 360・UI 倍率 2 の設定です。倍率 2 では、UI 内の 1 単位が出力画像の約 2 ピクセルに対応します。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>出力</th>
+<th>何を確認するか</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON</td>
+<td>解決済みの値、フレーム・矩形・binding・診断を詳しく見る</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>要素の矩形と配置を確認する図。素材・文字を再現した画像ではない</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>対応するテクスチャやフォント等を使って描いた画像</td>
+</tr>
+</tbody></table></div>
+<p>通常は、同名出力があると止まります。自分で置き換えてよい出力だけに <code>--force</code> を付けます。<strong>元パックとセッションを出力先にすることは <code>--force</code> でもできません。</strong></p>
+<h3 id="guide-5-自分のパックと状態を調べる">5. 自分のパックと状態を調べる</h3>
+<p>手順は例と同じです。<code>import</code> の入力を自分の ZIP/MCPACK/MCADDON に変え、<code>list</code> → <code>definitions</code> の順で <strong>実在する</strong>ファイルと定義を探します。通常パックは <code>--pack</code>、バニラ参照パックは <code>--vanilla</code> です。両方を同時に指定することもできます。参照パックは自分が利用する権利を持つものを用意してください。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs import --pack &quot;C:/MyPacks/addon.mcaddon&quot; --vanilla &quot;C:/MyPacks/reference.zip&quot; --session outputs/my-session.json
+node local-node/cli.mjs list --session outputs/my-session.json
+</code></pre>
+<p>MCADDON にリソースパック候補が複数あるときは、診断に出た header UUID を <code>--resource-pack</code> で指定します。最初の候補を勝手に選びません。参照パックや文字グリフが足りない場合、既定の PNG は停止します。JSON/SVG で構造を調べるか、必要な正当な参照素材を追加してから再試行してください。</p>
+<p>ゲームから取得できない値には、代表状態を与えます。たとえば次を UTF-8 の <code>outputs/state.json</code> として保存します。</p>
+<pre><code class="language-json">{
+  &quot;form&quot;: {
+    &quot;type&quot;: &quot;action&quot;,
+    &quot;title&quot;: &quot;Sample&quot;,
+    &quot;body&quot;: &quot;Choose an item&quot;,
+    &quot;buttons&quot;: [{ &quot;text&quot;: &quot;Continue&quot; }, { &quot;text&quot;: &quot;Close&quot; }]
+  }
+}
+</code></pre>
+<pre><code class="language-powershell">node local-node/cli.mjs settings --state-file outputs/state.json --replace-state --session outputs/my-session.json
+</code></pre>
+<p>これは <strong>プレビュー用のデータ</strong>です。フォームを実機で開くものではなく、読み込んだパックに欠けている定義を自動で作るものでもありません。<code>--replace-state</code> は以前の代表状態とローカルトグル状態を置き換えます。高度な生データは設定の <code>mock_data</code> / <code>collections</code> を使用します。型付き <code>state</code> との書き方・競合条件は <a href="#spec">仕様書</a> を確認してください。</p>
+<p>アニメーションの時刻は <code>frame / fps</code> 秒です。<code>--frame 30 --fps 60</code> は 0.5 秒、<code>--frame 0</code> は開始時です。PNG は時刻を省略すると開始約 1 秒後を使用するため、比較には時刻を明示してください。<code>--strict-animation</code> を加えると、アニメーション品質に未対応・不明状態が残る場合も停止します。</p>
+<h3 id="guide-6-検査結果を読む">6. 検査結果を読む</h3>
+<p>CLI は通常、成功・失敗を JSON 1 件で返します。<code>ok: true</code> と終了コード 0 が処理の成功、<code>ok: false</code> と非ゼロ終了コードが失敗です。PowerShell では直後の <code>$LASTEXITCODE</code> を確認できます。案内文字列が欲しい場合は <code>help</code>、説明を英語にしたい場合は <code>--language en</code> を使います。</p>
+<p>画像ができただけで合格と判断せず、<code>quality</code>、<code>stage_diagnostics</code>、<code>diagnostics</code> を確認してください。<code>passed</code> は対応範囲で計算できたこと、<code>unknown</code> は未対応・観測不足等が残ること、<code>failed</code> は不整合を検出したこと、<code>not_evaluated</code> は未評価を表します。<code>quality.native_properties</code> は <strong>記録済みの非対応プロパティ</strong>の検査で、Minecraft の全仕様を検査したという意味ではありません。</p>
+<p><code>--strict-semantics</code> は選択した UI の解決・行参照・表示入力 binding 等の不明状態を許可しない指定です。既定の PNG も、対応範囲の未解決素材等が残れば止まります。調査目的で不完全な画像が必要な場合だけ <code>--allow-partial</code> を使います。厳格検査の指定が優先されるため、これだけでは strict による失敗を解除できません。<code>complete</code> / <code>preview_complete</code> の真偽は <strong>実機の全画素・操作・音の一致を保証しません</strong>。</p>
+<h3 id="guide-7-原文を編集して取り消し書出しを行う">7. 原文を編集して、取り消し・書出しを行う</h3>
+<p>まず付属例のカードを右へ 12 単位動かします。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs edit --operation docs/release/manual/examples/move-demo.json --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format png --strict-semantics --out outputs/manual-edited.png --session outputs/manual-session.json
+node local-node/cli.mjs undo --session outputs/manual-session.json
+node local-node/cli.mjs redo --session outputs/manual-session.json
+</code></pre>
+<p>付属の <code>move-demo.json</code> は <code>/screen/controls/2/card</code> の <code>offset</code> を <code>[36, 56]</code> にします。<code>offset</code> はアンカーからの位置であり、画面の絶対ピクセルではありません。編集はセッションへ保存され、<strong>入力 MCPACK は変わりません</strong>。</p>
+<p>ファイル全体を自分のエディターで編集する場合は、いったん原文を取り出します。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs read --file ui/manual_demo.json --out outputs/manual-authored.json --session outputs/manual-session.json
+</code></pre>
+<p><code>outputs/manual-authored.json</code> を編集して UTF-8 で保存したら、反映します。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs edit --file ui/manual_demo.json --text-file outputs/manual-authored.json --session outputs/manual-session.json
+</code></pre>
+<p>不正な構文等の拒否時は、直前の確定済み編集を保持します。新しい編集を確定すると redo の履歴が消えます。undo には件数・容量上限があり、設定変更や UI 選択は undo の対象外です。</p>
+<p>最後に依存関係を確認して、新しいパックを書き出します。</p>
+<pre><code class="language-powershell">node local-node/cli.mjs export --file ui/manual_demo.json --definition manual.screen --plan --out outputs/manual-export-plan.json --session outputs/manual-session.json
+node local-node/cli.mjs export --file ui/manual_demo.json --definition manual.screen --out outputs/manual-selected.mcpack --session outputs/manual-session.json
+</code></pre>
+<p>書出しは <strong>選んだ UI と必要な依存</strong>が対象です。入力アドオンの全ファイル、BP スクリプト、世界やプレイヤーの状態を丸ごと保存するものではありません。依存を解決できない場合は停止します。パック名等の指定と、追加・削除・継承の操作形式は <a href="../../../local-node/CLI-ja.md">詳細 CLI ガイド</a> を参照してください。</p>
+<h3 id="guide-8-gui-を手で使う">8. GUI を手で使う</h3>
+<pre><code class="language-powershell">npm run gui
+</code></pre>
+<p>ブラウザーが自動で開かない場合は、起動ログのローカル URL を使います。<code>editor-core/app/index.html</code> をダブルクリックして開く方法は使いません。ターミナルはサーバーとして動いているので開いたままにします。</p>
+<ol>
+<li>左側の「<strong>1 · パックを読み込む</strong>」で ZIP/MCPACK を選びます。練習には生成済みの <code>outputs/manual-demo.mcpack</code> を使えます。</li>
+<li>「<strong>JSON UIファイル</strong>」で <code>ui/manual_demo.json</code>、その下の UI 定義で <code>screen</code> を選び、「<strong>選択したUIをプレビュー</strong>」を押します。</li>
+<li>配置だけを見るときはプレビューを使います。変更するときは「<strong>編集モード</strong>」へ切り替え、対象要素と影響範囲を確認します。自動配置、動的 offset、アニメーション中の位置などはドラッグできない場合があり、原文で編集します。</li>
+<li>キャンバスの未確定変更は「<strong>JSON UIに確定</strong>」で確定します。原文欄の変更は「<strong>検証して反映</strong>」で反映します。確定・適用に失敗した変更を、保存済みと判断しないでください。</li>
+<li>「<strong>書き出し</strong>」タブに現在の UI を追加し、依存を検査してパックを保存します。<strong>ページ再読込で読込みパックと編集内容が失われる</strong>ため、必要な成果物は先に書き出してください。</li>
+<li>問題がある場合は「<strong>ログ・診断</strong>」または診断の一括保存を使います。終了は起動ターミナルで Ctrl+C です。</li>
+</ol>
+<p>GUI は実験機能です。マウスで編集した後は、書き出したパックを <strong>別の CLI セッション</strong>へ取り込み、<code>validate</code> と指定時刻の厳格 PNG で再確認する手順を推奨します。GUI の状態を CLI セッションへ自動共有する機能はありません。</p>
+<h3 id="guide-9-node-api同じ-ui-の状態を変える">9. Node API：同じ UI の状態を変える</h3>
+<p>次は実行できる付属プログラムです。先に 4 節でパックを生成し、PNG 依存を導入してください。</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/sdk-demo.mjs
+</code></pre>
+<p>新しい <code>outputs/sdk-demo</code> に <code>before.png</code>、<code>after.png</code>、<code>result.json</code> ができます。スイッチを 1 回操作した状態を次の描画へ渡すため、<code>after.png</code> には右の紫色の詳細が現れます。インスタンスは <code>finally</code> で閉じます。出力フォルダーが既にある場合は、別名を指定します。</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/sdk-demo.mjs outputs/manual-demo.mcpack outputs/sdk-demo-2
+</code></pre>
+<p>この例は <code>createRenderer()</code> → <code>import()</code> → <code>render()</code> → <code>interact()</code> → <code>render()</code> → <code>resolveSound()</code> の順に使います。<code>interact()</code> は、渡したローカルトグル状態を返す方式です。毎回 <code>uiInstanceId</code>、最新の <code>localToggleState</code>、その <code>revision</code> を引き継ぎます。サーバー自身が最新状態を保存する方式ではありません。</p>
+<p><code>audioIntent</code> は音声再生の <strong>要求の記述</strong>で、<code>resolveSound()</code> は登録 OGG の参照先・ハッシュ・事前検査を返します。<strong>この Node/CLI/HTTP の例からスピーカーの音は出ません。</strong> GUI のプレーヤーとは別です。任意のゲーム命令の実行やフォーム送信は行いません。入力・音声の対応範囲は <a href="#spec">仕様書</a> を参照してください。</p>
+<h3 id="guide-10-http-apipowershell-から呼び出す">10. HTTP API：PowerShell から呼び出す</h3>
+<p>最初のターミナルで次を実行し、起動したままにします。</p>
+<pre><code class="language-powershell">node local-node/api-server.mjs --connection-file outputs/http-connection.json
+</code></pre>
+<p>別の PowerShell を同じプロジェクトフォルダーで開き、次を実行します。接続ファイルのトークンを表示したり、Git・共有ファイル・相談用ログへ貼り付けたりしないでください。</p>
+<pre><code class="language-powershell">$connection = Get-Content outputs/http-connection.json -Raw | ConvertFrom-Json
+$headers = @{ Authorization = &quot;Bearer $($connection.token)&quot; }
+$importBody = @{ pack = (Resolve-Path outputs/manual-demo.mcpack).Path } | ConvertTo-Json
+$importResult = Invoke-RestMethod -Method Post -Uri &quot;$($connection.base_url)/api/renderer/v1/import&quot; -Headers $headers -ContentType &quot;application/json; charset=utf-8&quot; -Body ([Text.Encoding]::UTF8.GetBytes($importBody))
+$renderBody = @{
+  file = &quot;ui/manual_demo.json&quot;
+  definition = &quot;manual.screen&quot;
+  format = &quot;json&quot;
+  frame = 0
+  width = 640
+  height = 360
+  uiScale = 2
+  strictSemantics = $true
+} | ConvertTo-Json -Depth 30
+$renderResult = Invoke-RestMethod -Method Post -Uri &quot;$($connection.base_url)/api/renderer/v1/render&quot; -Headers $headers -ContentType &quot;application/json; charset=utf-8&quot; -Body ([Text.Encoding]::UTF8.GetBytes($renderBody))
+$renderResult.result.quality
+</code></pre>
+<p>接続はループバックの <code>127.0.0.1</code> に限定され、通常のブラウザーの Origin 付き要求を受け付けません。他の PC やスマートフォンへ公開するサーバーではありません。CLI の保存セッションとは別のメモリ内作業領域です。終了はサーバー側ターミナルの Ctrl+C です。PNG の base64 保存等は <a href="../ENTRYPOINTS_JA.md#6-http-api-%E3%82%92%E4%BD%BF%E3%81%86">HTTP 詳細</a> と <a href="#spec">仕様書</a> を参照してください。</p>
+<h3 id="guide-11-よくある問題と次に確認する場所">11. よくある問題と次に確認する場所</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>症状・コード</th>
+<th>次にすること</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>npm start</code> で画面が開かない</td>
+<td>正常です。GUI を使う場合は <code>npm run gui</code></td>
+</tr>
+<tr>
+<td><code>RASTER_BACKEND_UNAVAILABLE</code></td>
+<td>プロジェクトのルートで <code>npm ci --ignore-scripts</code>。対応 OS/CPU の任意依存が導入されたか確認</td>
+</tr>
+<tr>
+<td>フォントやテクスチャの未解決</td>
+<td>必要な権利のある参照パックを追加。文字のない本書の例と比較</td>
+</tr>
+<tr>
+<td><code>CLI_DEFINITION_AMBIGUOUS</code></td>
+<td><code>definitions</code> の完全な <code>rawKey</code> を指定。先頭候補を推測しない</td>
+</tr>
+<tr>
+<td><code>POCKET_PREVIEW_BLOCKED</code></td>
+<td>Pocket の描画は非対応。Classic の定義を選び直す</td>
+</tr>
+<tr>
+<td><code>CLI_SOURCE_CHANGED</code></td>
+<td>読込み時と元パックの内容が異なる。元ファイルを戻すか、別セッションへ新規取込み</td>
+</tr>
+<tr>
+<td><code>CLI_SESSION_LOCKED</code></td>
+<td>同じセッションの別処理が終わるまで待つ。起動中のロックを削除しない</td>
+</tr>
+<tr>
+<td><code>API_REIMPORT_REQUIRED</code></td>
+<td>Worker 復旧後に必要なパックを明示して再取込み</td>
+</tr>
+<tr>
+<td>画像は出るが実機と違う</td>
+<td>対応範囲・状態・時刻・倍率・素材の診断を確認し、実機で別に検証</td>
+</tr>
+</tbody></table></div>
+<p>診断は <code>node local-node/cli.mjs diagnostics --out outputs/diagnostics.json --session outputs/manual-session.json</code> で保存できます。単独実行は <strong>今回の起動の診断</strong>で、過去に終了した処理のイベントまで復元するものではありません。連続操作の診断をまとめるときは <a href="../../../local-node/CLI-ja.md#%E8%A4%87%E6%95%B0%E6%93%8D%E4%BD%9C%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%82%8B">CLI の workflow</a> を使います。</p>
+<h3 id="guide-12-利用条件と資料">12. 利用条件と資料</h3>
+<p>本プロジェクトの独自部分は <strong>PolyForm Noncommercial License 1.0.0</strong> で提供します。非商用の利用・改変・再配布を認める条件と、必要な表示は <a href="#scope">LICENSE</a> を読んでください。商用利用を許可するライセンスではありません。依存ソフトや自分が読み込む素材には、それぞれ別の権利条件が適用されます。作品の販売等と組み合わせる場合も、利用目的が条件を満たすか確認してください。</p>
+<ul>
+<li><a href="#spec">仕様書</a>：入力、出力、内部処理、操作 API の契約。</li>
+<li><a href="#limitations">注意事項</a>：Classic/Pocket、描画・状態・音声・編集等の制限。</li>
+<li><a href="../../../local-node/CLI-ja.md">詳しいコマンドと操作 JSON</a>。</li>
+<li><a href="https://nodejs.org/en/download">Node.js 公式ダウンロード</a>と <a href="https://docs.npmjs.com/cli/commands/npm-ci/">npm ci 公式説明</a>：環境の準備。</li>
+</ul>
+<p>この説明書の検査成功は、Minecraft のあらゆる UI・バージョン・デバイスの完全な互換性を意味しません。完成したアドオンの実機確認は別に行ってください。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="spec"><h2 id="spec">JSON UI Workbench 0.16.1 技術仕様書</h2>
+<p><a href="HANDBOOK_EN.html#spec">English</a> · <a href="#guide">日本語説明書</a> · <a href="#limitations">制限・注意事項</a></p>
+<p>本書は配布版 0.16.1 の公開入出力と実装境界を定義します。0.16.1 は 0.16.0 の実行処理を維持したドキュメント・ライセンス整備版です。将来の機能案は現在の仕様に含めません。各種 <code>passed</code> は、その検査の対象範囲で確認できたという意味です。</p>
+<h3 id="spec-1-対象と入口">1. 対象と入口</h3>
+<p>対象は Minecraft Bedrock の <strong>Classic JSON UI</strong> です。パックを読み込み、定義を選択し、明示した状態でレイアウト・描画・診断を計算します。Minecraft 本体、Behavior Pack、Script API、screen controller は実行しません。</p>
+<p>Pocket JSON UI は一覧・原文参照・編集の対象にできますが、プレビューは禁止します。OreUI、DDUI、スマートフォン向け Pocket/touch UI の再現は対象外です。Classic という描画プロファイルへの対応を、スマートフォン上での利用対応と読み替えないでください。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>入口</th>
+<th>状態</th>
+<th>実行・状態の寿命</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLI <code>local-node/cli.mjs</code> / <code>npm start</code></td>
+<td>既定</td>
+<td>1 回の起動で専用 loopback server/Worker を所有。終了時に停止。状態・原文編集はセッション JSON に保存</td>
+</tr>
+<tr>
+<td>Node SDK <code>local-node/api.mjs</code></td>
+<td>対応</td>
+<td><code>createRenderer()</code> で server/Worker を作成し、<code>import()</code> または <code>close()</code> までパックを保持</td>
+</tr>
+<tr>
+<td>HTTP <code>local-node/api-server.mjs</code> / <code>npm run api</code></td>
+<td>対応</td>
+<td>認証付きの常駐 loopback API。内部で 1 個の SDK renderer を共有</td>
+</tr>
+<tr>
+<td>ブラウザー GUI <code>npm run gui</code></td>
+<td>実験機能</td>
+<td>明示起動。編集・ポインター操作・ブラウザー音声等の UI アダプターを持つが、ネイティブ実行の証明にはしない</td>
+</tr>
+</tbody></table></div>
+<p>Node.js は <strong>22.14.0 以降</strong>、公開モジュールは ESM です。PNG には任意依存 <code>@napi-rs/canvas</code> 0.1.100 と必要なパック素材が必要です。SDK import 自体はブラウザーや subprocess を起動せず、ファイルを編集・保存しません。</p>
+<h3 id="spec-2-パックと定義の入力">2. パックと定義の入力</h3>
+<p>入力はローカルの ZIP、MCPACK、MCADDON です。MCADDON から選択した Resource Pack を読み込み、Behavior Pack を実行しません。複数 RP があれば RP の manifest UUID を指定します。任意 URL のダウンロード、ディレクトリの直接読込み、ゲームからの状態取得は公開 SDK の import 入力にありません。</p>
+<p>スタックは <code>vanilla</code> と <code>imported</code> の最大 2 層です。同じ定義・素材の優先順位は imported が上です。パック内の UI 定義、グローバル変数、参照・素材をカタログ化してから、選択した定義を投影します。<code>file</code> は <code>ui/example.json</code> のような <strong>パック内パス</strong>、<code>pack</code> は OS 上の <strong>入力アーカイブパス</strong>です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>selector</th>
+<th>型・制約</th>
+<th>使用箇所</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>file</code></td>
+<td>空でない文字列、最大 1,024 文字、制御文字なし</td>
+<td>definitions / validate / render / interact</td>
+</tr>
+<tr>
+<td><code>definition</code></td>
+<td>同上。<code>id</code> / <code>rawKey</code> / <code>localName</code> / <code>qualifiedName</code> のいずれかへの一致</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>imported</code> または <code>vanilla</code></td>
+<td>list / definitions / validate / render / interact</td>
+</tr>
+</tbody></table></div>
+<p><code>definitions()</code> は一覧取得であり、絞込み結果が 0 件・複数件でも <code>count</code> / <code>items</code> を返します。次の画面選択規則は <code>validate</code> / <code>render</code> / <code>interact</code> に適用します。候補がちょうど 1 個なら selector の一部を省略できます。複数候補は <code>CLI_DEFINITION_AMBIGUOUS</code>、候補なしは <code>UI_DEFINITION_NOT_FOUND</code> です。名前の雰囲気で画面を選びません。<code>kind</code> がなければ同一ファイル・同一 qualifiedName の上位層を優先します。<code>state</code> 内の推奨定義は診断用であり、任意の定義を自動追加しません。</p>
+<h3 id="spec-3-node-sdk-の共通契約">3. Node SDK の共通契約</h3>
+<pre><code class="language-javascript">import { createRenderer, JsonUiApiError } from &#39;./local-node/api.mjs&#39;;
+const renderer = await createRenderer({ language: &#39;ja&#39; });
+try {
+  await renderer.import({ pack: &#39;C:\\packs\\example.mcpack&#39; });
+  const result = await renderer.render({
+    file: &#39;ui/example.json&#39;, definition: &#39;example.screen&#39;,
+    format: &#39;json&#39;, frame: 0, strictSemantics: true,
+  });
+  console.log(result.quality);
+} finally {
+  await renderer.close();
+}
+</code></pre>
+<p>全メソッドは Promise を返します。<code>close()</code> 以外の第二引数は任意の <code>{ signal: AbortSignal }</code> です。<code>createRenderer()</code> に渡した signal は初期化のみ、各処理はその処理用の signal を渡します。<code>close()</code> に要求・signal を渡す契約はありません。</p>
+<p>要求は通常の JSON 相当オブジェクトです。unknown field、<code>undefined</code>、関数、非有限数、循環参照、getter、symbol key、疎配列、独自配列プロパティ、通常オブジェクトでないインスタンス、<code>__proto__</code> / <code>prototype</code> / <code>constructor</code> key を拒否します。要求は受付時にコピーされ、受付後に元オブジェクトを変更しても処理内容は変わりません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>公開メソッド</th>
+<th>受理する第一引数のフィールド（列挙以外は拒否）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>createRenderer()</code></td>
+<td><code>settings</code>, <code>language</code></td>
+</tr>
+<tr>
+<td><code>import()</code></td>
+<td><code>pack</code>, <code>vanilla</code>, <code>resourcePack</code></td>
+</tr>
+<tr>
+<td><code>list()</code></td>
+<td><code>kind</code></td>
+</tr>
+<tr>
+<td><code>definitions()</code></td>
+<td><code>file</code>, <code>definition</code>, <code>kind</code></td>
+</tr>
+<tr>
+<td><code>status()</code></td>
+<td>なし / <code>{}</code></td>
+</tr>
+<tr>
+<td><code>validate()</code></td>
+<td>selector + <code>settings</code>, <code>state</code>, <code>strictSemantics</code></td>
+</tr>
+<tr>
+<td><code>render()</code></td>
+<td>selector + <code>settings</code>, <code>state</code>, <code>format</code>, <code>width</code>, <code>height</code>, <code>uiScale</code>, <code>fps</code>, <code>frame</code>, <code>allowPartial</code>, <code>strictSemantics</code>, <code>strictAnimation</code>, <code>drawEvidence</code>, <code>frameSummary</code>, <code>uiInstanceId</code>, <code>localToggleState</code></td>
+</tr>
+<tr>
+<td><code>interact()</code></td>
+<td>selector + <code>settings</code>, <code>state</code>, <code>width</code>, <code>height</code>, <code>uiScale</code>, <code>fps</code>, <code>frame</code>, <code>uiInstanceId</code>, <code>localToggleState</code>, <code>expectedRevision</code>, <code>nodeId</code>, <code>event</code>, <code>inputSource</code></td>
+</tr>
+<tr>
+<td><code>resolveSound()</code></td>
+<td><code>soundId</code>, <code>selectionSeed</code>, <code>contextSampleRate</code></td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>なし</td>
+</tr>
+</tbody></table></div>
+<p><code>strictAnimation</code> は <strong>render 専用</strong>です。interact は内部で意味論の厳格検査を要求するため <code>strictSemantics</code> field 自体を受理しません。<code>resolveSound()</code> に任意のファイルパス、<code>settings</code>、音声バイト列を渡す契約はありません。</p>
+<h4 id="spec-作成読込み一覧">作成・読込み・一覧</h4>
+<p><code>language</code> は <code>ja</code> / <code>en</code>、既定 <code>ja</code>。<code>settings</code> は次節の設定です。import は <code>pack</code> / <code>vanilla</code> の少なくとも一方が必須で、SDK では OS の絶対パス文字列、最大 32,768 文字を指定します。<code>resourcePack</code> は <code>pack</code> と併用する RP の UUID です。</p>
+<p><strong>SDK の import はスタック全体を交換します。</strong> <code>import({pack})</code> は以前の vanilla を引き継ぎません。両方が必要なら毎回両方を指定します。これに対し CLI import は指定した層だけを交換し、指定しない層を保持します。</p>
+<p>成功結果の schema は <code>jsonui-api-import-v1</code> / <code>jsonui-api-list-v1</code> / <code>jsonui-api-definitions-v1</code> / <code>jsonui-api-status-v1</code> です。import は <code>sources</code>（kind/name/size_bytes/checksum_sha256、必要なら resource_pack_uuid）、<code>file_count</code>、<code>definition_count</code>、<code>diagnostics</code> を返します。一覧は <code>count</code> / <code>items</code> / <code>diagnostics</code>。status はパック読込み、処理待ち数、Worker 情報、機能、PNG backend の availability を返します。status の <code>pending</code> は実行中の status 要求自体も含みます。</p>
+<h3 id="spec-4-設定と-cli-の対応">4. 設定と CLI の対応</h3>
+<p><code>createRenderer({settings})</code> はインスタンスの既定値です。validate/render/interact の <code>settings</code> はその呼出しだけにマージします。後続要求に保存しません。CLI <code>settings --file</code> はセッションにマージ保存します。トップレベルの幅・高さ等の要求値は、対応する settings 値に優先します。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>settings key</th>
+<th>既定</th>
+<th>受理内容・役割</th>
+<th>SDK / CLI の上書き</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width</code>, <code>height</code></td>
+<td>1920, 1080</td>
+<td>出力 pixels、整数 1～16,384。PNG にはさらに小さい上限</td>
+<td><code>width</code>, <code>height</code> / <code>--width</code>, <code>--height</code></td>
+</tr>
+<tr>
+<td><code>ui_scale</code></td>
+<td><code>auto</code></td>
+<td><code>auto</code> または整数 1～8。論理座標から出力 pixels への倍率</td>
+<td><code>uiScale</code> / <code>--ui-scale</code></td>
+</tr>
+<tr>
+<td><code>target_engine_version</code></td>
+<td><code>1.26.40</code></td>
+<td>妥当な engine version。vanilla 単体の 3D 対象版。imported RP は manifest min_engine_version を優先</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>fps</code></td>
+<td>60</td>
+<td>有限数 1～240。frame の秒換算用であり動画エンコード指定ではない</td>
+<td><code>fps</code> / <code>--fps</code></td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td><code>ja_JP</code></td>
+<td><code>[a-z]{2}_[A-Z]{2}</code>。パックの文字列とフォント</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td><code>ja</code></td>
+<td><code>ja</code> / <code>en</code>。説明・診断の表示言語</td>
+<td>作成 options / CLI <code>--language</code></td>
+</tr>
+<tr>
+<td><code>visibility</code></td>
+<td><code>safe</code></td>
+<td><code>safe</code> / <code>structure</code>。表示評価または構造調査。structure は実機表示の合格ではない</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>mock_data</code></td>
+<td><code>{}</code></td>
+<td>binding に与える値。通常 object、最大 1 MiB</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>collections</code></td>
+<td><code>{}</code></td>
+<td>collection の行データ。通常 object、最大 1 MiB</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td><code>{}</code></td>
+<td>resolver に与える <code>$</code> 変数。通常 object、最大 1 MiB</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>scroll</code></td>
+<td><code>{}</code></td>
+<td>node ID を key とする明示スクロール状態。最大 1 MiB</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>event_factory_selections</code></td>
+<td><code>{}</code></td>
+<td>factory 名と control_ids key の対応。最大 32 件、名称は安全な文字で 1～128 文字</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>ui_instance_id</code></td>
+<td><code>jsonui-cli</code></td>
+<td>空でない ID、最大 256 文字、制御文字・危険 key 禁止</td>
+<td><code>uiInstanceId</code> / settings のみ</td>
+</tr>
+<tr>
+<td><code>local_toggle_state</code></td>
+<td><code>null</code></td>
+<td>次節の local state。最大 1 MiB</td>
+<td><code>localToggleState</code> / settings のみ</td>
+</tr>
+<tr>
+<td><code>animation_event</code></td>
+<td><code>screen.entrance_push</code></td>
+<td>解析するイベント名、最大 256 文字、制御文字なし</td>
+<td>settings のみ</td>
+</tr>
+<tr>
+<td><code>font_profile</code></td>
+<td><code>bitmap</code></td>
+<td><code>bitmap</code> / <code>observed-smooth</code></td>
+<td>settings または state.font_profile</td>
+</tr>
+</tbody></table></div>
+<p>settings の数値チェックでは数値文字列も数値化します。一方、SDK のトップレベル <code>width</code> / <code>height</code> / <code>fps</code> / <code>frame</code> 等は JSON number が必要です。未知の settings key を受理しません。各 runtime map が 1 MiB 以下でも、組合せたフレーム状態の 1 MiB 上限を別途満たす必要があります。</p>
+<p><code>uiScale: &#39;auto&#39;</code> は RP の <code>build-info.json</code> の校正値、または Classic 既定 4 倍を使います。width/height は物理出力サイズ、logical_width/logical_height は倍率適用前の canvas サイズです。スマートフォンの GUI scale/touch レイアウトを検出する機能ではありません。</p>
+<h3 id="spec-5-型付き-state">5. 型付き state</h3>
+<p><code>state</code> はプレビュー用 JSON です。ゲーム内状態ではありません。正規化は全体を検査し、不正入力を途中まで適用しません。トップレベルで受理する key は次のとおりです。</p>
+<p><code>mockData</code>, <code>collectionData</code>, <code>furnace</code>, <code>brewing</code>, <code>trade</code>, <code>form</code>, <code>messageContext</code>, <code>inventory</code>, <code>slots</code>, <code>anvil</code>, <code>enchanting</code>, <code>horse</code>, <code>book</code>, <code>font_profile</code>, <code>eventFactorySelections</code>。</p>
+<p><strong>命名が異なります。</strong> state の raw 値は <code>mockData</code> / <code>collectionData</code>、settings の raw 値は <code>mock_data</code> / <code>collections</code> です。state を指定すると既定 runtime 値を置換し、variables/scroll/local state を初期化します。同じ要求の settings に <code>mock_data</code>, <code>collections</code>, <code>variables</code>, <code>scroll</code>, <code>event_factory_selections</code>, <code>local_toggle_state</code> があれば空でも <code>API_STATE_CONFLICT</code> です。サイズ・言語等の非 runtime 設定は併用できます。</p>
+<p>state と明示 <code>uiInstanceId</code> / <code>localToggleState</code> の併用は可能です。型付き state の正規化後にその local state を適用します。明示 field と settings 内の <code>ui_instance_id</code> / <code>local_toggle_state</code> を同時指定すると競合です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>state branch</th>
+<th>入力の構造・範囲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mockData</code></td>
+<td>binding 値の object。<code>__collections</code> は禁止し collectionData を使う</td>
+</tr>
+<tr>
+<td><code>collectionData</code></td>
+<td>collection 名 → row object の配列。row 内の <code>__collections</code> は nested collection</td>
+</tr>
+<tr>
+<td><code>inventory</code></td>
+<td><code>main</code> 最大 27、<code>hotbar</code> 9、<code>armor</code> 4、<code>offhand</code> 1、<code>container</code> containerSize 件。containerSize は 1～256、既定 27</td>
+</tr>
+<tr>
+<td><code>slots</code></td>
+<td>任意 collection 名 → item/null 配列。最大 128 collections、各 256 rows</td>
+</tr>
+<tr>
+<td><code>furnace</code></td>
+<td><code>progress</code>, <code>fuel</code> は 0～1。<code>input</code>, <code>fuelItem</code>, <code>output</code> は item</td>
+</tr>
+<tr>
+<td><code>brewing</code></td>
+<td><code>progress</code>, <code>fuel</code>, <code>bubbles</code> は 0～1。input/fuelItem と outputs 最大 3 items</td>
+</tr>
+<tr>
+<td><code>anvil</code></td>
+<td>input/material/output は item/null。name/costText は string。costRed/costGreen/invalid は boolean</td>
+</tr>
+<tr>
+<td><code>enchanting</code></td>
+<td>input/lapis は item/null。offers 最大 3、各 runes/cost/hoverText string、available boolean</td>
+</tr>
+<tr>
+<td><code>horse</code></td>
+<td>equipment/container は item/null 配列。equipmentSize/containerSize は 1～256、既定 2/15</td>
+</tr>
+<tr>
+<td><code>book</code></td>
+<td>title/author string、pages 最大 256 strings、editable boolean</td>
+</tr>
+<tr>
+<td><code>trade</code></td>
+<td>offers 最大 256、各 input/output 必須 item、secondInput 任意 item/null、unlocked/available boolean。title/tierName string、selected は範囲内の 0 始まり整数、既定 0。offers が空の場合は selected:0</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>下記 ActionForm / ModalForm</td>
+</tr>
+<tr>
+<td><code>messageContext</code></td>
+<td>form と併用。locale 識別子と明示 translations object</td>
+</tr>
+<tr>
+<td><code>font_profile</code></td>
+<td><code>bitmap</code> / <code>observed-smooth</code></td>
+</tr>
+<tr>
+<td><code>eventFactorySelections</code></td>
+<td>settings 相当の明示 factory 分岐</td>
+</tr>
+</tbody></table></div>
+<p>item の受理 key は <code>id</code>, <code>count</code>, <code>name</code>, <code>texture</code>, <code>atlasKey</code>, <code>variant</code>, <code>selected</code>。count は整数 0～999（既定 1）、selected は boolean。texture は安全な <code>textures/...</code> パック相対参照。texture と atlasKey は排他、variant は atlasKey と併用する整数 0～4,095。未知 ID を任意の既存アイテムに置換せず診断します。空スロットを受理する branch では null または省略末尾を空行に正規化します。表示できるアイテムを入力できることは、実機の投入許可・レシピ処理の証明ではありません。</p>
+<p>共通上限は UTF-8 JSON 1 MiB、深さ 24、20,000 要素、単一 string 65,536 文字、各 collection 256 rows、各 map 128 collections、nested を含む全体 2,048 rows です。raw <code>mockData</code> / <code>collectionData</code> は型付き branch による生成値の後に適用するため、同じ key を明示上書きできます。</p>
+<h4 id="spec-フォーム状態">フォーム状態</h4>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>種類</th>
+<th>仕様</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ActionForm</td>
+<td><code>type:&#39;action&#39;</code>（type 省略も action）、title/body は文字列または対応 RawMessage、buttons は <code>{text,icon?}</code> 配列。buttons と elements は排他</td>
+</tr>
+<tr>
+<td>ActionForm elements</td>
+<td><code>{type:&#39;button&#39;,text,icon?}</code>, <code>{type:&#39;header&#39;,text}</code>, <code>{type:&#39;label&#39;,text}</code>, <code>{type:&#39;divider&#39;}</code>。最大 256 行。selection は button のみ数え、表示行番号と区別</td>
+</tr>
+<tr>
+<td>ModalForm</td>
+<td><code>type:&#39;modal&#39;</code>, title、submitText、submitVisible:boolean、elements 必須 1～256 行。空 content は拒否</td>
+</tr>
+<tr>
+<td>Modal elements</td>
+<td>label/header/divider/toggle/slider/step_slider/dropdown/input。共通 text/tooltip は対応 RawMessage</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td>value:boolean、enabled:boolean。既定 false/true</td>
+</tr>
+<tr>
+<td>input</td>
+<td>value:string、placeholder、enabled:boolean。既定空/空/true</td>
+</tr>
+<tr>
+<td>slider</td>
+<td>従来の value:0～1、または range:{min,max,current,step?}。両者排他。range は min&lt;max、current は範囲内、step&gt;0（既定 1）。range と併用して valueText/displayText を指定可能</td>
+</tr>
+<tr>
+<td>step_slider</td>
+<td>options 1～256、selected は範囲内の整数、enabled 任意</td>
+</tr>
+<tr>
+<td>dropdown</td>
+<td>options 1～256、selected は範囲内の整数</td>
+</tr>
+</tbody></table></div>
+<p>slider の current/上端が step に一致しなくても勝手に丸めず警告します。ドラッグ操作・実機の丸め処理は別です。既定の推奨定義は ActionForm <code>server_form.long_form</code>、ModalForm <code>server_form.custom_form</code>。<code>eventFactorySelections.server_form_factory</code> に long_form/custom_form を明示した場合は、対応する祖先 <code>server_form.main_screen_content</code> の選択を推奨します。</p>
+<p>RawMessage は <code>text</code>、<code>rawtext</code>、<code>translate</code> と <code>with</code> の対応部分です。translate は明示 messageContext.translations だけを使い、ゲームの翻訳・score を取得しません。対応置換は <code>%s</code> / <code>%%1</code> 等。未定義訳・不足引数・未対応構文を拒否します。単一展開 64 KiB、総出力 1 MiB、深さ 24、4,096 nodes を別に制限します。</p>
+<h3 id="spec-6-validate-render-と出力形式">6. validate / render と出力形式</h3>
+<p>validate は投影後の UI model を検査します。render はさらにフレームを評価します。validate は collection の実行時行・表示入力 binding・資産描画を評価しません。静的な記録済み非対応プロパティは validate でも診断します。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>render field</th>
+<th>既定・制約</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>format</code></td>
+<td><code>json</code>、<code>svg</code>、<code>png</code>。既定 json</td>
+</tr>
+<tr>
+<td><code>width</code>, <code>height</code></td>
+<td>settings に従う。JSON number の整数 1～16,384</td>
+</tr>
+<tr>
+<td><code>uiScale</code></td>
+<td>settings に従う。auto / 整数 1～8</td>
+</tr>
+<tr>
+<td><code>fps</code></td>
+<td>settings に従う。有限 number 1～240</td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>0 始まり整数。API 受付上限 864,000、さらに pipeline 上限 fps×3,600。JSON/SVG は既定 0、PNG は既定 round(fps)</td>
+</tr>
+<tr>
+<td><code>strictSemantics</code></td>
+<td>boolean、既定 false。意味論・評価・行参照・表示入力 binding・記録済み非対応プロパティの非 passed で停止</td>
+</tr>
+<tr>
+<td><code>strictAnimation</code></td>
+<td>boolean、既定 false。animation quality の非 passed で停止</td>
+</tr>
+<tr>
+<td><code>allowPartial</code></td>
+<td>boolean、既定 false、PNG 専用。調査用の不完全 PNG を許可。strict 判定に優先しない</td>
+</tr>
+<tr>
+<td><code>drawEvidence</code></td>
+<td>boolean、既定 false、PNG 専用。最終描画入力を上限付きで追加</td>
+</tr>
+<tr>
+<td><code>frameSummary</code></td>
+<td>boolean、既定 false。JSON 専用、strictAnimation と併用不可。件数・打切り情報のみ、renderable:false</td>
+</tr>
+<tr>
+<td><code>uiInstanceId</code></td>
+<td>local state の instance ID。省略時 settings 値</td>
+</tr>
+<tr>
+<td><code>localToggleState</code></td>
+<td>明示する場合 uiInstanceId が必須</td>
+</tr>
+</tbody></table></div>
+<p>時刻は <code>frame/fps</code> 秒であり、PNG 既定は入口アニメーション開始約 1 秒後です。開始瞬間には frame:0 を明示します。API の fps に小数を指定できても frame 自体は整数です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>形式</th>
+<th>SDK 結果と意味</th>
+<th>CLI / HTTP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON</td>
+<td><code>schema:&#39;jsonui-api-render-v1&#39;</code>, ok:true, format:&#39;json&#39;。viewport、time、selected、投影 document、validation、frame IR、quality、stage_diagnostics を含む。描画 pixels は含まない</td>
+<td>CLI は stdout または .json。HTTP は result 内の object</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>同じ render schema、format:&#39;svg&#39;、<code>svg:string</code> と metadata。実レイアウトの矩形境界図。テクスチャ・glyph・3D の完成画像ではない</td>
+<td>CLI は --out .svg 必須。HTTP result.svg は string</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>同じ render schema、format:&#39;png&#39;、<code>png:Buffer</code> と metadata。素材・フォントの測定後に再配置し最終画面を描画</td>
+<td>CLI は --out .png 必須。HTTP は下記 base64 object</td>
+</tr>
+<tr>
+<td>validate</td>
+<td><code>schema:&#39;jsonui-api-validation-v1&#39;</code>, ok:true、validation・quality・stage_diagnostics 等。検査 error は例外</td>
+<td>CLI は JSON。HTTP は result 内</td>
+</tr>
+</tbody></table></div>
+<p>PNG metadata は <code>complete</code>, <code>preview_complete</code>, <code>draft</code>, <code>diagnostics</code>, <code>native_equivalence</code>, <code>provenance</code>, <code>final_frame_summary</code>、animation/binding/collection quality を含みます。<code>final_frame_summary</code> は実資産測定後の件数・frame/hash・box digest・再配置回数の有界情報です。全 frame の sidecar ではありません。JSON の座標は測定前、PNG の最終座標は測定後です。</p>
+<h3 id="spec-7-品質と失敗の意味">7. 品質と失敗の意味</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>quality axis</th>
+<th>判定対象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>semantic</code></td>
+<td>選択した投影の継承・参照・解決。無関係な catalog 全体の合否ではない</td>
+</tr>
+<tr>
+<td><code>native_properties</code></td>
+<td>実機記録で確認した非対応プロパティ。全 JSON UI schema の保証ではない</td>
+</tr>
+<tr>
+<td><code>evaluation</code></td>
+<td>有界な展開・走査・評価の完了</td>
+</tr>
+<tr>
+<td><code>collection</code></td>
+<td>collection_panel / stack_panel / grid の行所有・行番号・参照</td>
+</tr>
+<tr>
+<td><code>bindings</code></td>
+<td>表示・入力の状態、保存 local state を含む解決</td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>明示時刻における対応 animation と観測範囲</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>型付き状態の正規化。ゲーム状態の完全さではない</td>
+</tr>
+<tr>
+<td><code>assets</code></td>
+<td>PNG で用意した素材。JSON/SVG では not_evaluated</td>
+</tr>
+<tr>
+<td><code>interaction</code></td>
+<td>通常描画では Script API / ゲーム入力を実行しないため not_evaluated</td>
+</tr>
+<tr>
+<td><code>native_comparison</code></td>
+<td>Minecraft pixels の比較。通常 not_evaluated</td>
+</tr>
+</tbody></table></div>
+<p><code>complete</code> は raster の資産描画、<code>preview_complete</code> は対応範囲の資産・評価・collection・表示入力 binding・記録済みプロパティの完了です。animation は独立した strictAnimation 軸です。<code>ok:true</code>、<code>passed</code>、<code>preview_complete:true</code> のどれも、実機の全画素・全入力・発音との一致認定ではありません。</p>
+<p>代表的な失敗 code は <code>CLI_SEMANTIC_GATE_FAILED</code>, <code>CLI_EVALUATION_INCOMPLETE</code>, <code>CLI_COLLECTION_GATE_FAILED</code>, <code>CLI_NATIVE_PROPERTY_GATE_FAILED</code>, <code>CLI_BINDING_GATE_FAILED</code>, <code>CLI_ANIMATION_GATE_FAILED</code>, <code>RASTER_BACKEND_UNAVAILABLE</code>, <code>NODE_FRAME_REPLY_LIMIT</code>。code は安定した識別用、message は表示用です。</p>
+<p>記録済み非対応には label の <code>vertical_alignment</code>、受動 panel/image の <code>focus_enabled</code>、通常の直近親に置いた <code>collection_index</code> を含みます。未知の将来 field を一律削除・禁止する仕組みではありません。animation の offset/size/uv にある <code>looping</code> は別の animation 診断です。診断を打ち切った場合は complete な観測とせず unknown 等を示します。</p>
+<h3 id="spec-8-interact-と-local-state">8. interact と local state</h3>
+<p>interact は <strong>呼出し側が状態を保管する stateless projection</strong> です。server に最新の UI session を保存せず、毎回指定された定義・state・local state を投影して入力を評価します。必要な field は uiInstanceId/nodeId/expectedRevision と、候補を一意にする selector です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>field</th>
+<th>仕様</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>uiInstanceId</code></td>
+<td>空でない安全な ID、最大 256 文字</td>
+</tr>
+<tr>
+<td><code>nodeId</code></td>
+<td>現在の JSON frame に実在する node ID、最大 1,024 文字。caption や配列 index ではない</td>
+</tr>
+<tr>
+<td><code>expectedRevision</code></td>
+<td>非負 safe integer。渡した local state の revision と一致する必要あり</td>
+</tr>
+<tr>
+<td><code>localToggleState</code></td>
+<td>任意。省略時はその UI の初期状態を評価</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>activate / escape、既定 activate</td>
+</tr>
+<tr>
+<td><code>inputSource</code></td>
+<td>mouse / keyboard。既定は activate→mouse、escape→keyboard</td>
+</tr>
+</tbody></table></div>
+<p>local state の形式:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 1,
+  &quot;instanceId&quot;: &quot;inspection-1&quot;,
+  &quot;revision&quot;: 0,
+  &quot;values&quot;: { &quot;current-node-id&quot;: false }
+}
+</code></pre>
+<p>values は現在の UI の writable local toggle ID → boolean、最大 20,000 件。現在の全 local ID は JSON render の <code>frame.bindings.localToggleState</code> から取得します。外部 binding が所有する toggle は local state で上書きできません。radio は同じ親の明示 group に限って排他選択を扱います。</p>
+<p>入力 mapping は mouse activate に対する <code>button.menu_select</code> の pressed と、keyboard escape に対する menu_cancel/menu_exit の global を確認します。<code>input_mode_condition</code> は省略または not_gamepad だけを扱い、touch/gamepad/gaze を推測しません。複数 action の実行順が不明なら実行しません。hidden/disabled/ignored/描画外の対象は blocked、未知 action は unsupported と診断します。</p>
+<p>結果は <code>schema:&#39;jsonui-api-interaction-v1&#39;</code>, ok:true、<code>execution:&#39;stateless_preview_projection&#39;</code>、selected/node_id/ui_instance_id/previous_revision、projection/form_descriptor の SHA-256、interaction/status/effects/diagnostics、localToggleState、audioIntent、quality、stage_diagnostics、effects_executed、playback/native_equivalence です。blocked/unsupported は API 処理成功の結果として返る場合があるため、ok だけで操作成功としません。</p>
+<p>適用する effect は <strong>localTogglePatch だけ</strong>です。正常適用ごとに revision が 1 増えます。mockPatch/collectionPatch/close/navigate/chooseNavigate/clipboard 等は有限アダプターの記述であり、SDK は実行しません。フォーム応答の送信、フォームの閉開、BP への保存もありません。返された local state を次の interact/render に渡すことで同じ UI instance の見え方を変更できます。</p>
+<p>別 instance、revision 不一致、未知/readonly ID を拒否します。ただし <strong>古い snapshot と一致する古い expectedRevision を一緒に渡す再評価は可能</strong>です。これはサーバー保存式の完全な stale 操作防止ではありません。複数クライアントの最新性・排他は利用側が実装します。</p>
+<p>音声 intent は mouse activate の有効な対象に限定します。keyboard/escape は発音要求にしません。未解決 sound_name/volume/pitch binding、capture 不完全、無効・非表示状態から古い値を使った要求を生成しません。soundName/soundVolume/soundPitch/originScreenId/interactionId は要求の記述です。音声要求と action の対応可否は独立しているため、未知 action が unsupported でも有効な sound_name があれば intent を返す場合があります。intent は音源解決・再生完了の結果ではありません。</p>
+<h3 id="spec-9-resolvesound-と音声">9. resolveSound と音声</h3>
+<p>soundId は登録された sounds/sound_definitions.json の ID（最大 256 文字、制御文字・<code>$</code>/<code>#</code> 禁止）。selectionSeed は任意 string 最大 256、既定空。contextSampleRate は整数 8,000～192,000、既定 48,000 です。</p>
+<p>解決順は上位の imported 定義、その ID がなければ vanilla 定義です。音声ファイルは別に imported → vanilla の順で探索します。上位層に参照先の候補ファイルがない場合は、下位層の同じ参照先を探します。上位層にあるファイルの形式競合・曖昧さ・非対応形式・事前検査失敗は、下位音源への切替で回避しません。定義とファイルの所有層が異なる場合があり、結果には両方を記録します。拡張子明示はその形式、拡張子なしは同じ stem の OGG/WAV が一意なときだけ解決します。</p>
+<p>対応は短い <strong>Ogg Vorbis</strong> と <strong>WAV PCM16</strong>。音源最大 4 MiB、10 秒、mono/stereo、8,000～192,000 Hz、PCM 予約上限 8 MiB。定義最大 8 MiB、50,000 sound IDs、1 定義 64 候補。stream:true、FSB、MP3、Opus、chained OGG 等は非対応です。候補 pitch は 0.5～2、volume は非負有限数、weight は整数 1～1,000,000。definition 直下 volume/pitch はこの resolver では非対応です。</p>
+<p>複数候補は soundId と selectionSeed の SHA-256 による安定した weight 選択 <code>sha256-weighted-v1</code> です。Bedrock の乱数選択との一致を主張しません。OGG は header/page/CRC/sequence/packet/EOS/長さ/PCM 予約を事前検査します。<strong>完全な Vorbis decoder ではなく</strong>、ネイティブ decoder のメモリをハード上限で拘束するものでもありません。</p>
+<p>結果は <code>schema:&#39;jsonui-api-sound-v1&#39;</code>, ok:true、sound object（<code>jsonui-sound-v2</code>）と playback:&#39;not_executed&#39; / native_equivalence:&#39;not_evaluated&#39;。sound には定義・ファイルのパック/パス、codec/container、channels/sampleRate/duration、encodedBytes、contentRevision（ファイル SHA-256）、候補/index/選択 policy、音量/pitch/category/is3D、warnings 等を返します。<strong>音声バイト列は返さず、SDK/HTTP/CLI はスピーカー再生しません。</strong></p>
+<p>GUI の音声 player は別途 browser decode/play を試みます。category 別ゲーム mixer・position/distance は適用せず warning を残します。audibleVerified/nativeVerified/gameMixerVerified は false。形式検査・復号成功だけで聞こえたことを認定しません。</p>
+<h3 id="spec-10-http-transport">10. HTTP transport</h3>
+<p><code>createRendererServer({port?,signal?})</code> は <code>local-node/api-server.mjs</code> の公開 factory。port は整数 0～65,535、既定 0（自動割当）、bind は 127.0.0.1 固定。返す connection は schema/base_url/token/pid、close は冪等な終了 Promise です。JSON 要求に signal を埋め込みません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>route</th>
+<th>認証・本文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET /health</td>
+<td>token 不要、本文なし。稼働確認のみ</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/import</td>
+<td>SDK import object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/list</td>
+<td>SDK list object / {}</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/definitions</td>
+<td>SDK definitions object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/validate</td>
+<td>SDK validate object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/render</td>
+<td>SDK render object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/interact</td>
+<td>SDK interact object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/sound</td>
+<td>SDK resolveSound object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/status</td>
+<td>{}</td>
+</tr>
+</tbody></table></div>
+<p>health 以外は <code>Authorization: Bearer &lt;64桁hex token&gt;</code>、<code>Content-Type: application/json</code> を要求します。Host は割当済み <code>127.0.0.1:port</code> と厳密一致。Origin 付き要求または sec-fetch-site が none 以外の browser 要求を拒否します。CORS/remote 公開を提供する endpoint ではありません。</p>
+<p>成功は <code>{schema:&#39;jsonui-renderer-http-v1&#39;,ok:true,correlation_id,result}</code>、失敗は同じ schema の ok:false/error、非 2xx status。error は code/message/category/retryable/correlation_id/details/context。SDK は result を二重に包みません。</p>
+<p>PNG の result.png は <code>{encoding:&#39;base64&#39;,media_type:&#39;image/png&#39;,size_bytes,checksum_sha256,data}</code>。SVG は result.svg の string。HTTP に保存先を渡す API はありません。8 同時要求、32 接続、要求 JSON 16 MiB、応答 JSON 64 MiB、本文受信 30 秒。base64 で容量が増えるため大きな PNG は HTTP 応答上限で失敗し得ます。応答は no-store / nosniff、要求 ID header、Connection:close を付けます。</p>
+<p>代表 status は未認証 401、Host/Origin 拒否 403、route 不明 404、method 違い 405、content type 415、容量 413、過負荷 429、本文 timeout 408、処理 timeout 504、cancel 499。全 code の固定分類表ではなく、実応答 code/context を確認します。</p>
+<p>CLI server 起動の connection-file は新規作成専用。停止後も descriptor を残し、token は server 停止とともに失効します。file の存在を server 生存の証明としません。再起動には別パスか、停止済みの自分の旧 descriptor を確認して削除します。Unix mode 0600 が Windows ACL を完全制御するという保証はありません。</p>
+<h3 id="spec-11-cli-操作と永続状態">11. CLI 操作と永続状態</h3>
+<p>CLI 成功・失敗 envelope は <code>jsonui-cli-result-v1</code>、通常 stdout は JSON 1 件。help は人向け text、<code>help --json</code> は JSON。失敗は非ゼロ終了します。標準 session は <code>.jsonui-cli/session.json</code>、<code>--session</code> で変更可能。<code>--language</code> → JSONUI_LANGUAGE → 保存 language → ja の順で表示言語を選びます。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>command</th>
+<th>入力・動作・主な出力</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>import</td>
+<td>--pack / --vanilla / --resource-pack。指定層を交換、原文差分・履歴をリセット</td>
+</tr>
+<tr>
+<td>list / definitions / read</td>
+<td>層/定義一覧、原文 read。read の --out は .json/.jsonc</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>--file の raw 設定を保存、または --state-file の typed state を保存。両者排他。既存 runtime 置換には --replace-state</td>
+</tr>
+<tr>
+<td>validate / preview</td>
+<td>selector + 厳格 flag。preview は --format json/svg/png、--out、frame/fps/size/scale</td>
+</tr>
+<tr>
+<td>interact / resolve-sound</td>
+<td>--request-file に SDK と同じ JSON。返した操作状態を session に自動保存しない。--out は JSON</td>
+</tr>
+<tr>
+<td>draft</td>
+<td>--operation と selector。未確定 frame JSON を計算。原文・session・履歴を変更せず、草稿 PNG は未提供</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>--operation、直接 --text-file 置換、または set/move/add/inherit/planDelete/delete の原文操作。変更は session 差分に保存</td>
+</tr>
+<tr>
+<td>undo / redo</td>
+<td>保存履歴を復元。source revision が一致しない場合は拒否</td>
+</tr>
+<tr>
+<td>export</td>
+<td>--file/--definition/--kind または --selections。依存計画・検査を実施し、--out .mcpack/.zip で生成。--plan は計画のみ</td>
+</tr>
+<tr>
+<td>diagnostics / status</td>
+<td>現呼出しの診断、保存状態。status --live は source hash と作業領域も確認</td>
+</tr>
+<tr>
+<td>workflow</td>
+<td>--file の commands を順に処理。server を共有し、成功変更を都度保存。途中失敗時は completed/failed_index を報告</td>
+</tr>
+<tr>
+<td>features / help</td>
+<td>機能境界 / 説明</td>
+</tr>
+</tbody></table></div>
+<p>原文編集の pointer は JSON Pointer。set の value は JSON、move の value は offset、add/inherit の parent-pointer/name/base-ref/index を明示します。画面限定操作は生成要素・未解決参照・継承の安全条件を検査します。delete では事前 plan と必要な cascade を使用し、未確認の広範な削除を行いません。詳細な operation object の版付き契約は既存の <a href="../../../local-node/CLI-ja.md">CLI 詳細</a> も参照してください。</p>
+<p>export selections は 1～256 件。pack-options は name 120 文字、description 1,024、version は 3 個の整数 0～65,535、authors 最大 16×80 文字。pack-icon は PNG 最大 1 MiB/2,048 辺で、CRC を確認し透明余白付き 256×256 に変換します。未解決の依存参照を黙って落として成功としません。</p>
+<p>session は元 archive の絶対パス・SHA-256・size、原文 overrides、設定、選択、履歴を保存します。原本の内容が変われば復元を停止します。履歴は最大 64 件/8 MiB、古い履歴の除去は status に報告。session lock は同じファイルの同時利用を拒否します。</p>
+<h3 id="spec-12-内部処理と描画対象">12. 内部処理と描画対象</h3>
+<ol>
+<li>archive のサイズ・entry・path・CRC 等を検査し、処理用の登録を作成。</li>
+<li>UI/変数/素材の catalog を構築、上位層と一意な定義を選択。</li>
+<li>継承、controls、変数/default/conditional、対応 modifications、明示 factory branch を投影し、原文由来と依存診断を保持。</li>
+<li>model validation と記録済み native property 検査を実施。</li>
+<li>明示 mock/collection/local state と animation の絶対時刻を評価し、layout boxes/frame IR を生成。</li>
+<li>JSON は IR、SVG はその境界図。PNG はパック素材/localization/font を取得・測定して必要な再配置後に raster 描画。</li>
+<li>最終 quality/diagnostics/digest を返却。ファイル保存・session 更新は CLI/呼出し側の別責務。</li>
+</ol>
+<p>通常 palette は screen/panel/collection_panel/label/button/dropdown/image/input_panel/stack_panel/grid/scroll_view/edit_box/toggle/scroll_track/scrollbar_box。custom/factory/tooltip_trigger は保持・認識しても、全 runtime を一般描画できるという意味ではありません。未知 field は model に保持しますが、未対応描画機能の忠実な再現は保証しません。JSONC を parse した model は comment を保持しないため、投影・生成結果を原本と byte 同一とは扱いません。</p>
+<p>binding は公開 JSON UI の global/collection/view 等の対応部分と明示状態を評価します。ゲームの不透明な renderer data、Molang 全体、controller による値の生成は実行しません。collection_index は直近の collection owner と行 context を確認し、panel だけを挟んだ場合にも任意の祖先へ飛ばして正当化しません。</p>
+<p>画像は対応するパック内 PNG/JPEG 等の resource と texture sidecar、UV・nine-slice 等の対応 drawing contract を使います。実フォントが足りなければ厳格 PNG を停止し、OS フォントで不足を黙って補いません。bitmap profile と observed-smooth profile は明示選択し、後者は観測近似です。公開配布版に proprietary な Minecraft font/texture/model 一式は含めません。</p>
+<p>native renderer は限定された item/progress/モデル等の安全な surrogate を持ちます。player/horse/book 等の資産に基づく 3D 表示は deterministic な orthographic snapshot であり、Bedrock の shader/lighting/Molang/render pipeline 全体ではありません。geometry/texture の不足・未知機能・上限超過を検出します。</p>
+<p>animation は alpha/offset/size/uv/color/wait/flip_book の対応部分、有限な next chain、絶対時刻 sample を計算します。easing は linear と in/out/in_out の quad/cubic/quart/quint/sine/expo/circ/back/elastic/bounce。定義/track 最大各 2,048、chain 64、定義総量 2 MiB。イベント副作用、activation/reset、描画される瞬間の native clock 等は別途非対応診断です。</p>
+<h3 id="spec-13-主要上限とライフサイクル">13. 主要上限とライフサイクル</h3>
+<p>上限は保証する処理容量ではなく拒否境界です。異なる層の上限が併存し、先に到達した上限で失敗します。これらの値を超える UI が実機で不正という意味でもありません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>対象</th>
+<th>現行の主な上限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SDK JSON</td>
+<td>16 MiB、20,000 要素、深さ 32</td>
+</tr>
+<tr>
+<td>SDK 受付済み処理</td>
+<td>実行中を含む 8 件、1 renderer 内は直列</td>
+</tr>
+<tr>
+<td>ZIP</td>
+<td>入力 768 MiB、120,000 entries、central directory 128 MiB、展開総量 2,048 MiB、1 entry の展開後 64 MiB / 圧縮時 128 MiB</td>
+</tr>
+<tr>
+<td>展開比率</td>
+<td>展開後 8 MiB 以上の entry で 200 倍超を読込み拒否。圧縮爆弾対策に使う</td>
+</tr>
+<tr>
+<td>内部登録・upload</td>
+<td>登録 pack 最大 4（公開 stack は最大 2 層）、作業 disk bytes 2,304 MiB、upload 300 秒</td>
+</tr>
+<tr>
+<td>Worker 処理</td>
+<td>通常 job 120 秒、projection 30 秒。batch 等は別の上限</td>
+</tr>
+<tr>
+<td>共通 screen model</td>
+<td>既定 20,000 nodes/depth 200。validate / interact の model 検査に適用し、frame 側の上限だけを満たせばよいとはしない</td>
+</tr>
+<tr>
+<td>frame</td>
+<td>model 50,000 nodes/depth 256、layout 5,000 boxes、組合せ state 1 MiB、reply 24 MiB</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>各辺 8,192、16,777,216 pixels、decoded resources 128 MiB、512 assets、64 font sheets、131,072 文字、120 秒、encoded PNG 96 MiB</td>
+</tr>
+<tr>
+<td>3D surrogate</td>
+<td>256 bones、2,048 cubes、2,048 draw faces/work units、bone depth 64、motion mesh 2 MiB</td>
+</tr>
+<tr>
+<td>記録済み property 診断</td>
+<td>生成診断 256、quality 証拠は最大 64 件。省略数・capture 完了を別記</td>
+</tr>
+</tbody></table></div>
+<p>SDK/HTTP のパックは無操作 30 分で自動削除しません。import/close まで保持します。通常の worker/cache 上限、容量制限は維持します。Worker が復旧し接続 token/generation が変われば stack を無効化し <code>API_REIMPORT_REQUIRED</code> 等を返します。以前の projection ID を再利用せず import し直します。</p>
+<p>取消 signal は受付・待機・処理の各境界で検査します。待機要求は prompt に拒否されても、予約された queue slot は直列 task がそこへ到達してから解放します。同期処理・OS 操作を即座に停止できる保証ではありません。close は新規受付を止め、所有処理を cancel、server/Worker と queue の終了を待ちます。複数 close は同じ Promise にまとまります。</p>
+<p>import 失敗時は新規登録を片付け、通常は旧 stack を保持します。cleanup が失敗して登録を安全に追跡できなければ renderer を閉じ、context に recreate_renderer_required/import_cleanup 等を返します。取消の通知が cleanup 完了より早く返ることがあります。</p>
+<p>HTTP の複数 clients は <strong>同じ stack</strong> を共有します。一人の import が他の client にも影響します。独立したパックの処理には別 renderer/server を用意します。TCP 接続切断はその要求の取消、server close は全体終了です。</p>
+<h3 id="spec-14-ファイル保護errors検証根拠">14. ファイル保護・errors・検証根拠</h3>
+<p>CLI の出力は拡張子/通常 file/path を検査し、元 archive、要求 file、アプリ本体への上書きを拒否します。新規作成が既定、成果物だけ --force で置換。兄弟 temporary file を sync してから final 名を公開し、親 directory の電源断 durability までは保証しません。SDK/HTTP は保存を行わないので、利用者の writeFile は利用者が原本保護・上書き policy を実装します。</p>
+<p>SDK は JsonUiApiError を throw し、code/message/category/retryable/correlation_id/details/context を持ちます。内部 error は non-enumerable cause。公開診断は sanitize しますが、入力内の private 情報を無条件に公開共有してよいという意味ではありません。HTTP token と connection descriptor は認証情報です。</p>
+<p>0.16.0 の既存検証記録は Node 3,163 success・39 skip、共有 core 533 success、28 状態の strict PNG、39 操作、サンプル OGG 全復号です。これらは <strong>0.16.0 の履歴</strong>であり、0.16.1 の新規検査数や Minecraft/browser の実行結果として計上しません。現配布版の文書・package 検査結果はリリース報告を参照してください。</p>
+<p>本書の実装参照は <code>local-node/api.mjs</code>, <code>api-request.mjs</code>, <code>api-server.mjs</code>, <code>api-interaction.mjs</code>, <code>preview-settings.mjs</code>, <code>preview-pipeline.mjs</code>, <code>cli.mjs</code>, <code>cli-files.mjs</code>, <code>limits.mjs</code>, <code>frame-ir.mjs</code>, <code>frame-raster-assets13.mjs</code>, <code>sound-resolver.mjs</code>, <code>audio-preflight.mjs</code>、および <code>editor-core/src</code> の preview-state / preview-animation / local-toggle-state / native-property-diagnostics / native-model-preview です。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="limitations"><h2 id="limitations">JSON UI Workbench 0.16.1 — 注意事項・対応範囲</h2>
+<p>English: <a href="HANDBOOK_EN.html#limitations">Limitations and cautions</a> · <a href="#guide">説明書</a> · <a href="#spec">仕様書</a></p>
+<p>この文書は、プレビューの結果から判断できること、判断できないことを説明します。対象は <strong>Minecraft: Bedrock Edition の Classic JSON UI</strong> です。対応する機能を、入力した状態と素材を使ってゲーム外で評価します。</p>
+<h3 id="limitations-1-classic-ui-専用スマートフォン非対応">1. Classic UI 専用・スマートフォン非対応</h3>
+<p><strong>本ツールはデスクトップ環境での Classic UI 開発用です。スマートフォンでのツール実行、Pocket UI・タッチ向け UI の描画や操作検証には対応していません。</strong> Node.js とローカルファイルを扱えるデスクトップ環境を用意してください。</p>
+<p>Pocket と判定された UI は一覧や原文の確認には使えますが、プレビューは <code>POCKET_PREVIEW_BLOCKED</code> で停止します。画面の幅や高さをスマートフォン相当に変えても、Pocket のレイアウト、タッチ入力、端末の安全領域などを再現することにはなりません。</p>
+<p>ここでいう非対応は、このレンダラーの対象範囲です。Minecraft のモバイル版で Classic が選べるか、個別アドオンがモバイル版で動くかを、この制限だけから判定するものではありません。Classic/Pocket の選択と、端末や入力方法は別の条件として確認してください。</p>
+<p>OreUI と、Script API の Data-Driven UI（DDUI）の実行・描画にも対応していません。<code>interact()</code> でローカルトグルを変化させられることは、DDUI の Observable やゲーム内のリアクティブなフォームを実行できるという意味ではありません。</p>
+<h3 id="limitations-2-対応状況の一覧">2. 対応状況の一覧</h3>
+<p>「対応」は、記載した範囲の実装があるという意味です。「条件付き」は必要な入力・素材・対応する構造がある場合に利用できます。「非対応」は本ツールがその処理を提供しません。「未検証」は実装の有無とは別に、この版の検査で確認していない事項です。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>対象</th>
+<th>状況</th>
+<th>範囲・条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Classic JSON UI の読込み・定義選択</td>
+<td>対応</td>
+<td>ZIP / MCPACK / MCADDON 内のリソースパック。複数 RP や複数定義は明示的に選択します。</td>
+</tr>
+<tr>
+<td>JSON のフレーム出力</td>
+<td>対応</td>
+<td>評価したプロパティ、配置、診断を返します。画像素材を実際に描いた結果ではありません。</td>
+</tr>
+<tr>
+<td>SVG 出力</td>
+<td>対応</td>
+<td>配置・矩形を確認する診断図です。完成 UI やゲーム内の文字・画像描画とは異なります。</td>
+</tr>
+<tr>
+<td>PNG 出力</td>
+<td>条件付き</td>
+<td>対応する canvas バックエンド、必要な画像・フォント・モデル、評価可能な状態が必要です。</td>
+</tr>
+<tr>
+<td>binding・collection・継承・生成要素</td>
+<td>条件付き</td>
+<td>実装済みの式・生成規則と、与えた状態の範囲で評価します。ゲーム固有の全機構には対応しません。</td>
+</tr>
+<tr>
+<td>指定時刻のアニメーション</td>
+<td>条件付き</td>
+<td>対応するトラックを絶対時刻でサンプリングします。ゲームの時計・実イベント順序は再現しません。</td>
+</tr>
+<tr>
+<td><code>interact()</code> によるローカル状態変更</td>
+<td>条件付き</td>
+<td>明示したノードへの <code>activate</code> / <code>escape</code> と対応する入力マッピング。適用する効果は <code>localTogglePatch</code> です。</td>
+</tr>
+<tr>
+<td>CLI / Node / HTTP からの音源解決</td>
+<td>条件付き</td>
+<td>登録された短い OGG Vorbis / PCM16 WAV の参照・形式・ハッシュ等を返します。発音しません。</td>
+</tr>
+<tr>
+<td>実験版 GUI の音声再生</td>
+<td>条件付き</td>
+<td>Node 接続と Web Audio を使用し、対応する短音の再生を試みます。ブラウザー側の許可・復号能力にも依存します。</td>
+</tr>
+<tr>
+<td>原文編集・undo / redo・選択範囲のエクスポート</td>
+<td>条件付き</td>
+<td>安全に確定できる操作と依存関係が対象です。草稿、原文履歴、プレビュー状態は区別します。</td>
+</tr>
+<tr>
+<td>GUI による PowerPoint のような編集</td>
+<td>実験機能</td>
+<td>未完成です。共有定義・継承・生成要素の変更には制限があります。</td>
+</tr>
+<tr>
+<td>Pocket / タッチ UI のプレビュー</td>
+<td>非対応</td>
+<td>索引・原文確認だけに対応します。</td>
+</tr>
+<tr>
+<td>スマートフォンでのツール利用</td>
+<td>非対応</td>
+<td>デスクトップ Node.js 環境が対象です。</td>
+</tr>
+<tr>
+<td>OreUI / DDUI</td>
+<td>非対応</td>
+<td>OreUI のレンダリングや DDUI の Script API 実行機構はありません。</td>
+</tr>
+<tr>
+<td>Minecraft 本体・Behavior Pack スクリプトの実行</td>
+<td>非対応</td>
+<td>読み込んだ MCADDON の BP をゲームとして実行しません。</td>
+</tr>
+<tr>
+<td>実際のインベントリ・クラフト・交易・アイテム移動</td>
+<td>非対応</td>
+<td>指定された模擬状態を表示できますが、所持品やゲーム世界を変更しません。</td>
+</tr>
+<tr>
+<td>ネイティブのフォーム送信・再開・サーバー応答</td>
+<td>非対応</td>
+<td>操作 API は対応する効果を記述できても、ゲーム側で実行しません。</td>
+</tr>
+<tr>
+<td>全ブロック・全アイテム・全エンティティの完全な 3D 描画</td>
+<td>非対応</td>
+<td>個別の対応モデル・素材・プレビュー状態に限ります。</td>
+</tr>
+<tr>
+<td>この版での Minecraft 実機再比較・実音確認</td>
+<td>未検証</td>
+<td>内部の回帰検査と区別します。</td>
+</tr>
+<tr>
+<td>この版での Windows 実起動・ブラウザー実音出力</td>
+<td>未検証</td>
+<td>Linux / Node の検査結果から自動的に合格とはしません。</td>
+</tr>
+</tbody></table></div>
+<h3 id="limitations-3-成功completeの意味">3. 「成功」「complete」の意味</h3>
+<p>画像が保存されたこと、API が <code>ok: true</code> を返したことだけでは、実機で正しく動くとは判断できません。必要な品質軸と診断を確認してください。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>読み方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ok: true</code></td>
+<td>その API 処理を完了しました。Minecraft の動作合格ではありません。</td>
+</tr>
+<tr>
+<td><code>complete</code></td>
+<td>PNG の素材・描画情報に関する完了です。アニメーション、発音、実機動作の包括的な保証ではありません。</td>
+</tr>
+<tr>
+<td><code>preview_complete</code></td>
+<td>対応範囲で資産・評価・collection・表示／入力 binding・記録済み非対応プロパティの検査が完了しました。</td>
+</tr>
+<tr>
+<td><code>quality.animation</code></td>
+<td>指定時刻のアニメーションを調べる独立した軸です。<code>preview_complete</code> だけで判断しないでください。</td>
+</tr>
+<tr>
+<td><code>quality.native_properties</code></td>
+<td>記録済みの不整合だけを確認します。全ネイティブスキーマへの適合を証明しません。</td>
+</tr>
+<tr>
+<td><code>unknown</code> / <code>not_evaluated</code></td>
+<td>確定できない、または検査していません。成功へ読み替えないでください。</td>
+</tr>
+<tr>
+<td><code>draft: true</code></td>
+<td>不足等を許容した調査用の結果です。完成した画面の証拠にはしません。</td>
+</tr>
+<tr>
+<td><code>native_equivalence: &#39;not_evaluated&#39;</code> / <code>native_parity_verified: false</code></td>
+<td>Minecraft 実機との一致をこの結果では証明していません。</td>
+</tr>
+<tr>
+<td><code>playback: &#39;not_executed&#39;</code></td>
+<td>音源や再生要求の情報はありますが、その API は発音していません。</td>
+</tr>
+</tbody></table></div>
+<p><code>--strict-semantics</code> は選択した投影の参照・評価・collection・表示／入力 binding・記録済みプロパティ等を厳格に検査します。<code>validate</code> はフレーム全体を評価するコマンドではなく、PNG も生成しません。アニメーションまで停止条件に含める場合は、プレビューに <code>--strict-animation</code> を指定してください。</p>
+<p>通常の PNG は不足・非対応が残る場合に停止します。<code>--allow-partial</code> は調査用の部分描画を明示的に許可する指定で、実機互換性を高めるものではありません。<code>--strict-semantics</code> と <code>--strict-animation</code> の停止条件を解除する指定にもなりません。</p>
+<h3 id="limitations-4-状態操作アニメーションの境界">4. 状態・操作・アニメーションの境界</h3>
+<p>フォーム、変数、コレクション、スクロール位置、時刻などは、呼出し側が与えたプレビュー状態です。ゲームから自動取得した最新状態とは限りません。実機でタイトル・本文・行・ボタン等が変わる場合は、必要な状態を変えて複数のプレビューを検査してください。</p>
+<p><code>interact()</code> は、フォームの記述と <code>uiInstanceId</code> を保ちながら、対応するローカルトグル状態を更新できます。ゲーム内でフォームを開閉しないまま入力が成功する証明ではありません。返された <code>localToggleState</code> を次の要求へ渡す必要があります。外部 binding が所有する状態をローカル保存状態で上書きしたり、別の UI の保存状態を混ぜたりしないでください。</p>
+<p><code>expectedRevision</code> は要求で渡した状態の番号との整合性を検査します。サーバーが最新状態を保管する方式ではないため、古い状態と古い番号を組にして再送することはできます。最新状態の保管や複数利用者の競合処理は呼出し側の役割です。</p>
+<p>操作 API が実行する効果は <code>localTogglePatch</code> だけです。navigation、フォーム送信、clipboard 等の効果が記述されても、API が実行したとは扱わないでください。ドラッグやキーを連続再生してゲームの入力ループを再現する機能でもありません。GUI には個別の操作経路がありますが、API の効果記述と同一の実行範囲とは限りません。</p>
+<p>アニメーションは、指定された時刻・イベント条件でのサンプルです。実機での画面生成、ネイティブ時計、イベントの順序、副作用、入力遅延、サーバーとの同期は未検証です。<code>uv</code> / <code>size</code> / <code>offset</code> に <code>looping</code> を持つ記録済みの組合せや、一部の <code>flip_book</code> 接続には互換性診断が残ります。数値を計算できても、この診断が消えるわけではありません。</p>
+<h3 id="limitations-5-oggwav-と発音の制限">5. OGG・WAV と発音の制限</h3>
+<p>登録済みサウンド ID を、読み込んだパックの音源へ解決します。<code>resolveSound()</code> は任意の OS ファイルを読む API ではなく、音声バイト列の返却やスピーカー再生も行いません。</p>
+<p>対応する短音は <strong>OGG Vorbis または PCM16 WAV、1 / 2 チャンネル、8,000～192,000 Hz、10 秒以内</strong>です。さらに音源ファイル 4 MiB、復号後 PCM の予約量 8 MiB 等の制限があります。10 秒以内でも、予約量・パケット数・構造・その他の制限によって拒否される場合があります。</p>
+<p>Opus、FSB、連結 OGG、長音のストリーム再生には対応しません。拡張子を <code>.ogg</code> に変えるだけでは Vorbis になりません。同じ音源名の OGG と WAV が曖昧になる場合は、サウンド定義で拡張子を明示してください。</p>
+<p>GUI のブラウザー再生は、カテゴリ別の Minecraft 音量スライダーや 3D 位置音響を再現しません。該当する定義では <code>AUDIO_PREVIEW_CATEGORY_MIXER_NOT_APPLIED</code> / <code>AUDIO_PREVIEW_POSITIONAL_NOT_APPLIED</code> を報告します。候補の重み付き選択も、ゲームの乱数列と完全一致するとは限りません。合成 pitch の対応範囲は 0.5～2、出力 gain は 1 以下に制限され、GUI には別のプレビュー音量があります。</p>
+<p>ブラウザーの音声許可、音声 OFF、音量 0、音源の準備時間、復号失敗、同時再生数・メモリ等で発音されないことがあります。音源の参照や形式検査に成功したこと、Web Audio に再生開始を要求できたことは、スピーカーから音が聞こえた証拠ではありません。この版ではブラウザー実音・実機実音の確認はしていません。</p>
+<h3 id="limitations-6-画像フォントアイテム3d-モデル">6. 画像・フォント・アイテム・3D モデル</h3>
+<p>公開ソースには Minecraft / Mojang のテクスチャ、フォント、音声、スキン、モデル、完全な UI を同梱しません。必要な継承元と素材は、対象のゲーム版に合い、利用権を持つ参照パックから読み込んでください。パックの優先順位、内容、文字言語、UI 倍率、描画寸法が変われば、結果も変わり得ます。</p>
+<p>素材や必要な入力が欠けている場合は診断を返します。厳格 PNG は、足りない素材を無関係な画像で補って完成したと扱う機能ではありません。JSON / SVG の配置だけが得られても、PNG の最終文字測定・再配置や、ゲームの字体・レイヤー順と同じになるとは限りません。</p>
+<p>アイテムの数値 ID 表は対象版に依存します。独自アイテム、補助データ、NBT、染色、エンチャント、動的な表示等の全状態には対応していません。モデルが必要な品目で <code>NATIVE_ITEM_MODEL_REQUIRED</code> が出たら、面テクスチャを完成アイコンと読み替えないでください。</p>
+<p>対応する player / horse 等のモデル経路があっても、全エンティティのゲーム描画機構ではありません。player は参照パックのモデル・スキンを使い、利用者のアカウントスキンを自動取得しません。実装したカメラ・材質・controller・状態の範囲外は、診断または未対応として扱います。</p>
+<h3 id="limitations-7-診断は限定された互換性検査">7. 診断は限定された互換性検査</h3>
+<p>現在の記録済みプロパティ診断には、次のような対象があります。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>記述</th>
+<th>診断の範囲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>label.vertical_alignment</code></td>
+<td>記録済みのネイティブ拒否。原文には残し、プレビューの縦配置には使用しません。</td>
+</tr>
+<tr>
+<td>受動的な <code>panel</code> / <code>image</code> の <code>focus_enabled</code></td>
+<td><code>false</code> を含め、プロパティの存在を診断します。入力可能なすべての型を禁止する規則ではありません。</td>
+</tr>
+<tr>
+<td><code>collection_index</code> と具体的な直近親の不整合</td>
+<td>行所有権・親文脈の限定された検査です。単独テンプレートや全 collection 読取りを一律に禁止しません。</td>
+</tr>
+<tr>
+<td>特定アニメーション型の <code>looping</code> 等</td>
+<td>アニメーション品質で互換性不明を記録します。すべての <code>looping</code> や <code>flip_book</code> を禁止しません。</td>
+</tr>
+</tbody></table></div>
+<p>未知のプロパティを包括的に禁止する完全なスキーマ検査ではありません。診断が出ないことだけから、未来のゲーム版を含む全プロパティが有効とは判断できません。</p>
+<p>binding の全体検索による候補解決、collection の文脈不足等も、計算成功とは別の注意を返す場合があります。走査や診断の観測上限に達したときは <code>unknown</code> / 観測不完全を示します。省略された診断があることを「問題なし」と扱わないでください。</p>
+<h3 id="limitations-8-大きな-ui編集出力の注意">8. 大きな UI・編集・出力の注意</h3>
+<p>ノード数、生成数、入れ子、描画矩形、画像メモリ、要求時間、応答量等に制限があります。主要な例はモデル 50,000 ノード、PNG 5,000 矩形、PNG 一辺 8,192 px・総画素 16 Mi ピクセル、フレーム応答 24 MiB です。これはレンダラーの予算であり、Minecraft の UI 上限や FPS の保証ではありません。上限の全一覧と適用箇所は<a href="#spec">仕様書</a>を参照してください。</p>
+<p><code>--frame-summary</code> は大きなフレームの概要を JSON で受け取るための指定です。完全な診断本文・描画可能なフレーム・PNG を返さず、生成や評価の上限も解除しません。画面を分割して検査する場合は、部分ごとの成功を全画面の合格に置き換えないでください。</p>
+<p>実験版 GUI の編集では、同じ共有定義を使う複数の要素が影響を受ける場合があります。生成セルには独立した原文がない場合もあります。移動・削除・継承解除を常に任意の一要素だけへ適用できるわけではありません。草稿の確認、原文への確定、エクスポートを区別してください。</p>
+<p>原文の undo / redo は無制限ではなく、プレビューのクリック状態、設定変更、UI 選択をすべて戻す機能でもありません。CLI の原文履歴は最大 64 件 / 8 MiB で、セッション全体にも上限があります。履歴が削除された場合や大きすぎる単一編集では取り消せないことがあります。</p>
+<p>元アーカイブを変更せず、別の出力へ保存する設計です。ただし、書き出したファイルが意図した内容かは、原文・診断・再読込みで確認してください。出力先の上書き保護を回避して入力と同じ場所へ保存する使い方はしないでください。</p>
+<h3 id="limitations-9-公開前に確認すること">9. 公開前に確認すること</h3>
+<ol>
+<li>対象ゲーム版、Classic プロファイル、入力方法、参照パック、言語、寸法・UI 倍率を記録します。</li>
+<li>開いた直後だけでなく、ボタン・トグル・行・スクロール・アニメーション時刻を変えた必要な状態を検査します。</li>
+<li>検査したい範囲に厳格オプションを適用し、<code>quality</code>、不足、<code>unknown</code>、部分描画の有無を確認します。</li>
+<li>ゲーム内での表示・入力・フォーム返却・スクリプト・インベントリ・音声は、必要に応じて Minecraft と Content Log で別に確認します。</li>
+<li>配布するコード・素材と、公開する診断ファイルの内容を確認します。診断にはパックの内容・名前・ローカルパス等が含まれ得ます。</li>
+</ol>
+<p>この確認は、レンダラーの出力から言える範囲と、ゲーム内で確認する範囲を整理するためのものです。</p>
+<h3 id="limitations-10-ライセンス素材参照資料">10. ライセンス・素材・参照資料</h3>
+<p>本プロジェクトのコードとドキュメントは、配布物の<a href="#scope">ライセンス文書</a>に従って使用してください。非商用の利用・改変・再配布と、商用利用の制限の具体的な範囲は、その本文と正式なライセンスを確認してください。音源・画像・Minecraft 素材・第三者ライブラリには、各権利者の条件が独立して適用されます。アドオンを読み込めることは、その素材の再配布を許可することではありません。</p>
+<p>本ツールは独立した開発ツールであり、Mojang / Microsoft の公式製品ではありません。<a href="HANDBOOK_EN.html#thirdparty">第三者通知</a>も参照してください。</p>
+<p>現在の使い方・入力と出力は<a href="#guide">説明書</a>と<a href="#spec">仕様書</a>を正本とします。旧版の検査記録に書かれた件数や制限は、その版の履歴です。0.16.0 の変更根拠は<a href="../VERIFICATION_0160_JA.md">検査範囲</a>、個別の詳細は<a href="../INTERACTION_AUDIO_JA.md">操作・音声 API</a>、<a href="../ASSET_POLICY.md">素材方針</a>、<a href="../item-rendering.md">アイテム描画</a>、<a href="../limits-performance.md">評価上限</a>を参照してください。</p>
+<p>外部仕様を確認した一次資料（2026-10-04 UTC）:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/reference/content/jsonuireference/examples/jsonuilist?view=minecraft-bedrock-stable">Microsoft Learn: JSON UI</a></li>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/documents/scripting/intro-to-ddui?view=minecraft-bedrock-stable">Microsoft Learn: Introduction to DataDriven UI</a></li>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/documents/addcustomsounds?view=minecraft-bedrock-stable">Microsoft Learn: Creating and Adding Custom Sounds</a></li>
+<li><a href="https://github.com/Mojang/bedrock-schemas/blob/main/schemas/rp/sounds/index.schema.json">Mojang: sound definitions schema</a></li>
+</ul>
+<p>対応範囲は本ツールの実装に基づきます。これらの資料に載るすべての Minecraft 機能へ対応しているという意味ではありません。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="scope"><h2 id="scope">License / ライセンス — JSON UI Workbench 0.16.1</h2>
+<p>JSON UI Workbench 0.16.1 の公開者が権利を保有する、または許諾する権限を持つ独自のソースコード・文書・例・自作素材を、<strong>PolyForm Noncommercial License 1.0.0</strong> で提供します。非商用の目的での利用・改変・再配布を許可します。商用目的の利用は、このライセンスの許諾範囲に含まれません。SPDX 識別子は <code>PolyForm-Noncommercial-1.0.0</code> です。</p>
+<p>The publisher offers the original source code, documentation, examples and original assets of JSON UI Workbench 0.16.1 that they own or are authorized to license under the <strong>PolyForm Noncommercial License 1.0.0</strong>. It permits use, modification and redistribution for permitted noncommercial purposes. It does not grant permission for commercial purposes. SPDX identifier: <code>PolyForm-Noncommercial-1.0.0</code>.</p>
+<p>Required Notice: JSON UI Workbench — PolyForm Noncommercial License 1.0.0; project license scope is described in LICENSE.md. Third-party components and imported assets retain their separate terms.</p>
+<h3 id="scope-read-the-terms-本文と説明">Read the terms / 本文と説明</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Document / 文書</th>
+<th>Status / 位置付け</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#official">Original English text / 英語原文</a></td>
+<td>Governing, unmodified license text / 変更していない正式な条件</td>
+</tr>
+<tr>
+<td><a href="#license">日本語の条件説明</a></td>
+<td>条件を理解するための説明。独自の新たなライセンスではありません</td>
+</tr>
+<tr>
+<td><a href="HANDBOOK_EN.html#license">English explanation</a></td>
+<td>Plain-language explanation; does not replace the governing text</td>
+</tr>
+<tr>
+<td><a href="HANDBOOK_EN.html#thirdparty">Third-party notices</a> · <a href="#thirdparty">日本語</a></td>
+<td>Separate components and retained terms / 別の条件が適用される部品と素材</td>
+</tr>
+</tbody></table></div>
+<h3 id="scope-scope-適用範囲">Scope / 適用範囲</h3>
+<p>Third-party components, vendor files with their own notices, compatibility data subject to upstream terms, Minecraft assets, imported packs, other people&#39;s add-ons and user-provided content are <strong>not relicensed</strong> by this notice. Retain and follow separate upstream notices. The project license does not restrict permissions independently granted by a third-party license. See the <a href="../ASSET_POLICY.md">asset policy</a>.</p>
+<p>第三者ライブラリ、独自の権利表示がある vendor ファイル、元の条件が適用される互換性データ、Minecraft の素材、読み込んだパック、他者のアドオン、ユーザー提供データには、この表示で新しいライセンスを付与しません。元の表示を保持し、その条件に従ってください。第三者のライセンスが別途認める利用を、本プロジェクトのライセンスで制限するものではありません。</p>
+<p>The inherited r41 archive lacked a complete authorship record and a project-wide license. This release records the publisher&#39;s present license choice within their authority; it does not certify ownership of every inherited line or grant rights held by another person. Earlier releases retain the licensing status with which they were supplied. AI assistance alone does not establish third-party permission.</p>
+<p>元の r41 アーカイブには完全な著作者記録とプロジェクト全体のライセンスがありませんでした。本版は公開者の現在の選択を、公開者が許諾できる範囲に記録したものです。継承した全行の権利関係を証明したり、他者の権利を許諾したりするものではありません。旧版は配布時の権利状態を維持します。AI による作成だけで第三者の利用許諾が成立するわけではありません。</p>
+<p>Commercial-use restrictions mean this is <strong>noncommercial source-available software</strong>, rather than OSI open-source software. Redistribution must preserve the governing terms or their URL, the <code>Required Notice:</code> line above and applicable third-party notices. There is no additional project requirement to publish your changes or assign your copyright.</p>
+<p>商用利用の制限があるため、本プロジェクトは <strong>非商用のソース公開ソフトウェア</strong> です。OSI の定義によるオープンソースとは表記しません。再配布時は正式な条件の本文または URL、上記の <code>Required Notice:</code> 行、該当する第三者の権利表示を保持してください。改変ソースの公開や著作権の譲渡を追加で義務付けてはいません。</p>
+<h3 id="scope-minecraft-affiliation-minecraft-との関係">Minecraft affiliation / Minecraft との関係</h3>
+<p>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT. Minecraft names and assets belong to their respective rights holders. This license grants no rights to their names or assets.</p>
+<p>Minecraft の公式製品ではありません。Mojang / Microsoft の承認・提携はありません。Minecraft の名称と素材は各権利者に帰属し、本ライセンスはそれらの権利を許諾しません。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="license"><h2 id="license">ライセンスの日本語説明 — 0.16.1</h2>
+<p>採用ライセンスは <strong>PolyForm Noncommercial License 1.0.0</strong> です。個人の趣味・学習・実験などの非商用利用を許し、商用目的の利用を認めない、既存の条件を選びました。独自の制限を付け足したライセンスではありません。</p>
+<p>この文書は条件を理解するための日本語説明であり、正式な翻訳版や追加の利用許諾ではありません。矛盾する場合は、変更せず同梱した <a href="#official">英語原文</a> が優先します。<a href="HANDBOOK_EN.html#license">English explanation</a> / <a href="#scope">適用範囲</a>。</p>
+<h3 id="license-1-何ができるか">1. 何ができるか</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>行為・目的</th>
+<th>本プロジェクトの条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>個人の学習、趣味、私的な娯楽、公共の知識に役立つ研究・実験・テスト</td>
+<td>将来の商用利用を予定しない、原文が定める非商用の目的で許可</td>
+</tr>
+<tr>
+<td>非商用目的でのソースの変更、自分用の派生版の作成</td>
+<td>許可</td>
+</tr>
+<tr>
+<td>非商用目的での原版・改変版の再配布</td>
+<td>許可。正式な条件または URL、Required Notice、第三者の表示を引き継ぐ</td>
+</tr>
+<tr>
+<td>原文に列挙された慈善団体・教育機関・公共研究機関・公共の安全や健康に関わる団体・環境保護団体・政府機関による利用</td>
+<td>Noncommercial Organizations 条項に従い許可。資金源・資金による義務だけを理由に除外しない</td>
+</tr>
+<tr>
+<td>有料アドオン制作、受託開発、業務・収益化サービスでのレンダラー利用、レンダラーの販売</td>
+<td>本ライセンスで商用目的の利用を許可しない</td>
+</tr>
+</tbody></table></div>
+<p>「無料で配るから必ず非商用」「会社だからどんな用途でも禁止」とは一律に判定しません。利用の目的と原文の条項で判断します。有料の AI・クラウドを個人が契約していることだけで、その人の趣味の作業が必ず商用になるわけではありません。商用に使うサービス運営者の利用は別に判断します。商用目的で使うには、権限のある公開者から別途の許諾が必要です。</p>
+<p>本ライセンスは、レンダラーで作った画像やアドオンに自動で同じ条件を課す条項ではありません。成果物に含めた本プロジェクトのコード・素材、Minecraft の素材、他者の素材には各条件が適用されます。<strong>成果物が自動で同じライセンスにならないことと、レンダラーを有料制作に使ってよいことは別です。</strong> あらゆる成果物を自由に商用利用できるという許諾は与えていません。</p>
+<h3 id="license-2-再配布するとき">2. 再配布するとき</h3>
+<p>受け取った人に、正式なライセンス本文または <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">その URL</a> と、<code>LICENSE.md</code> にある <code>Required Notice:</code> で始まる表示を渡してください。個別ファイルの第三者表示とライセンスも残します。本体の一部だけを配る場合も同じ条件です。</p>
+<p>実務上は <code>LICENSE.md</code>、<code>LICENSE-JA.md</code>、<code>LICENSE-EN.md</code>、<code>docs/release/legal/PolyForm-Noncommercial-1.0.0.md</code>、第三者の表示と該当するライセンス本文を同梱すると説明が伝わります。原文が要求するのは本文または URL と Required Notice などであり、この説明書を追加の義務にしてはいません。</p>
+<p>改変したソースを必ず公開する義務や、変更を公開者に返す義務はありません。あなたが持つ著作権を公開者へ譲渡する必要もありません。元のソフトウェアについて、あなたが持つ許諾を他者へ再許諾・譲渡する権利はありません。受領者は公開者が提示する条件に従います。</p>
+<h3 id="license-3-各条項の意味">3. 各条項の意味</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>原文の節</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Acceptance</td>
+<td>条件を義務と許諾の条件として受け入れる必要がある</td>
+</tr>
+<tr>
+<td>Copyright License</td>
+<td>許可された目的で、許諾者の著作権に関わる利用を認める。配布・改変は各専用条項に従う</td>
+</tr>
+<tr>
+<td>Distribution License</td>
+<td>許可された改変版・派生作品を含むコピーの配布を認める</td>
+</tr>
+<tr>
+<td>Notices</td>
+<td>受領者へ条件本文または URL と Required Notice を渡す</td>
+</tr>
+<tr>
+<td>Changes and New Works License</td>
+<td>許可された目的で変更・派生作品を作ることを認める</td>
+</tr>
+<tr>
+<td>Patent License</td>
+<td>許諾者が許諾できる、または後に許諾できるようになる特許請求のうち、本ソフトウェアの使用で侵害するものを許諾する</td>
+</tr>
+<tr>
+<td>Noncommercial Purposes / Personal Uses / Noncommercial Organizations</td>
+<td>許可する目的と、個人用途・列挙された団体の取扱いを定める</td>
+</tr>
+<tr>
+<td>Fair Use</td>
+<td>法律が認めるフェアユースの権利を制限しない</td>
+</tr>
+<tr>
+<td>No Other Rights</td>
+<td>再許諾・許諾の譲渡・その他の権利は暗黙に認めない。公開者が別の相手に許諾することも妨げない</td>
+</tr>
+<tr>
+<td>Patent Defense</td>
+<td>ソフトウェアの特許侵害を文書で主張すると特許許諾が直ちに終了する。会社による主張では、その会社のための業務に関する特許許諾が終了する</td>
+</tr>
+<tr>
+<td>Violations</td>
+<td>初回の書面による違反通知後、32 日以内に完全に条件へ従い、過去の違反を是正する実際の措置を取れば許諾は継続し得る。それ以外は全許諾が直ちに終了する</td>
+</tr>
+<tr>
+<td>No Liability</td>
+<td>法律で認められる範囲で現状有姿・無保証で提供し、許諾者は利用や条件などから生じる損害の責任を負わない</td>
+</tr>
+<tr>
+<td>Definitions</td>
+<td>licensor は条件を提示する個人・団体、software は提示対象、you は受諾者、your licenses は与えられた全許諾。use は許諾が必要な行為。your company は勤務先・事業体と支配関係のある組織を含み、control は資産の実質的所有または経営・方針を決定する権限を指す</td>
+</tr>
+</tbody></table></div>
+<h3 id="license-4-対象外の権利">4. 対象外の権利</h3>
+<p>適用範囲は <a href="#scope">LICENSE.md</a> で確認してください。第三者ライブラリの BSD・MIT 等の条件はそのまま残ります。外部パックを読み込めることは、それを複製・改変・配布できるという許可ではありません。元の r41 の全著作者記録を、このライセンス採用で補完したことにはなりません。</p>
+<p>商用利用を制限するため、OSI の定義によるオープンソースではなく、非商用のソース公開ソフトウェアと説明します。Minecraft 公式製品でもありません。</p>
+<h3 id="license-5-出典と原文の保存">5. 出典と原文の保存</h3>
+<ul>
+<li><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">公式の条件</a></li>
+<li><a href="https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md">公式リポジトリの 1.0.0 原文</a></li>
+<li><a href="https://spdx.org/licenses/PolyForm-Noncommercial-1.0.0.html">SPDX の識別子</a></li>
+<li><a href="https://opensource.org/osd">OSI の定義</a></li>
+</ul>
+<p>同梱英語原文は公式リポジトリの 1.0.0 ファイルをそのまま保存しています。UTF-8 / LF、4,563 バイト、SHA-256 <code>c0ea4a896d2c8c394b29f9427589996db826cd501c512279ff0ed3ef48fabbe5</code>。原文に独自の追加条件や日本語を挿入していません。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="thirdparty"><h2 id="thirdparty">第三者の権利表示 — JSON UI Workbench 0.16.1</h2>
+<p><a href="HANDBOOK_EN.html#thirdparty">English</a> · <a href="#scope">本体のライセンス</a></p>
+<p>この文書は使用部品と由来を記録します。各ライセンス本文の代わりではなく、元のファイルに新たな条件を付けるものでもありません。</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>部品</th>
+<th>版</th>
+<th>ライセンス</th>
+<th>出典・保持している本文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zip.js</td>
+<td>2.8.16</td>
+<td>BSD-3-Clause</td>
+<td><a href="https://github.com/gildas-lormeau/zip.js">公式</a>、<code>editor-core/vendor/zip.js-2.8.16/LICENSE</code></td>
+</tr>
+<tr>
+<td>jsonc-parser</td>
+<td>3.3.1</td>
+<td>MIT</td>
+<td><a href="https://github.com/microsoft/node-jsonc-parser">公式</a>、<code>editor-core/vendor/jsonc-parser-3.3.1/LICENSE.md</code></td>
+</tr>
+<tr>
+<td>pngjs</td>
+<td>7.0.0</td>
+<td>MIT</td>
+<td><a href="https://github.com/pngjs/pngjs">公式</a>、<code>local-node/vendor/pngjs/LICENSE</code></td>
+</tr>
+<tr>
+<td>@napi-rs/canvas</td>
+<td>0.1.100</td>
+<td>パッケージは MIT</td>
+<td><a href="https://github.com/Brooooooklyn/canvas">公式</a>。npm で導入し、公開ソース ZIP にネイティブバイナリは含めない</td>
+</tr>
+</tbody></table></div>
+<p>ブラウザー用依存の固定版とハッシュは <code>editor-core/vendor/THIRD_PARTY_LOCK.tsv</code> に残っています。これらは r41 由来の記録で、配布物のハッシュは <code>PUBLIC-DISTRIBUTION.json</code> が別に記録します。canvas 本体の MIT 表示だけで、その内部・依存するネイティブ部品の条件を置き換えることはできません。将来インストーラーやバイナリを配布する場合は、実際に組み込む依存の本文と表示を収集してください。</p>
+<h3 id="thirdparty-minecraft-の互換性情報">Minecraft の互換性情報</h3>
+<p>レンダラーには、互換性のための識別子、アイテムとテクスチャの対応、プロパティ名、利用可能な数値 ID、ハッシュ、自作の解釈処理があります。外部形式についての情報であり、ゲームのテクスチャや Minecraft 全体の実行環境ではありません。</p>
+<p>既存の表には Mojang/bedrock-samples のコミット <code>736072450c26a7c67f07b1661f29d9a5ebaa14b1</code> を出典として記載するものがあります。ほかの表はそれぞれ固定した出典版を示します。出典コメントを保持してください。ある版との互換性で、すべてのゲーム版との互換性を証明したことにはなりません。</p>
+<p><a href="https://github.com/Mojang/bedrock-samples/blob/main/LICENSE.md">Mojang/bedrock-samples の条件</a>は Mojang の権利を保持し、<a href="https://www.minecraft.net/en-us/eula">Minecraft EULA</a>を参照しています。MIT ではありません。公開配布には、提供された実機プレイヤーモデル・スキン、コピーされたネイティブ UI・controller の試験データ、バニラパック、ゲームフォント、過去のゲーム画像を含めません。必要な参照パックは利用者が正規に用意します。</p>
+<h3 id="thirdparty-自作のデモ素材">自作のデモ素材</h3>
+<p><code>examples/revision12/pack</code> と <code>examples/revision13/pack</code> の小さな例は、付属の <code>CREDITS-ja.md</code> に自作の試験画像、限定的な試験字形、合成音声と記録されています。公開ビルダーは、由来が記録された素材経路だけを使います。この記録自体は追加の包括的な利用許諾ではなく、プロジェクトの条件が適用されます。由来不明の過去の試験 ZIP はそのまま配布せず、記録された自作素材から再構築します。</p>
+<p><code>docs/release/manual/examples/build-demo.mjs</code> は、自作 JSON 定義と単色の試験画像を生成し、由来が記録された合成 OGG を再利用します。ゲームのフォントやテクスチャをコピーしません。これらのプロジェクト独自部分には <code>LICENSE.md</code> の範囲で本体の条件が適用されます。</p>
+<h3 id="thirdparty-本体のソース">本体のソース</h3>
+<p>元の r41 は、完全な著作者記録や全体のライセンスを含んでいませんでした。0.16.1 で、公開者が所有するか許諾する権限を持つ独自部分に PolyForm Noncommercial License 1.0.0 を採用しました。第三者部品、元の条件が適用される互換性データ、ゲーム素材、ユーザー提供データを再ライセンスしません。非商用のソース公開ソフトウェアとして説明してください。</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+<section class="chapter" aria-labelledby="official"><h2 id="official">PolyForm Noncommercial License 1.0.0</h2>
+<p><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">https://polyformproject.org/licenses/noncommercial/1.0.0</a></p>
+<h3 id="official-acceptance">Acceptance</h3>
+<p>In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.</p>
+<h3 id="official-copyright-license">Copyright License</h3>
+<p>The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor&#39;s copyright in it for any permitted purpose.  However, you may only distribute the software according to <a href="#official-distribution-license">Distribution License</a> and make changes or new works based on the software according to <a href="#official-changes-and-new-works-license">Changes and New Works License</a>.</p>
+<h3 id="official-distribution-license">Distribution License</h3>
+<p>The licensor grants you an additional copyright license to distribute copies of the software.  Your license to distribute covers distributing the software with changes and new works permitted by <a href="#official-changes-and-new-works-license">Changes and New Works License</a>.</p>
+<h3 id="official-notices">Notices</h3>
+<p>You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with <code>Required Notice:</code> that the licensor provided with the software.  For example:</p>
+<blockquote>
+<p>Required Notice: Copyright Yoyodyne, Inc. (<a href="http://example.com">http://example.com</a>)</p>
+</blockquote>
+<h3 id="official-changes-and-new-works-license">Changes and New Works License</h3>
+<p>The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.</p>
+<h3 id="official-patent-license">Patent License</h3>
+<p>The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.</p>
+<h3 id="official-noncommercial-purposes">Noncommercial Purposes</h3>
+<p>Any noncommercial purpose is a permitted purpose.</p>
+<h3 id="official-personal-uses">Personal Uses</h3>
+<p>Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.</p>
+<h3 id="official-noncommercial-organizations">Noncommercial Organizations</h3>
+<p>Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.</p>
+<h3 id="official-fair-use">Fair Use</h3>
+<p>You may have &quot;fair use&quot; rights for the software under the law. These terms do not limit them.</p>
+<h3 id="official-no-other-rights">No Other Rights</h3>
+<p>These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else.  These terms do not imply any other licenses.</p>
+<h3 id="official-patent-defense">Patent Defense</h3>
+<p>If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.</p>
+<h3 id="official-violations">Violations</h3>
+<p>The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice.  Otherwise, all your licenses end immediately.</p>
+<h3 id="official-no-liability">No Liability</h3>
+<p><em><strong>As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.</strong></em></p>
+<h3 id="official-definitions">Definitions</h3>
+<p>The <strong>licensor</strong> is the individual or entity offering these terms, and the <strong>software</strong> is the software the licensor makes available under these terms.</p>
+<p><strong>You</strong> refers to the individual or entity agreeing to these terms.</p>
+<p><strong>Your company</strong> is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.  <strong>Control</strong> means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise.  Control can be direct or indirect.</p>
+<p><strong>Your licenses</strong> are all the licenses granted to you for the software under these terms.</p>
+<p><strong>Use</strong> means anything you do with the software requiring one of your licenses.</p>
+<p class="top-link"><a href="#top">先頭へ戻る</a></p></section>
+</main><footer>非商用のソース公開ソフトウェア。正式なライセンスは巻末の変更していない英語原文です。実機一致を保証しません。</footer></body></html>

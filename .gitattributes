@@ -1,0 +1,20 @@
+* text=auto
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.png binary
+*.ogg binary
+*.wasm binary
+*.zip binary
+*.mcpack binary
+editor-core/vendor/** linguist-vendored
+local-node/vendor/** linguist-vendored

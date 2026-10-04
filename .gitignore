@@ -1,0 +1,52 @@
+# Local dependencies and output
+node_modules/
+.jsonui-api/
+dist/
+coverage/
+test-results/
+playwright-report/
+logs/
+tmp/
+.cache/
+.jsonui-local/
+.jsonui-workbench/
+.jsonui/
+.jsonui-cli/
+outputs/
+
+# Private inputs, local sessions, historical evidence
+private-assets/
+private-fixtures/
+uploads/
+upload/
+sessions/
+docs/r[0-9]*/
+docs/revision*/
+docs/resume*/
+editor-core/assets/native-default-player/
+local-node/vendor/canvas/
+local-node/tests/horse-v3-controller.json
+local-node/tests/fixtures/settings-texture37.json
+editor-core/tests/fixtures/revision12-actions/official-action-excerpts.json
+
+# Personal configuration / credentials
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.log
+*.jsonl
+*.zip
+*.mcpack
+*.mcaddon
+!editor-core/app/fixtures/s018-small-fixture.zip
+!editor-core/app/fixtures/s025-minimal-resource-pack.zip
+.DS_Store
+Thumbs.db
+
+# Generated package inventories are deliberately regenerated for each release
+package-manifest.json
+PUBLIC-DISTRIBUTION.json
+archive-name-map.json
+registry/archive-name-map.json

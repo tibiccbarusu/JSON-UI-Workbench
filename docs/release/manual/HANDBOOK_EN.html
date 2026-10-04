@@ -1,0 +1,1530 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JSON UI Workbench 0.16.1 English Handbook</title><style>
+:root{color-scheme:light;--ink:#172c3c;--muted:#526476;--accent:#145b73;--line:#d6e1e7;--paper:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#edf2f5;color:var(--ink);font:16px/1.85 system-ui,-apple-system,"Segoe UI","Noto Sans CJK JP","Yu Gothic","Hiragino Sans",Meiryo,sans-serif;overflow-wrap:anywhere}
+header,main,footer{max-width:1040px;margin:auto;background:var(--paper);padding:36px 54px}header{border-top:7px solid var(--accent);padding-bottom:22px}main{padding-top:12px}footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.eyebrow{font-size:.82rem;letter-spacing:.08em;color:var(--accent);margin:0}h1{font-size:2rem;line-height:1.35;margin:.35em 0}h2{font-size:1.62rem;line-height:1.5;border-bottom:2px solid var(--line);padding-bottom:.35em;margin-top:1.3em}h3{font-size:1.24rem;line-height:1.5;margin-top:1.8em}h4{font-size:1.08rem;line-height:1.5}p{margin:.8em 0}a{color:#075e86;text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:3px solid #f0a33c;outline-offset:4px}li{margin:.35em 0}strong{font-weight:700}
+.scope-note{border-left:4px solid var(--accent);padding:10px 16px;background:#eef6f9}.meta{color:var(--muted)}details{border:1px solid var(--line);padding:12px 18px;margin-top:20px}summary{cursor:pointer;font-weight:600}.toc{padding-left:1.5em}.toc li{margin:.25em 0}.chapter{padding-top:22px;margin-top:24px;border-top:1px solid var(--line)}.chapter:first-child{border-top:0;margin-top:8px;padding-top:0}
+code{font-family:ui-monospace,"Cascadia Code",Consolas,monospace;font-size:.88em;background:#f0f4f7;padding:.12em .28em;border-radius:3px;overflow-wrap:anywhere}pre{background:#142b3a;color:#eff7fc;padding:17px 20px;border-radius:5px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;margin:1em 0;max-width:100%}pre code{color:inherit;background:none;padding:0;border:0;border-radius:0;font-size:.86rem;white-space:inherit}blockquote{margin:1em 0;padding:.3em 1.2em;border-left:3px solid var(--line);color:var(--muted)}
+.table-wrap{max-width:100%;overflow-x:auto;margin:1.1em 0;overscroll-behavior:contain}table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.7}th,td{border:1px solid var(--line);padding:9px 11px;vertical-align:top;text-align:left;overflow-wrap:anywhere}th{background:#eaf1f5;color:#193e52}tr:nth-child(even) td{background:#f8fafb}table code{font-size:.9em}img{max-width:100%;height:auto}hr{border:0;border-top:1px solid var(--line);margin:1.5em 0}.top-link{font-size:.88rem;margin-top:24px}
+@media(max-width:640px){header,main,footer{padding:22px 18px}body{font-size:15px}h1{font-size:1.62rem}h2{font-size:1.38rem}h3{font-size:1.12rem}pre{padding:13px 12px}th,td{padding:7px 8px}table{min-width:580px}details{padding:10px 12px}}
+@media print{html{scroll-behavior:auto}body{background:#fff;font-size:10pt;line-height:1.6}header,main,footer{max-width:none;padding:0}header{border-top:0}.chapter{break-before:page;border-top:0;padding-top:0;margin-top:0}.chapter:first-child{break-before:auto}details,.top-link{display:none}h2,h3,h4{break-after:avoid}pre{background:#f2f5f7;color:#172c3c;break-inside:auto;font-size:8pt}pre code{font-size:8pt}.table-wrap{overflow:visible}table{min-width:0;font-size:8pt}thead{display:table-header-group}tr{break-inside:avoid}a{color:inherit;text-decoration:underline}footer{margin-top:1em}@page{size:A4;margin:18mm}}
+</style></head><body><header id="top"><p class="eyebrow">JSON UI WORKBENCH · 0.16.1</p><h1>JSON UI Workbench<br>English Handbook</h1><p class="meta">Includes the user guide, specification, limitations and license information. This documentation and licensing release preserves the 0.16.0 renderer. Run tutorials from the complete source ZIP. The handbook text is readable in this standalone HTML; supplementary linked files are in the ZIP distributions.</p><p class="scope-note"><strong>Classic UI only. Pocket/touch UI and use of this tool on smartphones are unsupported. GUI editing is experimental.</strong></p><details><summary>Open contents</summary><ol class="toc"><li><a href="#guide">JSON UI Workbench 0.16.1 — User guide</a></li><li><a href="#spec">JSON UI Workbench 0.16.1 Technical Specification</a></li><li><a href="#limitations">JSON UI Workbench 0.16.1 — Limitations and cautions</a></li><li><a href="#scope">License / ライセンス — JSON UI Workbench 0.16.1</a></li><li><a href="#license">License explanation — 0.16.1</a></li><li><a href="#thirdparty">Third-party notices</a></li><li><a href="#official">PolyForm Noncommercial License 1.0.0</a></li></ol></details></header><main><section class="chapter" aria-labelledby="guide"><h2 id="guide">JSON UI Workbench 0.16.1 — User guide</h2>
+<p><a href="HANDBOOK_JA.html#guide">日本語</a> · <a href="#spec">Technical specification</a> · <a href="#limitations">Limitations</a> · <a href="#scope">License</a></p>
+<p>This application reads <strong>Classic JSON UI</strong> from Minecraft Bedrock resource packs so you can inspect its appearance and representative states outside the game. It does not start Minecraft or execute an add-on&#39;s JavaScript. Start with the small included example to learn the sequence: import, select a screen, preview, edit, and export.</p>
+<p><strong>Preview support is limited to Classic UI. Pocket UI, including the touch-oriented UI commonly used on smartphones, cannot be previewed.</strong> This distribution runs on a PC with Node.js; it is not a smartphone application. A device type and Minecraft&#39;s UI profile are separate conditions. See <a href="#limitations">Limitations</a> for the precise scope.</p>
+<h3 id="guide-1-choose-an-entry-point">1. Choose an entry point</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Entry point</th>
+<th>Suitable work</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Type commands in a terminal</td>
+<td>CLI; the default in this guide</td>
+<td>Validation, images, source editing, pack export</td>
+</tr>
+<tr>
+<td>Call repeatedly from a program</td>
+<td>Node API</td>
+<td>Repeated rendering of one pack; AI integration</td>
+</tr>
+<tr>
+<td>Send HTTP requests from Python or another language</td>
+<td>HTTP API</td>
+<td>Requests to a persistent local service</td>
+</tr>
+<tr>
+<td>Inspect and edit with a mouse</td>
+<td>Experimental GUI</td>
+<td>Manual inspection and editing; review the unfinished features&#39; results</td>
+</tr>
+</tbody></table></div>
+<p><code>npm start</code> <strong>prints CLI guidance and exits</strong>. Use <code>npm run gui</code> to open the browser interface. The existing <code>start.bat</code> is also a compatibility entry for the GUI. CLI and API calls do not automatically open a browser.</p>
+<h3 id="guide-2-install-and-prepare">2. Install and prepare</h3>
+<ol>
+<li>Extract the entire distribution ZIP. Do not run files directly inside the ZIP. For example, use <code>C:\Tools\jsonui-workbench-0.16.1</code>.</li>
+<li>Obtain a compatible <strong>Node.js 22.14.0 or later</strong>, with npm, from the <a href="https://nodejs.org/en/download">official Node.js website</a>. The baseline validation environment is Node.js 22.14.0.</li>
+<li>On Windows, open the extracted folder in File Explorer, type <code>powershell</code> in the address bar, and press Enter. The terminal now starts with this folder as its working directory.</li>
+<li>Run these commands one at a time.</li>
+</ol>
+<pre><code class="language-powershell">node --version
+npm --version
+npm ci --ignore-scripts
+node local-node/cli.mjs help
+</code></pre>
+<p><code>npm ci</code> installs the dependencies recorded in the included <code>package-lock.json</code>. <code>--ignore-scripts</code> disables dependency installation scripts. Initial package downloads require a network connection. <strong><code>npm ci</code> replaces an existing <code>node_modules</code> directory</strong>, so run it in this application, not an unrelated project. JSON and SVG inspection are distinct from PNG rendering: PNG requires the optional <code>@napi-rs/canvas</code> dependency.</p>
+<p>If Windows refuses <code>npm.ps1</code> under its execution policy, use <code>npm.cmd</code>, for example <code>npm.cmd ci --ignore-scripts</code> or <code>npm.cmd run gui</code> in the same folder. No execution-policy change is needed.</p>
+<p>If Windows says <code>node</code> is not recognized, reopen the terminal after installation and check <code>node --version</code>. If <code>start.bat</code> has installed the application&#39;s private Node executable, use <code>.\.jsonui\runtime\node.exe</code> instead of <code>node</code>. Running the GUI launcher alone does not establish that npm and the PNG dependency have been installed.</p>
+<p>On macOS/Linux, open a terminal, <code>cd</code> to the extracted directory, and use the same <code>node</code> and <code>npm</code> commands. The <code>/</code> separators in the commands below work in PowerShell and POSIX shells. Windows-specific commands such as <code>Get-Content</code> and <code>Invoke-RestMethod</code> are not POSIX shell commands.</p>
+<h3 id="guide-3-understand-paths-and-names">3. Understand paths and names</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>outputs/manual-demo.mcpack</code></td>
+<td>An input pack on your PC. Ordinary relative paths are based on the current working directory</td>
+</tr>
+<tr>
+<td><code>outputs/manual-session.json</code></td>
+<td>The CLI working record: source paths and hashes, settings, and source edits</td>
+</tr>
+<tr>
+<td><code>ui/manual_demo.json</code></td>
+<td>A UI file <strong>inside the pack</strong>; it need not exist as a separate PC file</td>
+</tr>
+<tr>
+<td><code>manual.screen</code></td>
+<td>A UI definition: namespace <code>manual</code> combined with definition <code>screen</code></td>
+</tr>
+<tr>
+<td><code>/screen/controls/2/card</code></td>
+<td>A JSON Pointer identifying a location in the authored JSON</td>
+</tr>
+</tbody></table></div>
+<p>Quote paths containing spaces, for example <code>&quot;C:\My Packs\sample.mcpack&quot;</code>. Use the same <code>--session</code> file throughout one task. Without it, the CLI uses <code>.jsonui-cli/session.json</code> in the current working directory.</p>
+<h3 id="guide-4-produce-your-first-preview-with-the-included-example">4. Produce your first preview with the included example</h3>
+<p>The tutorial uses original JSON, a white 1-pixel image, and an included synthetic OGG sound. It needs no Minecraft image or font. Its small screen contains no text, making it useful for checking PNG setup. <strong>It is a renderer tutorial, not a complete add-on that opens an in-game form.</strong></p>
+<pre><code class="language-powershell">node docs/release/manual/examples/build-demo.mjs
+node local-node/cli.mjs import --pack outputs/manual-demo.mcpack --session outputs/manual-session.json
+node local-node/cli.mjs list --session outputs/manual-session.json
+node local-node/cli.mjs definitions --file ui/manual_demo.json --session outputs/manual-session.json
+node local-node/cli.mjs settings --file docs/release/manual/examples/settings-demo.json --session outputs/manual-session.json
+</code></pre>
+<p><code>build-demo.mjs</code> creates a new <code>outputs/manual-demo.mcpack</code>. It stops if that file already exists and does not overwrite it. To repeat the exercise, choose a different name.</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/build-demo.mjs outputs/manual-demo-2.mcpack
+</code></pre>
+<p>After confirming <code>ui/manual_demo.json</code> and <code>manual.screen</code> in the listings, run:</p>
+<pre><code class="language-powershell">node local-node/cli.mjs validate --file ui/manual_demo.json --definition manual.screen --strict-semantics --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format json --strict-semantics --out outputs/manual-frame.json --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format svg --strict-semantics --out outputs/manual-frame.svg --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format png --strict-semantics --out outputs/manual-frame.png --session outputs/manual-session.json
+</code></pre>
+<p>Open <code>outputs/manual-frame.png</code>. It shows a dark background, a horizontal banner, a card on the left, and a switch below it. The detail area on the right stays hidden until the switch is activated. The settings use a 640 × 360 output with UI scale 2. At scale 2, one UI unit corresponds to approximately two output pixels.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON</td>
+<td>Inspect resolved values, frames, rectangles, bindings, and diagnostics</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>Inspect element boundaries and placement; it is not a textured or font-rendered image</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>An image rendered with supported textures, fonts, and other assets</td>
+</tr>
+</tbody></table></div>
+<p>By default, an existing output file stops the command. Add <code>--force</code> only when you intend to replace your own output. <strong>Even <code>--force</code> cannot make a source pack or the session file an output destination.</strong></p>
+<h3 id="guide-5-inspect-your-own-packs-and-states">5. Inspect your own packs and states</h3>
+<p>Follow the same sequence. Change the <code>import</code> input to your ZIP/MCPACK/MCADDON, then use <code>list</code> and <code>definitions</code> to find <strong>actual</strong> file and definition names. Use <code>--pack</code> for a regular pack and <code>--vanilla</code> for a vanilla reference pack; you may supply both together. You must have the right to use any reference assets.</p>
+<pre><code class="language-powershell">node local-node/cli.mjs import --pack &quot;C:/MyPacks/addon.mcaddon&quot; --vanilla &quot;C:/MyPacks/reference.zip&quot; --session outputs/my-session.json
+node local-node/cli.mjs list --session outputs/my-session.json
+</code></pre>
+<p>When an MCADDON contains multiple resource-pack candidates, use <code>--resource-pack</code> with the header UUID reported by the diagnostic. The renderer does not automatically choose the first candidate. Default PNG output stops if required reference assets or glyphs are missing. Inspect the structure with JSON/SVG, or supply authorized assets before retrying.</p>
+<p>Provide representative states for values the renderer cannot obtain from the running game. For example, save this as UTF-8 <code>outputs/state.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;form&quot;: {
+    &quot;type&quot;: &quot;action&quot;,
+    &quot;title&quot;: &quot;Sample&quot;,
+    &quot;body&quot;: &quot;Choose an item&quot;,
+    &quot;buttons&quot;: [{ &quot;text&quot;: &quot;Continue&quot; }, { &quot;text&quot;: &quot;Close&quot; }]
+  }
+}
+</code></pre>
+<pre><code class="language-powershell">node local-node/cli.mjs settings --state-file outputs/state.json --replace-state --session outputs/my-session.json
+</code></pre>
+<p>This is <strong>preview data</strong>. It does not open a native form or create definitions missing from the imported pack. <code>--replace-state</code> replaces previous representative data and local toggle state. Advanced raw data uses the settings fields <code>mock_data</code> and <code>collections</code>. Check the <a href="#spec">Technical specification</a> for typed <code>state</code> syntax and input conflicts.</p>
+<p>Animation time is <code>frame / fps</code> seconds. <code>--frame 30 --fps 60</code> selects 0.5 seconds; <code>--frame 0</code> selects the start. If PNG time is omitted, it uses approximately one second after the start, so specify time explicitly for comparisons. Add <code>--strict-animation</code> to stop when animation quality remains unsupported or uncertain.</p>
+<h3 id="guide-6-read-validation-results">6. Read validation results</h3>
+<p>The CLI normally returns one JSON result. <code>ok: true</code> with exit code 0 means the command succeeded; <code>ok: false</code> with a nonzero code means it failed. PowerShell exposes the code as <code>$LASTEXITCODE</code> immediately after a command. Use <code>help</code> for human-readable guidance and <code>--language en</code> for English console descriptions.</p>
+<p>Inspect <code>quality</code>, <code>stage_diagnostics</code>, and <code>diagnostics</code>, even when an image exists. <code>passed</code> means evaluated within the supported scope; <code>unknown</code> means unsupported behavior or incomplete observations remain; <code>failed</code> means a detected inconsistency; <code>not_evaluated</code> means no evaluation. <code>quality.native_properties</code> checks <strong>recorded unsupported properties</strong>, not the complete Minecraft specification.</p>
+<p><code>--strict-semantics</code> refuses uncertain resolution, collection-row references, visual/input bindings, and related checks for the selected UI. Default PNG output also stops on unresolved assets and other covered conditions. Use <code>--allow-partial</code> only for a deliberately incomplete diagnostic image. Explicit strict gates take precedence: this flag alone does not bypass a strict failure. <code>complete</code> and <code>preview_complete</code> <strong>do not certify matching native pixels, interactions, or sound</strong>.</p>
+<h3 id="guide-7-edit-source-undo-and-export">7. Edit source, undo, and export</h3>
+<p>First move the tutorial card 12 UI units to the right.</p>
+<pre><code class="language-powershell">node local-node/cli.mjs edit --operation docs/release/manual/examples/move-demo.json --session outputs/manual-session.json
+node local-node/cli.mjs preview --file ui/manual_demo.json --definition manual.screen --frame 0 --format png --strict-semantics --out outputs/manual-edited.png --session outputs/manual-session.json
+node local-node/cli.mjs undo --session outputs/manual-session.json
+node local-node/cli.mjs redo --session outputs/manual-session.json
+</code></pre>
+<p>The included <code>move-demo.json</code> sets the <code>offset</code> at <code>/screen/controls/2/card</code> to <code>[36, 56]</code>. Offset is relative to the anchors, not an absolute screen-pixel coordinate. The edit is saved in the session; <strong>the input MCPACK remains unchanged</strong>.</p>
+<p>To edit the whole file in your own editor, extract the authored source:</p>
+<pre><code class="language-powershell">node local-node/cli.mjs read --file ui/manual_demo.json --out outputs/manual-authored.json --session outputs/manual-session.json
+</code></pre>
+<p>Edit <code>outputs/manual-authored.json</code>, save it as UTF-8, and apply it:</p>
+<pre><code class="language-powershell">node local-node/cli.mjs edit --file ui/manual_demo.json --text-file outputs/manual-authored.json --session outputs/manual-session.json
+</code></pre>
+<p>Rejected syntax and other rejected changes preserve the last committed edit. A new committed edit clears redo history. Undo has count and size limits; settings changes and UI selection are outside source undo.</p>
+<p>Finally inspect dependencies and export a new pack:</p>
+<pre><code class="language-powershell">node local-node/cli.mjs export --file ui/manual_demo.json --definition manual.screen --plan --out outputs/manual-export-plan.json --session outputs/manual-session.json
+node local-node/cli.mjs export --file ui/manual_demo.json --definition manual.screen --out outputs/manual-selected.mcpack --session outputs/manual-session.json
+</code></pre>
+<p>Export includes the <strong>selected UI and its required dependencies</strong>. It is not a full copy of an add-on&#39;s files, BP scripts, world, or player state. Unresolved dependencies stop export. The <a href="#spec">Technical specification</a> covers the operation contract; the <a href="../../../local-node/CLI-ja.md">legacy CLI reference in Japanese</a> provides additional pack-metadata and operation-JSON examples.</p>
+<h3 id="guide-8-use-the-gui-manually">8. Use the GUI manually</h3>
+<pre><code class="language-powershell">npm run gui
+</code></pre>
+<p>If the browser does not open automatically, use the local URL in the startup log. Do not double-click <code>editor-core/app/index.html</code> as a substitute. Keep the terminal open: it is running the server.</p>
+<ol>
+<li>In the left-hand <strong>“1 · パックを読み込む”</strong> section (load a pack), select a ZIP/MCPACK. You can practice with the generated <code>outputs/manual-demo.mcpack</code>.</li>
+<li>Select <code>ui/manual_demo.json</code> under <strong>“JSON UIファイル”</strong> (JSON UI file), select <code>screen</code> in the definition list below it, and press <strong>“選択したUIをプレビュー”</strong> (preview selected UI).</li>
+<li>Use preview mode to inspect placement. Switch to <strong>“編集モード”</strong> (edit mode) to change it, and check the target and affected scope. Flow layout, dynamic offsets, and animated positions may prevent dragging; edit the source instead.</li>
+<li>Commit pending canvas edits with <strong>“JSON UIに確定”</strong> (commit to JSON UI). Apply source-field edits with <strong>“検証して反映”</strong> (validate and apply). A failed commit or apply is not a saved edit.</li>
+<li>Add the current UI under the <strong>“書き出し”</strong> (export) tab, inspect its dependencies, and save a pack. <strong>Reloading the page loses the loaded pack and edits</strong>, so export anything you need beforehand.</li>
+<li>Use <strong>“ログ・診断”</strong> (logs and diagnostics) or the diagnostic bundle if something fails. Stop the server with Ctrl+C in its terminal.</li>
+</ol>
+<p>The GUI is experimental. After visual editing, import its exported pack into a <strong>separate CLI session</strong>, then check <code>validate</code> and strict PNG at an explicit time. GUI memory is not automatically shared with a CLI session. The labels above are the source-verified Japanese controls; interface translation availability does not change these steps.</p>
+<h3 id="guide-9-node-api-change-the-same-uis-state">9. Node API: change the same UI&#39;s state</h3>
+<p>The included program is runnable. First generate the pack in section 4 and install the PNG dependency.</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/sdk-demo.mjs
+</code></pre>
+<p>It creates <code>before.png</code>, <code>after.png</code>, and <code>result.json</code> in a new <code>outputs/sdk-demo</code> directory. It activates the switch once and passes the returned state to the next render, making the purple detail area appear on the right in <code>after.png</code>. The renderer closes in <code>finally</code>. Choose another output directory if it already exists:</p>
+<pre><code class="language-powershell">node docs/release/manual/examples/sdk-demo.mjs outputs/manual-demo.mcpack outputs/sdk-demo-2
+</code></pre>
+<p>The sequence is <code>createRenderer()</code>, <code>import()</code>, <code>render()</code>, <code>interact()</code>, <code>render()</code>, and <code>resolveSound()</code>. <code>interact()</code> returns the updated local toggle state. Carry <code>uiInstanceId</code>, the current <code>localToggleState</code>, and its <code>revision</code> into subsequent requests. The server does not retain the latest interaction state for you.</p>
+<p><code>audioIntent</code> <strong>describes a playback request</strong>. <code>resolveSound()</code> reports the registered OGG reference, hash, and preflight inspection. <strong>This Node/CLI/HTTP example does not produce speaker output.</strong> It is separate from the GUI&#39;s audio player. It does not execute arbitrary game commands or submit a native form. See the <a href="#spec">Technical specification</a> for supported input and audio behavior.</p>
+<h3 id="guide-10-http-api-call-it-from-powershell">10. HTTP API: call it from PowerShell</h3>
+<p>Run this in the first terminal and leave it running:</p>
+<pre><code class="language-powershell">node local-node/api-server.mjs --connection-file outputs/http-connection.json
+</code></pre>
+<p>Open another PowerShell in the project folder and run the following. Do not print the token or paste it into Git, shared files, or support logs.</p>
+<pre><code class="language-powershell">$connection = Get-Content outputs/http-connection.json -Raw | ConvertFrom-Json
+$headers = @{ Authorization = &quot;Bearer $($connection.token)&quot; }
+$importBody = @{ pack = (Resolve-Path outputs/manual-demo.mcpack).Path } | ConvertTo-Json
+$importResult = Invoke-RestMethod -Method Post -Uri &quot;$($connection.base_url)/api/renderer/v1/import&quot; -Headers $headers -ContentType &quot;application/json; charset=utf-8&quot; -Body ([Text.Encoding]::UTF8.GetBytes($importBody))
+$renderBody = @{
+  file = &quot;ui/manual_demo.json&quot;
+  definition = &quot;manual.screen&quot;
+  format = &quot;json&quot;
+  frame = 0
+  width = 640
+  height = 360
+  uiScale = 2
+  strictSemantics = $true
+} | ConvertTo-Json -Depth 30
+$renderResult = Invoke-RestMethod -Method Post -Uri &quot;$($connection.base_url)/api/renderer/v1/render&quot; -Headers $headers -ContentType &quot;application/json; charset=utf-8&quot; -Body ([Text.Encoding]::UTF8.GetBytes($renderBody))
+$renderResult.result.quality
+</code></pre>
+<p>The service binds to loopback <code>127.0.0.1</code> and refuses ordinary browser requests carrying an Origin. It is not a server for other PCs or smartphones. Its workspace is in memory, separate from CLI session files. Stop it with Ctrl+C in the server terminal. The <a href="../ENTRYPOINTS_JA.md#6-http-api-%E3%82%92%E4%BD%BF%E3%81%86">entry-point guide</a> contains additional PowerShell examples, and the bilingual <a href="#spec">Technical specification</a> documents the HTTP contract, including base64 PNG output.</p>
+<h3 id="guide-11-troubleshooting">11. Troubleshooting</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Symptom or code</th>
+<th>Next step</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>No browser opens with <code>npm start</code></td>
+<td>Expected. Use <code>npm run gui</code> for the GUI</td>
+</tr>
+<tr>
+<td><code>RASTER_BACKEND_UNAVAILABLE</code></td>
+<td>Run <code>npm ci --ignore-scripts</code> in the project root; check the optional dependency for your OS/CPU</td>
+</tr>
+<tr>
+<td>Missing fonts or textures</td>
+<td>Supply an authorized reference pack; compare with this guide&#39;s font-free example</td>
+</tr>
+<tr>
+<td><code>CLI_DEFINITION_AMBIGUOUS</code></td>
+<td>Specify the complete <code>rawKey</code> from <code>definitions</code>; do not guess the first result</td>
+</tr>
+<tr>
+<td><code>POCKET_PREVIEW_BLOCKED</code></td>
+<td>Pocket rendering is unsupported; choose a Classic definition</td>
+</tr>
+<tr>
+<td><code>CLI_SOURCE_CHANGED</code></td>
+<td>The pack differs from the imported content; restore it or import into a new session</td>
+</tr>
+<tr>
+<td><code>CLI_SESSION_LOCKED</code></td>
+<td>Wait for the other session operation to finish; do not delete an active lock</td>
+</tr>
+<tr>
+<td><code>API_REIMPORT_REQUIRED</code></td>
+<td>Explicitly reimport the required packs after Worker recovery</td>
+</tr>
+<tr>
+<td>An image differs from the game</td>
+<td>Check scope, state, time, scale, and asset diagnostics; verify natively separately</td>
+</tr>
+</tbody></table></div>
+<p>Save diagnostics with <code>node local-node/cli.mjs diagnostics --out outputs/diagnostics.json --session outputs/manual-session.json</code>. A standalone call records <strong>this invocation</strong>, not events from processes that already exited. Use a CLI workflow to capture related operations within one shared invocation; see the <a href="#spec">Technical specification</a> and the <a href="../../../local-node/CLI-ja.md">legacy Japanese CLI reference</a>.</p>
+<h3 id="guide-12-terms-and-further-reading">12. Terms and further reading</h3>
+<p>The project&#39;s original portions use <strong>PolyForm Noncommercial License 1.0.0</strong>. Read <a href="#scope">LICENSE</a> for permitted noncommercial use, modification, redistribution, and required notices. This is not a license for commercial use. Dependencies and imported assets retain their separate conditions. If combining the renderer with selling your work, check whether that purpose satisfies the license.</p>
+<ul>
+<li><a href="#spec">Technical specification</a>: inputs, outputs, internal processing, and interaction API contracts.</li>
+<li><a href="#limitations">Limitations</a>: Classic/Pocket, rendering, states, sound, editing, and other boundaries.</li>
+<li><a href="../../../local-node/CLI-ja.md">Legacy detailed commands and operation JSON (Japanese)</a>; use the new English specification for the current English contract.</li>
+<li><a href="https://nodejs.org/en/download">Official Node.js downloads</a> and <a href="https://docs.npmjs.com/cli/commands/npm-ci/">official npm ci documentation</a>: environment preparation.</li>
+</ul>
+<p>Success with this guide does not establish complete compatibility with every Minecraft UI, version, or device. Test completed add-ons in the game separately.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="spec"><h2 id="spec">JSON UI Workbench 0.16.1 Technical Specification</h2>
+<p><a href="HANDBOOK_JA.html#spec">日本語</a> · <a href="#guide">English user guide</a> · <a href="#limitations">Limitations and notices</a></p>
+<p>This document specifies the public inputs, outputs, and implementation boundaries of release 0.16.1. Version 0.16.1 updates documentation and licensing while preserving the 0.16.0 execution implementation. Proposed future features are outside the current specification. A <code>passed</code> result applies only to the scope of that particular check.</p>
+<h3 id="spec-1-scope-and-entry-points">1. Scope and entry points</h3>
+<p>The target is Minecraft Bedrock <strong>Classic JSON UI</strong>. The renderer imports packs, selects definitions, and computes layout, rendering, and diagnostics using explicitly supplied state. It does not execute Minecraft, Behavior Packs, Script API, or native screen controllers.</p>
+<p>Pocket JSON UI can be listed, read, and edited, but its preview is blocked. OreUI, DDUI, and smartphone Pocket/touch UI reproduction are outside scope. Support for the Classic rendering profile does not imply support for using the tool on a smartphone.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Entry point</th>
+<th>Status</th>
+<th>Execution and state lifetime</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CLI <code>local-node/cli.mjs</code> / <code>npm start</code></td>
+<td>Primary</td>
+<td>Owns a loopback server/Worker for one invocation; stops them at exit. Settings and authored edits persist in session JSON</td>
+</tr>
+<tr>
+<td>Node SDK <code>local-node/api.mjs</code></td>
+<td>Supported</td>
+<td><code>createRenderer()</code> owns a server/Worker and retains imported packs until another <code>import()</code> or <code>close()</code></td>
+</tr>
+<tr>
+<td>HTTP <code>local-node/api-server.mjs</code> / <code>npm run api</code></td>
+<td>Supported</td>
+<td>Persistent authenticated loopback API backed by one shared SDK renderer</td>
+</tr>
+<tr>
+<td>Browser GUI <code>npm run gui</code></td>
+<td>Experimental</td>
+<td>Explicit opt-in. Provides UI adapters for editing, pointer input, and browser audio; these are not evidence of native execution</td>
+</tr>
+</tbody></table></div>
+<p>Node.js <strong>22.14.0 or later</strong> is required. Public modules are ESM. PNG requires the optional <code>@napi-rs/canvas</code> 0.1.100 dependency and the necessary pack assets. Importing the SDK module alone starts no browser or subprocess and does not edit or save files.</p>
+<h3 id="spec-2-pack-and-definition-inputs">2. Pack and definition inputs</h3>
+<p>Inputs are local ZIP, MCPACK, and MCADDON files. The selected Resource Pack in a MCADDON is imported; its Behavior Pack is not executed. When multiple RPs are present, specify the RP manifest UUID. The public SDK does not provide URL downloads, direct directory import, or game-state acquisition.</p>
+<p>A stack has at most two layers: <code>vanilla</code> and <code>imported</code>. Imported definitions and assets take precedence when both layers provide the same resource. UI definitions, global variables, references, and assets are cataloged before the selected definition is projected. <code>file</code> is a <strong>pack-relative path</strong>, such as <code>ui/example.json</code>; <code>pack</code> is the <strong>archive path on the operating system</strong>.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Type and constraints</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>file</code></td>
+<td>Nonempty string, at most 1,024 characters, no control characters</td>
+<td>definitions / validate / render / interact</td>
+</tr>
+<tr>
+<td><code>definition</code></td>
+<td>Same string constraints; matches <code>id</code>, <code>rawKey</code>, <code>localName</code>, or <code>qualifiedName</code></td>
+<td>Same methods</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td><code>imported</code> or <code>vanilla</code></td>
+<td>list / definitions / validate / render / interact</td>
+</tr>
+</tbody></table></div>
+<p><code>definitions()</code> lists the filtered catalog and returns <code>count</code> / <code>items</code> for zero or multiple matches. The following screen-selection rules apply to <code>validate</code>, <code>render</code>, and <code>interact</code>. Some selectors may be omitted when exactly one candidate remains. Multiple candidates produce <code>CLI_DEFINITION_AMBIGUOUS</code>; no candidate produces <code>UI_DEFINITION_NOT_FOUND</code>. Screens are not selected by guessing their names. Without <code>kind</code>, the higher-precedence record wins for the same file and qualifiedName. A recommended definition in typed-state diagnostics does not create missing definitions in an arbitrary pack.</p>
+<h3 id="spec-3-common-node-sdk-contract">3. Common Node SDK contract</h3>
+<pre><code class="language-javascript">import { createRenderer, JsonUiApiError } from &#39;./local-node/api.mjs&#39;;
+const renderer = await createRenderer({ language: &#39;en&#39; });
+try {
+  await renderer.import({ pack: &#39;C:\\packs\\example.mcpack&#39; });
+  const result = await renderer.render({
+    file: &#39;ui/example.json&#39;, definition: &#39;example.screen&#39;,
+    format: &#39;json&#39;, frame: 0, strictSemantics: true,
+  });
+  console.log(result.quality);
+} finally {
+  await renderer.close();
+}
+</code></pre>
+<p>All methods return Promises. Except for <code>close()</code>, their optional second argument is <code>{ signal: AbortSignal }</code>. A signal passed to <code>createRenderer()</code> applies only to initialization. Subsequent operations take their own signals. Passing a request or signal to <code>close()</code> is outside its contract.</p>
+<p>Requests must be ordinary JSON-equivalent objects. Unknown fields, <code>undefined</code>, functions, nonfinite numbers, cycles, getters, symbol keys, sparse arrays, custom array properties, nonplain object instances, and <code>__proto__</code> / <code>prototype</code> / <code>constructor</code> keys are rejected. Requests are copied at admission; later mutations to the caller&#39;s object do not change the admitted operation.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Public method</th>
+<th>Accepted first-argument fields; all other fields are rejected</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>createRenderer()</code></td>
+<td><code>settings</code>, <code>language</code></td>
+</tr>
+<tr>
+<td><code>import()</code></td>
+<td><code>pack</code>, <code>vanilla</code>, <code>resourcePack</code></td>
+</tr>
+<tr>
+<td><code>list()</code></td>
+<td><code>kind</code></td>
+</tr>
+<tr>
+<td><code>definitions()</code></td>
+<td><code>file</code>, <code>definition</code>, <code>kind</code></td>
+</tr>
+<tr>
+<td><code>status()</code></td>
+<td>None / <code>{}</code></td>
+</tr>
+<tr>
+<td><code>validate()</code></td>
+<td>Selectors + <code>settings</code>, <code>state</code>, <code>strictSemantics</code></td>
+</tr>
+<tr>
+<td><code>render()</code></td>
+<td>Selectors + <code>settings</code>, <code>state</code>, <code>format</code>, <code>width</code>, <code>height</code>, <code>uiScale</code>, <code>fps</code>, <code>frame</code>, <code>allowPartial</code>, <code>strictSemantics</code>, <code>strictAnimation</code>, <code>drawEvidence</code>, <code>frameSummary</code>, <code>uiInstanceId</code>, <code>localToggleState</code></td>
+</tr>
+<tr>
+<td><code>interact()</code></td>
+<td>Selectors + <code>settings</code>, <code>state</code>, <code>width</code>, <code>height</code>, <code>uiScale</code>, <code>fps</code>, <code>frame</code>, <code>uiInstanceId</code>, <code>localToggleState</code>, <code>expectedRevision</code>, <code>nodeId</code>, <code>event</code>, <code>inputSource</code></td>
+</tr>
+<tr>
+<td><code>resolveSound()</code></td>
+<td><code>soundId</code>, <code>selectionSeed</code>, <code>contextSampleRate</code></td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>None</td>
+</tr>
+</tbody></table></div>
+<p><code>strictAnimation</code> is <strong>render-only</strong>. Interact internally requires strict semantic checks and does not accept a <code>strictSemantics</code> field itself. <code>resolveSound()</code> does not accept arbitrary file paths, <code>settings</code>, or audio bytes.</p>
+<h4 id="spec-creation-imports-and-listing">Creation, imports, and listing</h4>
+<p><code>language</code> is <code>ja</code> or <code>en</code>, defaulting to <code>ja</code>. <code>settings</code> follows the next section. Import requires at least one of <code>pack</code> and <code>vanilla</code>; the SDK requires an absolute OS path string, at most 32,768 characters. <code>resourcePack</code> is an RP UUID used with <code>pack</code>.</p>
+<p><strong>SDK import replaces the entire stack.</strong> <code>import({pack})</code> does not retain a previously imported vanilla layer. Specify both layers each time if both are needed. CLI import instead replaces only the supplied layers and retains unspecified layers.</p>
+<p>Success schemas are <code>jsonui-api-import-v1</code>, <code>jsonui-api-list-v1</code>, <code>jsonui-api-definitions-v1</code>, and <code>jsonui-api-status-v1</code>. Import returns <code>sources</code> with kind/name/size_bytes/checksum_sha256 and, where applicable, resource_pack_uuid, plus file_count, definition_count, and diagnostics. Lists return count/items/diagnostics. Status returns import state, pending operations, Worker information, capabilities, and raster-backend availability. The status request itself is included in <code>pending</code> while it executes.</p>
+<h3 id="spec-4-settings-and-cli-mappings">4. Settings and CLI mappings</h3>
+<p><code>createRenderer({settings})</code> defines instance defaults. Settings supplied to validate/render/interact merge for that call only; they are not saved for later requests. CLI <code>settings --file</code> merges and saves settings into its session. Top-level dimension/timing request fields override the corresponding settings values.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Settings key</th>
+<th>Default</th>
+<th>Accepted value and purpose</th>
+<th>SDK / CLI override</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width</code>, <code>height</code></td>
+<td>1920, 1080</td>
+<td>Output pixels; integers 1–16,384. PNG has additional lower limits</td>
+<td><code>width</code>, <code>height</code> / <code>--width</code>, <code>--height</code></td>
+</tr>
+<tr>
+<td><code>ui_scale</code></td>
+<td><code>auto</code></td>
+<td><code>auto</code> or integer 1–8; logical-to-output pixel scale</td>
+<td><code>uiScale</code> / <code>--ui-scale</code></td>
+</tr>
+<tr>
+<td><code>target_engine_version</code></td>
+<td><code>1.26.40</code></td>
+<td>Valid engine version for vanilla-only 3D previews; an imported RP&#39;s manifest min_engine_version takes priority</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>fps</code></td>
+<td>60</td>
+<td>Finite number 1–240 for frame-to-seconds conversion, not a video-encoding option</td>
+<td><code>fps</code> / <code>--fps</code></td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td><code>ja_JP</code></td>
+<td><code>[a-z]{2}_[A-Z]{2}</code>; pack strings and fonts</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>language</code></td>
+<td><code>ja</code></td>
+<td><code>ja</code> or <code>en</code>; tool explanations and diagnostics</td>
+<td>Factory options / CLI <code>--language</code></td>
+</tr>
+<tr>
+<td><code>visibility</code></td>
+<td><code>safe</code></td>
+<td><code>safe</code> or <code>structure</code>; visibility evaluation or structural inspection. Structure is not native-display validation</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>mock_data</code></td>
+<td><code>{}</code></td>
+<td>Explicit binding values; ordinary object, at most 1 MiB</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>collections</code></td>
+<td><code>{}</code></td>
+<td>Collection rows; ordinary object, at most 1 MiB</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td><code>{}</code></td>
+<td>Resolver <code>$</code> variables; ordinary object, at most 1 MiB</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>scroll</code></td>
+<td><code>{}</code></td>
+<td>Explicit scroll state keyed by node ID; at most 1 MiB</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>event_factory_selections</code></td>
+<td><code>{}</code></td>
+<td>Factory name to control_ids key mapping; at most 32 entries, safe names of 1–128 characters</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>ui_instance_id</code></td>
+<td><code>jsonui-cli</code></td>
+<td>Nonempty ID up to 256 characters; no control characters or unsafe keys</td>
+<td><code>uiInstanceId</code> / Settings only</td>
+</tr>
+<tr>
+<td><code>local_toggle_state</code></td>
+<td><code>null</code></td>
+<td>Local state described below; at most 1 MiB</td>
+<td><code>localToggleState</code> / Settings only</td>
+</tr>
+<tr>
+<td><code>animation_event</code></td>
+<td><code>screen.entrance_push</code></td>
+<td>Selected event name up to 256 characters, no control characters</td>
+<td>Settings only</td>
+</tr>
+<tr>
+<td><code>font_profile</code></td>
+<td><code>bitmap</code></td>
+<td><code>bitmap</code> or <code>observed-smooth</code></td>
+<td>Settings or state.font_profile</td>
+</tr>
+</tbody></table></div>
+<p>Numeric settings also coerce numeric strings. SDK top-level fields such as width/height/fps/frame require JSON numbers. Unknown settings keys are rejected. Separate runtime maps being below 1 MiB does not remove the additional 1 MiB combined-frame-state limit.</p>
+<p><code>uiScale:&#39;auto&#39;</code> uses calibration in the RP&#39;s build-info.json or the Classic default scale of 4. Width and height describe physical output pixels; logical_width/logical_height describe the canvas before scaling. This does not detect smartphone GUI scale or touch layout.</p>
+<h3 id="spec-5-typed-state">5. Typed state</h3>
+<p><code>state</code> is preview JSON, not live game state. Normalization validates the entire input and does not partially apply invalid state. Accepted top-level keys are:</p>
+<p><code>mockData</code>, <code>collectionData</code>, <code>furnace</code>, <code>brewing</code>, <code>trade</code>, <code>form</code>, <code>messageContext</code>, <code>inventory</code>, <code>slots</code>, <code>anvil</code>, <code>enchanting</code>, <code>horse</code>, <code>book</code>, <code>font_profile</code>, <code>eventFactorySelections</code>.</p>
+<p><strong>The names differ:</strong> raw values in state use <code>mockData</code>/<code>collectionData</code>; raw settings use <code>mock_data</code>/<code>collections</code>. Supplying state replaces default runtime data and clears variables/scroll/local state. In the same request, settings containing mock_data/collections/variables/scroll/event_factory_selections/local_toggle_state cause <code>API_STATE_CONFLICT</code>, even if those fields are empty. Nonruntime settings such as dimensions and language can be combined with state.</p>
+<p>State can be combined with explicit <code>uiInstanceId</code>/<code>localToggleState</code>; these are applied after typed-state normalization. Explicit fields cannot be combined with ui_instance_id/local_toggle_state in settings.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>State branch</th>
+<th>Input structure and limits</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mockData</code></td>
+<td>Binding-value object. <code>__collections</code> is forbidden; use collectionData</td>
+</tr>
+<tr>
+<td><code>collectionData</code></td>
+<td>Collection name → array of row objects. A row&#39;s <code>__collections</code> contains nested collections</td>
+</tr>
+<tr>
+<td><code>inventory</code></td>
+<td>main up to 27, hotbar 9, armor 4, offhand 1, container up to containerSize. containerSize is 1–256, default 27</td>
+</tr>
+<tr>
+<td><code>slots</code></td>
+<td>Arbitrary collection name → item/null array; at most 128 collections, each up to 256 rows</td>
+</tr>
+<tr>
+<td><code>furnace</code></td>
+<td>progress/fuel in 0–1; input/fuelItem/output are items</td>
+</tr>
+<tr>
+<td><code>brewing</code></td>
+<td>progress/fuel/bubbles in 0–1; input/fuelItem and up to 3 output items</td>
+</tr>
+<tr>
+<td><code>anvil</code></td>
+<td>input/material/output are item/null; name/costText strings; costRed/costGreen/invalid booleans</td>
+</tr>
+<tr>
+<td><code>enchanting</code></td>
+<td>input/lapis item/null; up to 3 offers containing runes/cost/hoverText strings and available boolean</td>
+</tr>
+<tr>
+<td><code>horse</code></td>
+<td>equipment/container item/null arrays; equipmentSize/containerSize 1–256, defaults 2/15</td>
+</tr>
+<tr>
+<td><code>book</code></td>
+<td>title/author strings, up to 256 page strings, editable boolean</td>
+</tr>
+<tr>
+<td><code>trade</code></td>
+<td>Up to 256 offers, each with required input/output items, optional secondInput item/null, unlocked/available booleans. title/tierName strings; selected is a zero-based integer within range, default 0. Empty offers require selected:0</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>ActionForm or ModalForm described below</td>
+</tr>
+<tr>
+<td><code>messageContext</code></td>
+<td>Requires form; locale identifier and explicit translations object</td>
+</tr>
+<tr>
+<td><code>font_profile</code></td>
+<td>bitmap or observed-smooth</td>
+</tr>
+<tr>
+<td><code>eventFactorySelections</code></td>
+<td>Explicit factory branch mapping corresponding to settings</td>
+</tr>
+</tbody></table></div>
+<p>Item fields are id/count/name/texture/atlasKey/variant/selected. Count is an integer 0–999, default 1; selected is boolean. Texture is a safe pack-relative textures/... reference. Texture and atlasKey are mutually exclusive. Variant requires atlasKey and is an integer 0–4,095. Unknown IDs produce diagnostics instead of being substituted with an arbitrary known item. Branches supporting empty slots normalize null or omitted trailing entries into empty rows. Supplying a renderable item does not establish native slot admission or recipe behavior.</p>
+<p>Common limits are 1 MiB of UTF-8 JSON, depth 24, 20,000 elements, 65,536 characters per string, 256 rows per collection, 128 collections per map, and 2,048 rows total including nested collections. Raw mockData/collectionData are applied after typed branches and may explicitly override the same keys.</p>
+<h4 id="spec-form-state">Form state</h4>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ActionForm</td>
+<td>type:&#39;action&#39;, also default when omitted; title/body strings or supported RawMessage; buttons array of {text,icon?}. Buttons and elements are mutually exclusive</td>
+</tr>
+<tr>
+<td>ActionForm elements</td>
+<td>{type:&#39;button&#39;,text,icon?}, {type:&#39;header&#39;,text}, {type:&#39;label&#39;,text}, {type:&#39;divider&#39;}. At most 256 display rows. Selection counts only buttons and differs from display-row index</td>
+</tr>
+<tr>
+<td>ModalForm</td>
+<td>type:&#39;modal&#39;, title, submitText, submitVisible:boolean, required elements with 1–256 rows. Empty content is rejected</td>
+</tr>
+<tr>
+<td>Modal elements</td>
+<td>label/header/divider/toggle/slider/step_slider/dropdown/input; common text/tooltip support RawMessage</td>
+</tr>
+<tr>
+<td>toggle</td>
+<td>value:boolean, enabled:boolean; defaults false/true</td>
+</tr>
+<tr>
+<td>input</td>
+<td>value:string, placeholder, enabled:boolean; defaults empty/empty/true</td>
+</tr>
+<tr>
+<td>slider</td>
+<td>Legacy value:0–1 or range:{min,max,current,step?}, mutually exclusive. Range requires min&lt;max, current within range, step&gt;0, default 1. valueText/displayText are available with range</td>
+</tr>
+<tr>
+<td>step_slider</td>
+<td>1–256 options, selected integer within range, optional enabled</td>
+</tr>
+<tr>
+<td>dropdown</td>
+<td>1–256 options, selected integer within range</td>
+</tr>
+</tbody></table></div>
+<p>If a slider current value or upper endpoint does not align with step, the renderer warns without rounding the input. Drag interaction and native rounding remain separate. Default recommended definitions are server_form.long_form for ActionForm and server_form.custom_form for ModalForm. Explicit long_form/custom_form in eventFactorySelections.server_form_factory instead recommends the corresponding ancestor server_form.main_screen_content.</p>
+<p>RawMessage supports the implemented subset of text/rawtext/translate/with. Translation uses only explicit messageContext.translations and does not query game translations or scores. Supported placeholders include %s and %%1. Missing translations, missing arguments, and unsupported syntax are rejected. Separate limits include 64 KiB per expansion, 1 MiB aggregate output, depth 24, and 4,096 nodes.</p>
+<h3 id="spec-6-validate-render-and-output-formats">6. Validate, render, and output formats</h3>
+<p>Validate checks the projected UI model. Render additionally evaluates a frame. Validate does not evaluate runtime collection rows, visual/input bindings, or raster assets. Recorded static native-property incompatibilities are also diagnosed by validate.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Render field</th>
+<th>Default and constraints</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>format</code></td>
+<td>json/svg/png, default json</td>
+</tr>
+<tr>
+<td><code>width</code>, <code>height</code></td>
+<td>From settings; JSON-number integers 1–16,384</td>
+</tr>
+<tr>
+<td><code>uiScale</code></td>
+<td>From settings; auto or integer 1–8</td>
+</tr>
+<tr>
+<td><code>fps</code></td>
+<td>From settings; finite number 1–240</td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>Zero-based integer. API admission cap 864,000, further pipeline cap fps×3,600. Default 0 for JSON/SVG, round(fps) for PNG</td>
+</tr>
+<tr>
+<td><code>strictSemantics</code></td>
+<td>Boolean, default false. Stops on nonpassed semantics/evaluation/rows/visual-input bindings/recorded native properties</td>
+</tr>
+<tr>
+<td><code>strictAnimation</code></td>
+<td>Boolean, default false. Stops on nonpassed animation quality</td>
+</tr>
+<tr>
+<td><code>allowPartial</code></td>
+<td>Boolean, default false, PNG-only. Permits an incomplete diagnostic PNG; never overrides strict checks</td>
+</tr>
+<tr>
+<td><code>drawEvidence</code></td>
+<td>Boolean, default false, PNG-only. Adds bounded final draw-input evidence</td>
+</tr>
+<tr>
+<td><code>frameSummary</code></td>
+<td>Boolean, default false, JSON-only; incompatible with strictAnimation. Counts/truncation diagnostics only, renderable:false</td>
+</tr>
+<tr>
+<td><code>uiInstanceId</code></td>
+<td>Local-state instance ID, otherwise from settings</td>
+</tr>
+<tr>
+<td><code>localToggleState</code></td>
+<td>Requires explicit uiInstanceId when supplied</td>
+</tr>
+</tbody></table></div>
+<p>Time is frame/fps seconds. PNG&#39;s default capture is approximately one second after entrance animation starts. Set frame:0 for the initial instant. FPS may be fractional; frame itself must be an integer.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Format</th>
+<th>SDK result and meaning</th>
+<th>CLI / HTTP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JSON</td>
+<td>schema:&#39;jsonui-api-render-v1&#39;, ok:true, format:&#39;json&#39;; viewport/time/selected/projected document/validation/frame IR/quality/stage_diagnostics. No rendered pixels</td>
+<td>CLI stdout or .json; HTTP object within result</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>Same render schema, format:&#39;svg&#39;, svg:string plus metadata. Layout rectangle diagram, not a complete texture/glyph/3D image</td>
+<td>CLI requires --out .svg; HTTP result.svg is a string</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>Same render schema, format:&#39;png&#39;, png:Buffer plus metadata. Resource/font measurement and necessary reflow precede raster drawing</td>
+<td>CLI requires --out .png; HTTP uses the base64 object below</td>
+</tr>
+<tr>
+<td>Validate</td>
+<td>schema:&#39;jsonui-api-validation-v1&#39;, ok:true, validation/quality/stage_diagnostics. Validation errors throw</td>
+<td>CLI JSON; HTTP within result</td>
+</tr>
+</tbody></table></div>
+<p>PNG metadata includes complete/preview_complete/draft/diagnostics/native_equivalence/provenance/final_frame_summary plus animation/binding/collection quality. Final-frame summary contains bounded counts, frame/hash/box digest, and reflow information after actual resource measurement. It is not a full-frame sidecar. JSON coordinates precede resource measurement; final PNG geometry follows measurement.</p>
+<h3 id="spec-7-quality-axes-and-failures">7. Quality axes and failures</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Quality axis</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>semantic</code></td>
+<td>Selected projection inheritance/reference resolution, not unrelated catalog-wide validity</td>
+</tr>
+<tr>
+<td><code>native_properties</code></td>
+<td>Properties rejected in supplied native evidence, not exhaustive JSON UI schema verification</td>
+</tr>
+<tr>
+<td><code>evaluation</code></td>
+<td>Completion of bounded expansion, traversal, and evaluation</td>
+</tr>
+<tr>
+<td><code>collection</code></td>
+<td>Row ownership, indices, and references for collection_panel/stack_panel/grid</td>
+</tr>
+<tr>
+<td><code>bindings</code></td>
+<td>Resolution of visual/input state, including supplied local-state snapshots</td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>Supported animation sampling and observation at an explicit time</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>Typed-input normalization, not complete live game state</td>
+</tr>
+<tr>
+<td><code>assets</code></td>
+<td>Prepared PNG resources; not_evaluated for JSON/SVG</td>
+</tr>
+<tr>
+<td><code>interaction</code></td>
+<td>Normal rendering does not execute Script API or game input; not_evaluated</td>
+</tr>
+<tr>
+<td><code>native_comparison</code></td>
+<td>Minecraft pixel comparison; normally not_evaluated</td>
+</tr>
+</tbody></table></div>
+<p>Complete describes raster-resource completeness. Preview_complete covers supported resources/evaluation/collections/visual-input bindings/recorded native properties. Animation has its own strictAnimation axis. Neither ok:true nor passed nor preview_complete:true certifies all native pixels, input behavior, or audible playback.</p>
+<p>Representative error codes are CLI_SEMANTIC_GATE_FAILED, CLI_EVALUATION_INCOMPLETE, CLI_COLLECTION_GATE_FAILED, CLI_NATIVE_PROPERTY_GATE_FAILED, CLI_BINDING_GATE_FAILED, CLI_ANIMATION_GATE_FAILED, RASTER_BACKEND_UNAVAILABLE, and NODE_FRAME_REPLY_LIMIT. Codes are identifiers; messages are display text.</p>
+<p>Recorded incompatibilities include vertical_alignment on labels, focus_enabled on passive panel/image nodes, and collection_index beneath an ordinary immediate parent. Unknown future fields are not globally deleted or forbidden. Looping on offset/size/uv is a separate animation diagnostic. Truncated observations are not treated as complete evidence; an unknown or other appropriate status is retained.</p>
+<h3 id="spec-8-interact-and-local-state">8. Interact and local state</h3>
+<p>Interact is a <strong>stateless projection with caller-owned state</strong>. It does not store the latest UI session on the server. Each request projects the supplied definition/state/local state and evaluates an input. Required fields are uiInstanceId/nodeId/expectedRevision and enough selectors to identify one definition.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>uiInstanceId</code></td>
+<td>Nonempty safe ID up to 256 characters</td>
+</tr>
+<tr>
+<td><code>nodeId</code></td>
+<td>Node ID present in the current JSON frame, up to 1,024 characters; not a caption or array index</td>
+</tr>
+<tr>
+<td><code>expectedRevision</code></td>
+<td>Nonnegative safe integer matching the supplied local state&#39;s revision</td>
+</tr>
+<tr>
+<td><code>localToggleState</code></td>
+<td>Optional; omission evaluates the initial state of the UI</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>activate or escape, default activate</td>
+</tr>
+<tr>
+<td><code>inputSource</code></td>
+<td>mouse or keyboard; default mouse for activate, keyboard for escape</td>
+</tr>
+</tbody></table></div>
+<p>Local-state format:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 1,
+  &quot;instanceId&quot;: &quot;inspection-1&quot;,
+  &quot;revision&quot;: 0,
+  &quot;values&quot;: { &quot;current-node-id&quot;: false }
+}
+</code></pre>
+<p>Values map current writable local-toggle IDs to booleans, with at most 20,000 entries. Obtain current local IDs from JSON render&#39;s frame.bindings.localToggleState. A toggle managed by an external binding cannot be overwritten with local state. Radio exclusivity is limited to explicit groups under the same parent.</p>
+<p>Input mappings match button.menu_select/pressed for mouse activate and menu_cancel/menu_exit/global for keyboard escape. Input_mode_condition must be absent or not_gamepad; touch/gamepad/gaze is not inferred. Multiple actions with an unknown execution order are not executed. Hidden/disabled/ignored/not-rendered targets are blocked; unknown actions are unsupported.</p>
+<p>Results use schema:&#39;jsonui-api-interaction-v1&#39;, ok:true, execution:&#39;stateless_preview_projection&#39;, selected/node_id/ui_instance_id/previous_revision, projection/form-descriptor SHA-256 values, interaction/status/effects/diagnostics, localToggleState, audioIntent, quality, stage_diagnostics, effects_executed, and playback/native_equivalence. Blocked or unsupported input may still be a successfully evaluated API result; ok alone does not mean the requested action occurred.</p>
+<p>Only <strong>localTogglePatch</strong> effects are applied. Each applied patch increments revision by 1. MockPatch/collectionPatch/close/navigate/chooseNavigate/clipboard and other finite-adapter effects are descriptors; the SDK does not execute them. It neither submits native form responses, closes/reopens forms, nor saves state to a BP. Pass the returned local state to subsequent interact/render calls to change the appearance of the same preview UI instance.</p>
+<p>Foreign instances, mismatched revisions, and unknown/read-only IDs are rejected. However, <strong>an old snapshot can be reevaluated when accompanied by its matching old expectedRevision</strong>. This is not complete server-owned stale-operation prevention. Clients must implement latest-state storage and concurrency control when needed.</p>
+<p>Audio intent is limited to valid mouse-activate targets. Keyboard/escape is not converted into an audio request. Unresolved sound_name/volume/pitch bindings, incomplete observation, disabled state, or hidden state do not generate an intent from a residual old value. SoundName/soundVolume/soundPitch/originScreenId/interactionId describe the request. Audio intent and action support are independent, so an unsupported unknown action can still return an intent when its authored sound_name is valid. An intent is not a sound-resolution or playback-completion result.</p>
+<h3 id="spec-9-resolvesound-and-audio">9. ResolveSound and audio</h3>
+<p>SoundId identifies a sound registered in sounds/sound_definitions.json: at most 256 characters, no control characters or $/#. SelectionSeed is an optional string up to 256 characters, default empty. ContextSampleRate is an integer 8,000–192,000, default 48,000.</p>
+<p>Definitions resolve from imported first, then vanilla if the imported layer does not own that ID. Sound files are searched independently, imported then vanilla. If a higher layer contains no candidate for the referenced path, the same reference may resolve from a lower layer. An existing higher-layer format conflict, ambiguity, unsupported file or failed preflight is not bypassed by falling back. Definition and file ownership can differ, and the result records both. An explicit extension selects that format. Extensionless names require a unique OGG/WAV file with that stem.</p>
+<p>Supported files are short <strong>Ogg Vorbis</strong> and <strong>WAV PCM16</strong>. Limits: encoded sound 4 MiB, duration 10 seconds, mono/stereo, 8,000–192,000 Hz, PCM reservation 8 MiB. Definitions are limited to 8 MiB/50,000 IDs/64 candidates per sound. Streaming, FSB, MP3, Opus, and chained OGG are unsupported. Candidate pitch is 0.5–2, volume is a nonnegative finite number, and weight is an integer 1–1,000,000. Definition-level volume/pitch is unsupported by this resolver.</p>
+<p>Multiple candidates use soundId and selectionSeed in the deterministic SHA-256 weighted policy sha256-weighted-v1. This does not claim parity with Bedrock&#39;s RNG. OGG preflight checks headers/pages/CRC/sequences/packets/EOS/duration/PCM reservation. It is <strong>not a complete Vorbis decoder</strong> or a hard cap on native decoder allocations.</p>
+<p>The result is schema:&#39;jsonui-api-sound-v1&#39;, ok:true, a sound object using jsonui-sound-v2, playback:&#39;not_executed&#39;, and native_equivalence:&#39;not_evaluated&#39;. Sound metadata includes definition/file pack IDs and paths, codec/container, channels/sampleRate/duration, encodedBytes, contentRevision as file SHA-256, candidate/index/selection policy, volume/pitch/category/is3D, and warnings. <strong>No audio bytes are returned; SDK/HTTP/CLI do not play through speakers.</strong></p>
+<p>The GUI player separately attempts browser decode/playback. Game category mixing and positional/distance audio are not applied and remain warnings. AudibleVerified/nativeVerified/gameMixerVerified remain false. Inspection or successful decoding alone does not certify that playback was heard.</p>
+<h3 id="spec-10-http-transport">10. HTTP transport</h3>
+<p><code>createRendererServer({port?,signal?})</code> is the public factory in local-node/api-server.mjs. Port is an integer 0–65,535, default 0 for automatic allocation. Bind is fixed to 127.0.0.1. Its connection descriptor contains schema/base_url/token/pid; close is an idempotent shutdown Promise. Signals are not embedded in JSON requests.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Authentication/body</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET /health</td>
+<td>No token or body; readiness only</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/import</td>
+<td>SDK import object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/list</td>
+<td>SDK list object / {}</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/definitions</td>
+<td>SDK definitions object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/validate</td>
+<td>SDK validate object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/render</td>
+<td>SDK render object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/interact</td>
+<td>SDK interact object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/sound</td>
+<td>SDK resolveSound object</td>
+</tr>
+<tr>
+<td>POST /api/renderer/v1/status</td>
+<td>{}</td>
+</tr>
+</tbody></table></div>
+<p>Except for health, requests require Authorization:Bearer followed by a 64-character hexadecimal token and Content-Type:application/json. Host must exactly match the assigned 127.0.0.1:port. Requests containing Origin, or browser sec-fetch-site values other than none, are rejected. This is not a CORS or remote-publication endpoint.</p>
+<p>Success is {schema:&#39;jsonui-renderer-http-v1&#39;,ok:true,correlation_id,result}; failure uses the same schema with ok:false/error and a non-2xx status. Error contains code/message/category/retryable/correlation_id/details/context. SDK results are not additionally nested in a result envelope.</p>
+<p>PNG result.png is {encoding:&#39;base64&#39;,media_type:&#39;image/png&#39;,size_bytes,checksum_sha256,data}; SVG is result.svg as a string. HTTP provides no output-path write API. Limits are 8 simultaneous requests, 32 connections, 16 MiB request JSON, 64 MiB response JSON, and 30 seconds to receive a body. Base64 increases size, so large PNG output may exceed the HTTP response limit. Responses include no-store/nosniff/request-ID headers and Connection:close.</p>
+<p>Representative statuses: 401 unauthenticated, 403 Host/Origin rejection, 404 unknown route, 405 wrong method, 415 wrong content type, 413 size limit, 429 overload, 408 body timeout, 504 operation timeout, and 499 cancellation. This is not an exhaustive fixed mapping for all errors; inspect the actual code/context.</p>
+<p>The CLI server&#39;s connection-file is create-only. It remains after shutdown, but its token ceases to work when the server stops. File existence is not proof that the server is running. Restart with a new path, or verify the old server is stopped and the descriptor is yours before deleting it. Unix mode 0600 does not guarantee complete control of Windows ACLs.</p>
+<h3 id="spec-11-cli-operations-and-persistent-state">11. CLI operations and persistent state</h3>
+<p>CLI success/failure envelopes use jsonui-cli-result-v1. Regular stdout contains one JSON object. Help is human-readable text; help --json returns JSON. Failure exits nonzero. Default session is .jsonui-cli/session.json, overridable with --session. Console-language precedence is --language, JSONUI_LANGUAGE, saved language, then ja.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Input, behavior, and main output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>import</td>
+<td>--pack/--vanilla/--resource-pack; replaces supplied layers and resets their source overrides and editing history</td>
+</tr>
+<tr>
+<td>list / definitions / read</td>
+<td>Lists files/definitions/layers; read returns authored text. Read --out accepts .json/.jsonc</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>Saves raw --file settings or typed --state-file state, mutually exclusive. Existing runtime replacement requires --replace-state</td>
+</tr>
+<tr>
+<td>validate / preview</td>
+<td>Selectors and strict flags. Preview accepts --format json/svg/png, --out, frame/fps/size/scale</td>
+</tr>
+<tr>
+<td>interact / resolve-sound</td>
+<td>--request-file uses the SDK JSON contract. Returned operation state is not automatically persisted into the session. --out is JSON</td>
+</tr>
+<tr>
+<td>draft</td>
+<td>--operation plus selectors; computes uncommitted frame JSON without changing source/session/history. Draft PNG is unavailable</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>--operation, direct --text-file replacement, or set/move/add/inherit/planDelete/delete authored operations. Changes persist as session overrides</td>
+</tr>
+<tr>
+<td>undo / redo</td>
+<td>Restores saved history; refuses mismatched source revisions</td>
+</tr>
+<tr>
+<td>export</td>
+<td>Single --file/--definition/--kind or --selections; dependency planning and validation, then --out .mcpack/.zip. --plan returns only the plan</td>
+</tr>
+<tr>
+<td>diagnostics / status</td>
+<td>Current invocation&#39;s diagnostics or saved state. Status --live additionally checks source hashes and workspace</td>
+</tr>
+<tr>
+<td>workflow</td>
+<td>Executes file.commands in order, sharing one server and saving successful changes. Failure reports completed operations and failed_index</td>
+</tr>
+<tr>
+<td>features / help</td>
+<td>Capability boundaries / help</td>
+</tr>
+</tbody></table></div>
+<p>Authored pointers use JSON Pointer. Set value is JSON; move value maps to offset; add/inherit specify parent-pointer/name/base-ref/index. Screen-scoped operations check generated-control, unresolved-reference, and inheritance boundaries. Deletion uses a prior plan and any required cascade rather than an unverified broad removal. Existing <a href="../../../local-node/CLI-ja.md">CLI details</a> also document versioned operation-object contracts.</p>
+<p>Export selections contain 1–256 entries. Pack-options permit name up to 120 characters, description 1,024, version as three integers 0–65,535, and up to 16 authors of 80 characters each. Pack-icon is a PNG up to 1 MiB/2,048 pixels per side; CRC is checked before conversion into a 256×256 image with transparent padding. Unresolved dependencies are not silently dropped to report success.</p>
+<p>Sessions contain absolute source archive paths, SHA-256, size, authored overrides, settings, selection, and history. Changed archive bytes stop restoration. History is bounded to 64 entries/8 MiB; discarded oldest entries are reported in status. Session locks reject simultaneous use of the same file.</p>
+<h3 id="spec-12-internal-processing-and-rendering-scope">12. Internal processing and rendering scope</h3>
+<ol>
+<li>Inspect archive sizes/entries/paths/CRC and register the input for processing.</li>
+<li>Build UI/variable/asset catalogs; choose the precedence layer and one definition.</li>
+<li>Project inheritance, controls, variables/defaults/conditionals, supported modifications, and explicit factory branches while retaining provenance and dependency diagnostics.</li>
+<li>Run model validation and recorded native-property checks.</li>
+<li>Evaluate explicit mock/collection/local state and absolute animation time, then generate layout boxes/frame IR.</li>
+<li>Return IR for JSON or its layout diagram for SVG. PNG loads pack assets/localization/fonts, measures them, reflows where necessary, and rasterizes the final frame.</li>
+<li>Return final quality/diagnostics/digests. File output and session persistence are separate CLI/caller responsibilities.</li>
+</ol>
+<p>The ordinary palette contains screen/panel/collection_panel/label/button/dropdown/image/input_panel/stack_panel/grid/scroll_view/edit_box/toggle/scroll_track/scrollbar_box. Recognition and preservation of custom/factory/tooltip_trigger does not mean generic reproduction of all associated runtime behavior. Unknown fields survive in the model, but faithful drawing of unsupported features is not guaranteed. A model parsed from JSONC does not retain comments; projected/generated output is not byte-identical source preservation.</p>
+<p>Bindings evaluate the implemented subset of public global/collection/view conventions using explicit state. Opaque game renderer data, full Molang, and values generated by native controllers are not executed. Collection_index must match the immediate collection owner and row context; an intervening ordinary panel is not bypassed by searching arbitrary ancestors.</p>
+<p>Images use supported pack resources such as PNG/JPEG, texture sidecars, and implemented UV/nine-slice drawing contracts. Strict PNG stops when real font assets are missing instead of silently using OS fonts to hide missing resources. Bitmap and observed-smooth profiles are explicit; the latter is an observed approximation. Proprietary Minecraft font/texture/model collections are not bundled in the public release.</p>
+<p>Native-renderer previews include bounded safe surrogates for implemented item/progress/model cases. Resource-backed player/horse/book 3D previews are deterministic orthographic snapshots, not the full Bedrock shader/lighting/Molang/render pipeline. Missing geometry/textures, unsupported features, and resource limits are diagnosed.</p>
+<p>Animation implements supported alpha/offset/size/uv/color/wait/flip_book cases, finite next chains, and absolute-time sampling. Easing includes linear plus in/out/in_out variants of quad/cubic/quart/quint/sine/expo/circ/back/elastic/bounce. Limits: 2,048 definitions and tracks each, chain 64, aggregate definitions 2 MiB. Event side effects, activation/reset state, and native timing when an element becomes rendered have separate unsupported diagnostics.</p>
+<h3 id="spec-13-main-limits-and-lifecycle">13. Main limits and lifecycle</h3>
+<p>Limits are rejection boundaries, not guaranteed processing capacity. Multiple layers have separate limits; the first reached limit applies. A UI exceeding a renderer limit is not necessarily invalid in Minecraft.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Main current limits</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SDK JSON</td>
+<td>16 MiB, 20,000 elements, depth 32</td>
+</tr>
+<tr>
+<td>SDK admitted operations</td>
+<td>8 including the running operation; serial within one renderer</td>
+</tr>
+<tr>
+<td>ZIP</td>
+<td>768 MiB input, 120,000 entries, 128 MiB central directory, 2,048 MiB total expanded, 64 MiB expanded / 128 MiB compressed per entry</td>
+</tr>
+<tr>
+<td>Expansion ratio</td>
+<td>Entries expanding to at least 8 MiB are blocked from reading above 200× as archive-bomb protection</td>
+</tr>
+<tr>
+<td>Internal registrations/uploads</td>
+<td>At most 4 registered packs while the public stack has at most 2 layers; working disk bytes 2,304 MiB; upload 300 seconds</td>
+</tr>
+<tr>
+<td>Worker execution</td>
+<td>Normal job 120 seconds, projection 30 seconds; batch operations have separate limits</td>
+</tr>
+<tr>
+<td>Shared screen model</td>
+<td>Default 20,000 nodes/depth 200, used by validate/interact model checks; satisfying only the frame limit is insufficient</td>
+</tr>
+<tr>
+<td>Frame</td>
+<td>50,000 model nodes/depth 256, 5,000 layout boxes, 1 MiB combined state, 24 MiB reply</td>
+</tr>
+<tr>
+<td>PNG</td>
+<td>8,192 pixels per side, 16,777,216 pixels, 128 MiB decoded resources, 512 assets, 64 font sheets, 131,072 characters, 120 seconds, 96 MiB encoded PNG</td>
+</tr>
+<tr>
+<td>3D surrogate</td>
+<td>256 bones, 2,048 cubes, 2,048 draw faces/work units, bone depth 64, 2 MiB motion mesh</td>
+</tr>
+<tr>
+<td>Recorded-property diagnostics</td>
+<td>256 generated diagnostics, up to 64 quality-evidence entries; omitted count and capture completion reported separately</td>
+</tr>
+</tbody></table></div>
+<p>SDK/HTTP packs are not automatically removed after 30 minutes of inactivity; they remain until import/close. Other worker/cache/capacity limits still apply. Worker recovery that changes the token/generation invalidates the stack and reports API_REIMPORT_REQUIRED or associated diagnostics. Reimport rather than reusing an old projection ID.</p>
+<p>Cancellation signals are checked at admission, queue, and execution boundaries. A queued request can reject promptly on cancellation while its reserved queue slot is released only when the serial task reaches it. Immediate interruption of synchronous processing or OS operations is not guaranteed. Close stops admissions, cancels owned operations, and waits for its server/Worker and queue to finish. Repeated close calls share one Promise.</p>
+<p>On import failure, new registrations are cleaned up and the previous stack is normally preserved. If cleanup fails and registrations cannot safely be tracked, the renderer closes and reports recreate_renderer_required/import_cleanup context. Cancellation may be reported before cleanup has finished.</p>
+<p>HTTP clients share <strong>one stack</strong>. One client&#39;s import affects other clients. Use separate renderers/servers for independent packs. A disconnected request cancels that operation; closing the server stops the entire instance.</p>
+<h3 id="spec-14-file-protection-errors-and-validation-evidence">14. File protection, errors, and validation evidence</h3>
+<p>CLI checks output extensions/regular files/paths and rejects overwriting source archives, request files, and application files. Outputs are create-only by default; --force permits replacing generated artifacts. A sibling temporary file is synced before exposing the final name; parent-directory power-loss durability is not guaranteed. SDK/HTTP do not save outputs, so callers using writeFile must implement source protection and overwrite policy themselves.</p>
+<p>SDK throws JsonUiApiError with code/message/category/retryable/correlation_id/details/context. An internal error is retained as a nonenumerable cause. Public diagnostics are sanitized, but that does not make arbitrary private input safe to publish. HTTP tokens and connection descriptors contain authentication information.</p>
+<p>Historical 0.16.0 evidence records 3,163 successful Node tests and 39 skips, 533 successful shared-core tests, 28 strict PNG states, 39 operations, and full decoding of the sample OGG. These are <strong>0.16.0 historical results</strong>, not newly executed 0.16.1 tests or Minecraft/browser results. Consult the release report for the current distribution&#39;s documentation/package checks.</p>
+<p>Implementation references: local-node/api.mjs, api-request.mjs, api-server.mjs, api-interaction.mjs, preview-settings.mjs, preview-pipeline.mjs, cli.mjs, cli-files.mjs, limits.mjs, frame-ir.mjs, frame-raster-assets13.mjs, sound-resolver.mjs, audio-preflight.mjs; and editor-core/src preview-state, preview-animation, local-toggle-state, native-property-diagnostics, and native-model-preview modules.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="limitations"><h2 id="limitations">JSON UI Workbench 0.16.1 — Limitations and cautions</h2>
+<p>日本語: <a href="HANDBOOK_JA.html#limitations">注意事項・対応範囲</a> · <a href="#guide">User guide</a> · <a href="#spec">Technical specification</a></p>
+<p>This document explains what a preview can and cannot establish. The target is <strong>Classic JSON UI for Minecraft: Bedrock Edition</strong>. The tool evaluates supported features outside the game, using the state and assets you provide.</p>
+<h3 id="limitations-1-classic-ui-only-smartphones-are-unsupported">1. Classic UI only; smartphones are unsupported</h3>
+<p><strong>This tool targets Classic UI development on desktop systems. Running the tool on a smartphone, or rendering and testing Pocket or touch-oriented UI, is unsupported.</strong> Use a desktop environment with Node.js and local file access.</p>
+<p>UI identified as Pocket can be listed and inspected as source, but its preview stops with <code>POCKET_PREVIEW_BLOCKED</code>. Setting the viewport to phone dimensions does not reproduce Pocket layout, touch input, device safe areas, or other mobile behavior.</p>
+<p>This is a limitation of the renderer. It does not, by itself, determine whether Minecraft on a particular mobile device offers a Classic profile or whether an individual add-on works there. Treat the Classic/Pocket profile, device, and input method as separate conditions.</p>
+<p>OreUI and Script API Data-Driven UI (DDUI) execution and rendering are also unsupported. Changing a local toggle with <code>interact()</code> does not execute DDUI Observables or reactive forms inside Minecraft.</p>
+<h3 id="limitations-2-support-matrix">2. Support matrix</h3>
+<p>“Supported” means the stated implementation exists. “Conditional” requires suitable inputs, assets, and structures. “Unsupported” means the tool does not provide that operation. “Unverified” is separate from implementation status: the release checks did not verify that behavior.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+<th>Scope and conditions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Classic JSON UI import and definition selection</td>
+<td>Supported</td>
+<td>Resource packs within ZIP / MCPACK / MCADDON. Explicitly select among multiple RPs or definitions.</td>
+</tr>
+<tr>
+<td>JSON frame output</td>
+<td>Supported</td>
+<td>Evaluated properties, layout, and diagnostics; not an image rendered with actual assets.</td>
+</tr>
+<tr>
+<td>SVG output</td>
+<td>Supported</td>
+<td>A diagnostic view of layout and bounds; not final game text and texture rendering.</td>
+</tr>
+<tr>
+<td>PNG output</td>
+<td>Conditional</td>
+<td>Requires a supported canvas backend, required textures/fonts/models, and evaluable state.</td>
+</tr>
+<tr>
+<td>Bindings, collections, inheritance, and generated controls</td>
+<td>Conditional</td>
+<td>Implemented expressions and generation rules with supplied state; not every game-specific mechanism.</td>
+</tr>
+<tr>
+<td>Animation at a specified time</td>
+<td>Conditional</td>
+<td>Samples supported tracks at absolute time; does not reproduce the native clock or actual event order.</td>
+</tr>
+<tr>
+<td>Local state changes through <code>interact()</code></td>
+<td>Conditional</td>
+<td>Explicit <code>activate</code> / <code>escape</code> on a node and supported input mappings. The applied effect is <code>localTogglePatch</code>.</td>
+</tr>
+<tr>
+<td>Sound resolution through CLI / Node / HTTP</td>
+<td>Conditional</td>
+<td>Returns references, format checks, hashes, and related metadata for registered short OGG Vorbis / PCM16 WAV. No playback.</td>
+</tr>
+<tr>
+<td>Audio in the experimental GUI</td>
+<td>Conditional</td>
+<td>Uses a Node connection and Web Audio to attempt supported short-sound playback. Browser permission and decoding support also apply.</td>
+</tr>
+<tr>
+<td>Source editing, undo / redo, and selected export</td>
+<td>Conditional</td>
+<td>Operations and dependencies that can be established safely. Drafts, source history, and preview state are distinct.</td>
+</tr>
+<tr>
+<td>PowerPoint-style GUI editing</td>
+<td>Experimental</td>
+<td>Incomplete; shared definitions, inheritance, and generated controls impose restrictions.</td>
+</tr>
+<tr>
+<td>Pocket / touch UI preview</td>
+<td>Unsupported</td>
+<td>Indexing and source inspection only.</td>
+</tr>
+<tr>
+<td>Smartphone use of the tool</td>
+<td>Unsupported</td>
+<td>A desktop Node.js environment is the target.</td>
+</tr>
+<tr>
+<td>OreUI / DDUI</td>
+<td>Unsupported</td>
+<td>No OreUI renderer or DDUI Script API runtime.</td>
+</tr>
+<tr>
+<td>Minecraft or Behavior Pack script execution</td>
+<td>Unsupported</td>
+<td>Importing an MCADDON does not execute its BP as a game.</td>
+</tr>
+<tr>
+<td>Real inventory, crafting, trading, or item transfer</td>
+<td>Unsupported</td>
+<td>Supplied mock state can be displayed; game inventory and the world are not changed.</td>
+</tr>
+<tr>
+<td>Native form submission/reopening and server responses</td>
+<td>Unsupported</td>
+<td>An interaction effect can be described without being executed in the game.</td>
+</tr>
+<tr>
+<td>Complete 3D rendering of every block, item, or entity</td>
+<td>Unsupported</td>
+<td>Limited to individual supported model paths, assets, and preview states.</td>
+</tr>
+<tr>
+<td>Minecraft device comparison and audible playback for this release</td>
+<td>Unverified</td>
+<td>Separate from internal regression checks.</td>
+</tr>
+<tr>
+<td>Actual Windows startup and browser audio output for this release</td>
+<td>Unverified</td>
+<td>Linux / Node checks do not automatically establish either.</td>
+</tr>
+</tbody></table></div>
+<h3 id="limitations-3-what-success-and-complete-mean">3. What “success” and “complete” mean</h3>
+<p>A saved image or API response with <code>ok: true</code> does not establish correct behavior in Minecraft. Check the relevant quality axes and diagnostics.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ok: true</code></td>
+<td>That API operation completed; not a Minecraft behavior pass.</td>
+</tr>
+<tr>
+<td><code>complete</code></td>
+<td>Completion of PNG resource/raster information, not comprehensive animation, playback, or native behavior verification.</td>
+</tr>
+<tr>
+<td><code>preview_complete</code></td>
+<td>Checks completed within the supported scope for assets, evaluation, collections, visual/input bindings, and recorded unsupported properties.</td>
+</tr>
+<tr>
+<td><code>quality.animation</code></td>
+<td>An independent axis for animation at the requested time. Do not infer it from <code>preview_complete</code>.</td>
+</tr>
+<tr>
+<td><code>quality.native_properties</code></td>
+<td>Checks recorded incompatibilities only; not conformance to the complete native schema.</td>
+</tr>
+<tr>
+<td><code>unknown</code> / <code>not_evaluated</code></td>
+<td>Uncertain or not checked. Do not reinterpret either as a pass.</td>
+</tr>
+<tr>
+<td><code>draft: true</code></td>
+<td>A diagnostic result allowing missing information or other partial conditions; not evidence of a complete screen.</td>
+</tr>
+<tr>
+<td><code>native_equivalence: &#39;not_evaluated&#39;</code> / <code>native_parity_verified: false</code></td>
+<td>This result does not establish Minecraft device parity.</td>
+</tr>
+<tr>
+<td><code>playback: &#39;not_executed&#39;</code></td>
+<td>Sound metadata or an intent exists, but that API did not produce audio.</td>
+</tr>
+</tbody></table></div>
+<p><code>--strict-semantics</code> applies strict checks to selected-projection resolution, evaluation, collections, visual/input bindings, recorded properties, and related evidence. <code>validate</code> does not evaluate an entire frame or produce PNG. Add <code>--strict-animation</code> to a preview when animation quality must also be an acceptance condition.</p>
+<p>Ordinary PNG output stops when required information or supported rendering is missing. <code>--allow-partial</code> explicitly permits diagnostic partial rendering; it does not improve native compatibility and does not override the failure conditions of <code>--strict-semantics</code> or <code>--strict-animation</code>.</p>
+<h3 id="limitations-4-state-interactions-and-animation-boundaries">4. State, interactions, and animation boundaries</h3>
+<p>Forms, variables, collections, scroll positions, and time are supplied preview state. They are not necessarily the latest state read from Minecraft. If a title, body, row, or button changes in the game, provide the required state and inspect multiple previews.</p>
+<p><code>interact()</code> can update supported local toggles while retaining a form descriptor and <code>uiInstanceId</code>. This does not prove successful native input without closing and reopening the game form. Pass the returned <code>localToggleState</code> to the next request. Do not use saved local state to override an externally bound control or mix state from another UI.</p>
+<p><code>expectedRevision</code> checks consistency with the state supplied in the request. The server does not keep the latest snapshot, so an old snapshot paired with its old revision can be replayed. The caller must store the latest state and manage concurrent users when needed.</p>
+<p>The interaction API applies only <code>localTogglePatch</code>. Described navigation, form submission, clipboard, or other effects are not executed by that API. It is not a drag/key replay system or a reproduction of the game&#39;s input loop. The GUI has individual interaction paths whose execution scope need not match API effect descriptions.</p>
+<p>Animation is sampled at the requested time and event conditions. Native screen creation, clocks, event order, side effects, input latency, and server synchronization are unverified. Recorded combinations of <code>looping</code> on <code>uv</code> / <code>size</code> / <code>offset</code>, and some <code>flip_book</code> attachments, retain compatibility diagnostics. Successful numerical sampling does not remove those diagnostics.</p>
+<h3 id="limitations-5-ogg-wav-and-audible-playback-limits">5. OGG, WAV, and audible playback limits</h3>
+<p>Registered sound IDs resolve to assets in loaded packs. <code>resolveSound()</code> is not an arbitrary OS file reader and does not return audio bytes or play through speakers.</p>
+<p>Supported short sounds are <strong>OGG Vorbis or PCM16 WAV, 1 / 2 channels, 8,000–192,000 Hz, and no longer than 10 seconds</strong>. Additional limits include a 4 MiB encoded file and an 8 MiB decoded PCM reservation. Even a sound under 10 seconds can be rejected because of its reservation, packet count, structure, or another limit.</p>
+<p>Opus, FSB, chained OGG, and long streaming playback are unsupported. Renaming a file to <code>.ogg</code> does not convert it to Vorbis. If OGG and WAV share an ambiguous sound name, specify the extension in the sound definition.</p>
+<p>Browser playback in the GUI does not reproduce Minecraft category volume sliders or positional 3D audio. Relevant definitions report <code>AUDIO_PREVIEW_CATEGORY_MIXER_NOT_APPLIED</code> / <code>AUDIO_PREVIEW_POSITIONAL_NOT_APPLIED</code>. Weighted candidate selection need not match the game&#39;s random sequence. Supported combined pitch is 0.5–2, output gain is capped at 1, and the GUI has a separate preview volume control.</p>
+<p>Audio permission, disabled preview audio, zero volume, preparation time, decoding failure, concurrent voice limits, or memory budgets may prevent playback. Resolving an asset, passing format inspection, or requesting Web Audio playback does not prove sound was heard through speakers. Audible browser and native audio were not verified for this release.</p>
+<h3 id="limitations-6-textures-fonts-items-and-3d-models">6. Textures, fonts, items, and 3D models</h3>
+<p>The public source does not bundle Minecraft / Mojang textures, fonts, audio, skins, models, or complete UI. Load necessary bases and assets from appropriately licensed reference packs matching the target game version. Pack priority, content, language, UI scale, and viewport dimensions can change the result.</p>
+<p>Missing assets or required inputs produce diagnostics. Strict PNG output does not fill missing assets with unrelated images and call the result complete. JSON / SVG bounds alone need not match PNG&#39;s final glyph measurement and reflow, native font metrics, or game layer order.</p>
+<p>Numeric item ID tables depend on the target version. Not every custom item, auxiliary value, NBT state, dye, enchantment, or dynamic appearance is reproduced. If an item reports <code>NATIVE_ITEM_MODEL_REQUIRED</code>, do not interpret a face texture as a finished item icon.</p>
+<p>Supported player / horse model paths are not a renderer for every entity&#39;s game pipeline. Player previews use model and skin data from reference packs; they do not automatically retrieve the user&#39;s account skin. Cameras, materials, controllers, and states outside the implementation are diagnosed or unsupported.</p>
+<h3 id="limitations-7-diagnostics-are-narrow-compatibility-checks">7. Diagnostics are narrow compatibility checks</h3>
+<p>Current recorded-property diagnostics include these cases:</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Authored field</th>
+<th>Diagnostic scope</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>label.vertical_alignment</code></td>
+<td>Recorded native rejection. Preserved in source; not used for preview vertical placement.</td>
+</tr>
+<tr>
+<td><code>focus_enabled</code> on passive <code>panel</code> / <code>image</code></td>
+<td>Presence is diagnosed even when <code>false</code>. This is not a ban on all input-capable types.</td>
+</tr>
+<tr>
+<td><code>collection_index</code> inconsistent with a concrete immediate parent</td>
+<td>Narrow row-ownership and parent-context checks. Not a blanket ban on standalone templates or all collection reads.</td>
+</tr>
+<tr>
+<td><code>looping</code> on specific animation types and related cases</td>
+<td>Compatibility uncertainty in animation quality. Not a blanket ban on every <code>looping</code> or <code>flip_book</code>.</td>
+</tr>
+</tbody></table></div>
+<p>This is not a complete schema validator that prohibits every unknown property. Absence of a diagnostic does not establish that all properties, including those in future game versions, are valid.</p>
+<p>Binding resolution through a global fallback and missing collection context can report concerns independently from successful calculation. Scanning and observation limits produce <code>unknown</code> or incomplete-observation evidence. Omitted diagnostics do not mean no issues exist.</p>
+<h3 id="limitations-8-large-uis-editing-and-outputs">8. Large UIs, editing, and outputs</h3>
+<p>Node counts, generated controls, depth, draw rectangles, image memory, request time, and response size are bounded. Major examples include 50,000 model nodes, 5,000 PNG rectangles, 8,192 px per PNG dimension, 16 Mi pixels total, and a 24 MiB frame response. These are renderer budgets, not Minecraft UI capacity limits or FPS guarantees. See the <a href="#spec">technical specification</a> for the full list and scope.</p>
+<p><code>--frame-summary</code> requests a JSON summary of a large frame. It does not return full diagnostic text, a renderable frame, or PNG, and it does not bypass generation or evaluation limits. Passing each isolated part of a screen does not substitute for passing the entire screen.</p>
+<p>Experimental GUI edits can affect multiple controls using the same shared definition. A generated cell may have no independent source. Moving, deleting, or detaching inheritance cannot always be applied independently to any chosen element. Distinguish draft review, committing to source, and export.</p>
+<p>Source undo / redo is bounded and does not reverse every preview click, settings change, or UI selection. CLI source history retains at most 64 entries / 8 MiB, with an additional session-wide limit. Dropped history or an oversized individual edit can make undo unavailable.</p>
+<p>The design keeps original archives unchanged and writes to a separate output. Still inspect source, diagnostics, and reimported output to confirm the intended result. Do not bypass output protections to write over the input.</p>
+<h3 id="limitations-9-before-publishing-an-add-on">9. Before publishing an add-on</h3>
+<ol>
+<li>Record the game version, Classic profile, input method, reference pack, language, dimensions, and UI scale.</li>
+<li>Inspect necessary states after buttons, toggles, rows, scrolling, and animation time change, as well as the initial screen.</li>
+<li>Apply strict options to the scope you intend to check. Read <code>quality</code>, missing information, <code>unknown</code>, and any partial-render indicators.</li>
+<li>Separately check game display, input, form responses, scripts, inventory, and audio in Minecraft and its Content Log when relevant.</li>
+<li>Inspect code and assets included in the distribution and the contents of shared diagnostic files. Diagnostics can contain pack content, names, and local paths.</li>
+</ol>
+<p>These steps distinguish what the renderer output establishes from what requires in-game confirmation.</p>
+<h3 id="limitations-10-licensing-assets-and-references">10. Licensing, assets, and references</h3>
+<p>Use project code and documentation under the distribution&#39;s <a href="#scope">license document</a>. Check that document and the formal license for the precise scope of noncommercial use, modification, redistribution, and restrictions on commercial use. Audio, images, Minecraft assets, and third-party libraries retain their owners&#39; independent terms. Import support does not grant redistribution rights to an add-on&#39;s assets.</p>
+<p>This is an independent development tool, not an official Mojang / Microsoft product. See <a href="#thirdparty">third-party notices</a>.</p>
+<p>The <a href="#guide">user guide</a> and <a href="#spec">technical specification</a> are the current references for operation, inputs, and outputs. Counts and limits in older verification records describe those versions. See <a href="../VERIFICATION_0160_JA.md">0.16.0 verification scope</a> for the preceding changes, and <a href="../INTERACTION_AUDIO_JA.md">interaction/audio API</a>, <a href="../ASSET_POLICY.md">asset policy</a>, <a href="../item-rendering.md">item rendering</a>, and <a href="../limits-performance.md">evaluation limits</a> for individual historical details.</p>
+<p>Primary references checked for external specifications on 2026-10-04 UTC:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/reference/content/jsonuireference/examples/jsonuilist?view=minecraft-bedrock-stable">Microsoft Learn: JSON UI</a></li>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/documents/scripting/intro-to-ddui?view=minecraft-bedrock-stable">Microsoft Learn: Introduction to DataDriven UI</a></li>
+<li><a href="https://learn.microsoft.com/en-us/minecraft/creator/documents/addcustomsounds?view=minecraft-bedrock-stable">Microsoft Learn: Creating and Adding Custom Sounds</a></li>
+<li><a href="https://github.com/Mojang/bedrock-schemas/blob/main/schemas/rp/sounds/index.schema.json">Mojang: sound definitions schema</a></li>
+</ul>
+<p>Support claims are based on this tool&#39;s implementation. They do not imply support for every Minecraft feature documented by those sources.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="scope"><h2 id="scope">License / ライセンス — JSON UI Workbench 0.16.1</h2>
+<p>JSON UI Workbench 0.16.1 の公開者が権利を保有する、または許諾する権限を持つ独自のソースコード・文書・例・自作素材を、<strong>PolyForm Noncommercial License 1.0.0</strong> で提供します。非商用の目的での利用・改変・再配布を許可します。商用目的の利用は、このライセンスの許諾範囲に含まれません。SPDX 識別子は <code>PolyForm-Noncommercial-1.0.0</code> です。</p>
+<p>The publisher offers the original source code, documentation, examples and original assets of JSON UI Workbench 0.16.1 that they own or are authorized to license under the <strong>PolyForm Noncommercial License 1.0.0</strong>. It permits use, modification and redistribution for permitted noncommercial purposes. It does not grant permission for commercial purposes. SPDX identifier: <code>PolyForm-Noncommercial-1.0.0</code>.</p>
+<p>Required Notice: JSON UI Workbench — PolyForm Noncommercial License 1.0.0; project license scope is described in LICENSE.md. Third-party components and imported assets retain their separate terms.</p>
+<h3 id="scope-read-the-terms-本文と説明">Read the terms / 本文と説明</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Document / 文書</th>
+<th>Status / 位置付け</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="#official">Original English text / 英語原文</a></td>
+<td>Governing, unmodified license text / 変更していない正式な条件</td>
+</tr>
+<tr>
+<td><a href="HANDBOOK_JA.html#license">日本語の条件説明</a></td>
+<td>条件を理解するための説明。独自の新たなライセンスではありません</td>
+</tr>
+<tr>
+<td><a href="#license">English explanation</a></td>
+<td>Plain-language explanation; does not replace the governing text</td>
+</tr>
+<tr>
+<td><a href="#thirdparty">Third-party notices</a> · <a href="HANDBOOK_JA.html#thirdparty">日本語</a></td>
+<td>Separate components and retained terms / 別の条件が適用される部品と素材</td>
+</tr>
+</tbody></table></div>
+<h3 id="scope-scope-適用範囲">Scope / 適用範囲</h3>
+<p>Third-party components, vendor files with their own notices, compatibility data subject to upstream terms, Minecraft assets, imported packs, other people&#39;s add-ons and user-provided content are <strong>not relicensed</strong> by this notice. Retain and follow separate upstream notices. The project license does not restrict permissions independently granted by a third-party license. See the <a href="../ASSET_POLICY.md">asset policy</a>.</p>
+<p>第三者ライブラリ、独自の権利表示がある vendor ファイル、元の条件が適用される互換性データ、Minecraft の素材、読み込んだパック、他者のアドオン、ユーザー提供データには、この表示で新しいライセンスを付与しません。元の表示を保持し、その条件に従ってください。第三者のライセンスが別途認める利用を、本プロジェクトのライセンスで制限するものではありません。</p>
+<p>The inherited r41 archive lacked a complete authorship record and a project-wide license. This release records the publisher&#39;s present license choice within their authority; it does not certify ownership of every inherited line or grant rights held by another person. Earlier releases retain the licensing status with which they were supplied. AI assistance alone does not establish third-party permission.</p>
+<p>元の r41 アーカイブには完全な著作者記録とプロジェクト全体のライセンスがありませんでした。本版は公開者の現在の選択を、公開者が許諾できる範囲に記録したものです。継承した全行の権利関係を証明したり、他者の権利を許諾したりするものではありません。旧版は配布時の権利状態を維持します。AI による作成だけで第三者の利用許諾が成立するわけではありません。</p>
+<p>Commercial-use restrictions mean this is <strong>noncommercial source-available software</strong>, rather than OSI open-source software. Redistribution must preserve the governing terms or their URL, the <code>Required Notice:</code> line above and applicable third-party notices. There is no additional project requirement to publish your changes or assign your copyright.</p>
+<p>商用利用の制限があるため、本プロジェクトは <strong>非商用のソース公開ソフトウェア</strong> です。OSI の定義によるオープンソースとは表記しません。再配布時は正式な条件の本文または URL、上記の <code>Required Notice:</code> 行、該当する第三者の権利表示を保持してください。改変ソースの公開や著作権の譲渡を追加で義務付けてはいません。</p>
+<h3 id="scope-minecraft-affiliation-minecraft-との関係">Minecraft affiliation / Minecraft との関係</h3>
+<p>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT. Minecraft names and assets belong to their respective rights holders. This license grants no rights to their names or assets.</p>
+<p>Minecraft の公式製品ではありません。Mojang / Microsoft の承認・提携はありません。Minecraft の名称と素材は各権利者に帰属し、本ライセンスはそれらの権利を許諾しません。</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="license"><h2 id="license">License explanation — 0.16.1</h2>
+<p>The selected license is <strong>PolyForm Noncommercial License 1.0.0</strong>. It allows permitted noncommercial use, including personal hobbies, study and experiments, while excluding commercial purposes. These are established terms rather than a custom license with additional restrictions.</p>
+<p>This document explains the conditions. It is not a replacement license or an additional grant. The unchanged <a href="#official">original English text</a> governs if an explanation conflicts with it. <a href="HANDBOOK_JA.html#license">日本語の説明</a> / <a href="#scope">License scope</a>.</p>
+<h3 id="license-1-what-is-allowed">1. What is allowed</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Activity or purpose</th>
+<th>Project terms</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Personal study, hobbies, private entertainment, research, experiments and testing for public knowledge</td>
+<td>Permitted on the noncommercial basis described in the terms, without anticipated commercial application</td>
+</tr>
+<tr>
+<td>Modifying source or making a personal derivative for a noncommercial purpose</td>
+<td>Permitted</td>
+</tr>
+<tr>
+<td>Redistributing original or modified copies for a permitted noncommercial purpose</td>
+<td>Permitted; pass on the terms or their URL, Required Notice and third-party notices</td>
+</tr>
+<tr>
+<td>Use by the charitable, educational, public research, public safety or health, environmental protection, and government organizations listed in the terms</td>
+<td>Permitted under Noncommercial Organizations, regardless of funding sources or resulting funding obligations</td>
+</tr>
+<tr>
+<td>Using the renderer for paid add-ons, commissioned development, commercial business or monetized services; selling the renderer</td>
+<td>Commercial purposes are not permitted by this license</td>
+</tr>
+</tbody></table></div>
+<p>Neither “distributed free of charge” nor “used by a company” determines every case by itself. Read the purpose and the governing clauses. A personal paid AI or cloud subscription alone does not necessarily make a hobby activity commercial. A service operator&#39;s own commercial use is a separate question. Commercial use requires a separate grant from a publisher authorized to give it.</p>
+<p>The license does not automatically apply the same terms to every image or add-on produced with the renderer. Included project code or assets, Minecraft assets and other people&#39;s materials retain their respective conditions. <strong>Output not automatically inheriting the license does not authorize using the renderer for paid production.</strong> This notice does not grant blanket commercial rights to all outputs.</p>
+<h3 id="license-2-when-redistributing">2. When redistributing</h3>
+<p>Give recipients the governing terms or <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">their URL</a>, and the line beginning <code>Required Notice:</code> in <code>LICENSE.md</code>. Retain applicable third-party notices and license texts. These requirements also apply when distributing only part of the software.</p>
+<p>A practical package includes <code>LICENSE.md</code>, <code>LICENSE-JA.md</code>, <code>LICENSE-EN.md</code>, <code>docs/release/legal/PolyForm-Noncommercial-1.0.0.md</code>, the third-party notices and applicable component license texts. The governing terms require the terms or URL and Required Notices; this suggested bundle does not make the explanations an extra obligation.</p>
+<p>There is no requirement to publish your modified source, return changes to the publisher, or assign your copyright. The terms do not let you sublicense or transfer your licenses to someone else. Recipients rely on the terms offered by the licensor.</p>
+<h3 id="license-3-meaning-of-the-clauses">3. Meaning of the clauses</h3>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Original section</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Acceptance</td>
+<td>Accept the terms as obligations and as conditions of the licenses</td>
+</tr>
+<tr>
+<td>Copyright License</td>
+<td>Permits acts involving the licensor&#39;s copyright for permitted purposes; distribution and changes follow their dedicated clauses</td>
+</tr>
+<tr>
+<td>Distribution License</td>
+<td>Permits distributing copies, including permitted changes and new works</td>
+</tr>
+<tr>
+<td>Notices</td>
+<td>Give recipients the terms or URL and Required Notices</td>
+</tr>
+<tr>
+<td>Changes and New Works License</td>
+<td>Permits modifications and new works based on the software for permitted purposes</td>
+</tr>
+<tr>
+<td>Patent License</td>
+<td>Covers patent claims the licensor can license, or later becomes able to license, that use of the software would infringe</td>
+</tr>
+<tr>
+<td>Noncommercial Purposes / Personal Uses / Noncommercial Organizations</td>
+<td>Define permitted purposes and the treatment of personal uses and listed organizations</td>
+</tr>
+<tr>
+<td>Fair Use</td>
+<td>Does not limit fair-use rights provided by law</td>
+</tr>
+<tr>
+<td>No Other Rights</td>
+<td>Grants no sublicensing, transfer or implied additional rights; does not prevent grants to other people</td>
+</tr>
+<tr>
+<td>Patent Defense</td>
+<td>A written claim of patent infringement ends the patent license immediately; a company claim ends it for work on that company&#39;s behalf</td>
+</tr>
+<tr>
+<td>Violations</td>
+<td>After the first written violation notice, licenses may continue if full compliance and practical corrective steps occur within 32 days; otherwise all licenses end immediately</td>
+</tr>
+<tr>
+<td>No Liability</td>
+<td>Provides the software as is without warranty and excludes the licensor&#39;s liability for resulting damages as far as the law allows</td>
+</tr>
+<tr>
+<td>Definitions</td>
+<td>Licensor is the person or entity offering the terms; software is what they offer; you is the accepting party; your licenses are all licenses granted here. Use covers acts requiring a license. Your company includes your employer or business and related organizations under control, meaning substantial asset ownership or power over management and policies</td>
+</tr>
+</tbody></table></div>
+<h3 id="license-4-rights-outside-the-scope">4. Rights outside the scope</h3>
+<p>See <a href="#scope">LICENSE.md</a> for scope. Third-party BSD, MIT and other licenses remain in effect. The ability to import an external pack does not grant permission to copy, modify or distribute it. Adopting this license does not complete the authorship record of all inherited r41 code.</p>
+<p>Because commercial purposes are restricted, describe the project as noncommercial source-available software, rather than open source under the OSI definition. It is not an official Minecraft product.</p>
+<h3 id="license-5-sources-and-original-text-preservation">5. Sources and original-text preservation</h3>
+<ul>
+<li><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">Official terms</a></li>
+<li><a href="https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md">Official repository&#39;s 1.0.0 text</a></li>
+<li><a href="https://spdx.org/licenses/PolyForm-Noncommercial-1.0.0.html">SPDX identifier</a></li>
+<li><a href="https://opensource.org/osd">OSI definition</a></li>
+</ul>
+<p>The bundled English original is unchanged from the official repository&#39;s 1.0.0 file: UTF-8 / LF, 4,563 bytes, SHA-256 <code>c0ea4a896d2c8c394b29f9427589996db826cd501c512279ff0ed3ef48fabbe5</code>. No custom conditions or Japanese text have been inserted into it.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="thirdparty"><h2 id="thirdparty">Third-party notices</h2>
+<p>This file records the components used by JSON UI Workbench 0.16.1. It is not a
+replacement for their license texts and does not relicense upstream files.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Version</th>
+<th>License</th>
+<th>Source / retained notice</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zip.js</td>
+<td>2.8.16</td>
+<td>BSD-3-Clause</td>
+<td><a href="https://github.com/gildas-lormeau/zip.js">upstream</a>, <code>editor-core/vendor/zip.js-2.8.16/LICENSE</code></td>
+</tr>
+<tr>
+<td>jsonc-parser</td>
+<td>3.3.1</td>
+<td>MIT</td>
+<td><a href="https://github.com/microsoft/node-jsonc-parser">upstream</a>, <code>editor-core/vendor/jsonc-parser-3.3.1/LICENSE.md</code></td>
+</tr>
+<tr>
+<td>pngjs</td>
+<td>7.0.0</td>
+<td>MIT</td>
+<td><a href="https://github.com/pngjs/pngjs">upstream</a>, <code>local-node/vendor/pngjs/LICENSE</code></td>
+</tr>
+<tr>
+<td>@napi-rs/canvas</td>
+<td>0.1.100</td>
+<td>MIT package</td>
+<td><a href="https://github.com/Brooooooklyn/canvas">upstream</a>; installed by npm, not included as a native binary in the public source archive</td>
+</tr>
+</tbody></table></div>
+<p>Browser dependency file hashes and source versions are retained in
+<code>editor-core/vendor/THIRD_PARTY_LOCK.tsv</code>. Those records originate in r41; the
+public distribution manifest independently records the shipped file hashes.
+The canvas package&#39;s license designation does not replace notices for its
+transitive native components. If distributing an installer or binary in the
+future, collect the notices from the exact installed dependencies first.</p>
+<h3 id="thirdparty-minecraft-compatibility-information">Minecraft compatibility information</h3>
+<p>The renderer contains compatibility identifiers, item-to-texture aliases,
+property names, numeric identifiers where available, hashes, and authored
+interpretation logic. They describe the external format; they are not game
+textures or a complete Minecraft runtime.</p>
+<p>Existing compatibility tables identify Mojang/bedrock-samples commit
+<code>736072450c26a7c67f07b1661f29d9a5ebaa14b1</code>; other tables identify their own pinned
+source versions. Preserve those source comments. Compatibility with one snapshot
+does not prove compatibility with every version of the game.</p>
+<p>The <a href="https://github.com/Mojang/bedrock-samples/blob/main/LICENSE.md">Mojang/bedrock-samples license</a>
+retains Mojang&#39;s rights and refers to the <a href="https://www.minecraft.net/en-us/eula">Minecraft EULA</a>.
+It is <strong>not</strong> an MIT license. The public package excludes the supplied native
+player model/skin, copied native UI/controller fixtures, vanilla packs, game
+fonts, and historical game screenshots. Users supply their own authorized packs.</p>
+<h3 id="thirdparty-demonstration-assets">Demonstration assets</h3>
+<p>The small demonstrations under <code>examples/revision12/pack</code> and
+<code>examples/revision13/pack</code> are identified in their supplied <code>CREDITS-ja.md</code> files
+as original test graphics, limited test glyphs, and synthesized audio. The
+public builder uses only those credited asset paths. Their provenance does not
+constitute an additional blanket license; the project rights status still
+applies. Unknown historical fixture ZIPs are rebuilt from these credited sources
+for public distribution rather than republished unchanged.</p>
+<h3 id="thirdparty-project-source">Project source</h3>
+<p>The r41 archive is the source of the inherited renderer and did not contain a complete authorship record or project-wide license. In 0.16.1 the publisher adopts PolyForm Noncommercial License 1.0.0 for original portions they own or are authorized to license. It does not relicense upstream components, compatibility data subject to upstream terms, game assets or user content. Describe the project as noncommercial source-available software. See <a href="#scope">LICENSE.md</a>.</p>
+<p>The tutorial in <code>docs/release/manual/examples/build-demo.mjs</code> generates original JSON definitions and a solid-color test image, and reuses the credited synthesized OGG audio; it copies no game fonts or textures. Its project-authored contents are covered by the project license within the scope in <code>LICENSE.md</code>.</p>
+<p><a href="HANDBOOK_JA.html#thirdparty">日本語の権利表示</a>.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+<section class="chapter" aria-labelledby="official"><h2 id="official">PolyForm Noncommercial License 1.0.0</h2>
+<p><a href="https://polyformproject.org/licenses/noncommercial/1.0.0">https://polyformproject.org/licenses/noncommercial/1.0.0</a></p>
+<h3 id="official-acceptance">Acceptance</h3>
+<p>In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.</p>
+<h3 id="official-copyright-license">Copyright License</h3>
+<p>The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor&#39;s copyright in it for any permitted purpose.  However, you may only distribute the software according to <a href="#official-distribution-license">Distribution License</a> and make changes or new works based on the software according to <a href="#official-changes-and-new-works-license">Changes and New Works License</a>.</p>
+<h3 id="official-distribution-license">Distribution License</h3>
+<p>The licensor grants you an additional copyright license to distribute copies of the software.  Your license to distribute covers distributing the software with changes and new works permitted by <a href="#official-changes-and-new-works-license">Changes and New Works License</a>.</p>
+<h3 id="official-notices">Notices</h3>
+<p>You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with <code>Required Notice:</code> that the licensor provided with the software.  For example:</p>
+<blockquote>
+<p>Required Notice: Copyright Yoyodyne, Inc. (<a href="http://example.com">http://example.com</a>)</p>
+</blockquote>
+<h3 id="official-changes-and-new-works-license">Changes and New Works License</h3>
+<p>The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.</p>
+<h3 id="official-patent-license">Patent License</h3>
+<p>The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.</p>
+<h3 id="official-noncommercial-purposes">Noncommercial Purposes</h3>
+<p>Any noncommercial purpose is a permitted purpose.</p>
+<h3 id="official-personal-uses">Personal Uses</h3>
+<p>Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.</p>
+<h3 id="official-noncommercial-organizations">Noncommercial Organizations</h3>
+<p>Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.</p>
+<h3 id="official-fair-use">Fair Use</h3>
+<p>You may have &quot;fair use&quot; rights for the software under the law. These terms do not limit them.</p>
+<h3 id="official-no-other-rights">No Other Rights</h3>
+<p>These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else.  These terms do not imply any other licenses.</p>
+<h3 id="official-patent-defense">Patent Defense</h3>
+<p>If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately. If your company makes such a claim, your patent license ends immediately for work on behalf of your company.</p>
+<h3 id="official-violations">Violations</h3>
+<p>The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice.  Otherwise, all your licenses end immediately.</p>
+<h3 id="official-no-liability">No Liability</h3>
+<p><em><strong>As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.</strong></em></p>
+<h3 id="official-definitions">Definitions</h3>
+<p>The <strong>licensor</strong> is the individual or entity offering these terms, and the <strong>software</strong> is the software the licensor makes available under these terms.</p>
+<p><strong>You</strong> refers to the individual or entity agreeing to these terms.</p>
+<p><strong>Your company</strong> is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.  <strong>Control</strong> means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise.  Control can be direct or indirect.</p>
+<p><strong>Your licenses</strong> are all the licenses granted to you for the software under these terms.</p>
+<p><strong>Use</strong> means anything you do with the software requiring one of your licenses.</p>
+<p class="top-link"><a href="#top">Back to top</a></p></section>
+</main><footer>Noncommercial source-available software. The unchanged governing English license is reproduced in the final appendix. Native equivalence is not guaranteed.</footer></body></html>

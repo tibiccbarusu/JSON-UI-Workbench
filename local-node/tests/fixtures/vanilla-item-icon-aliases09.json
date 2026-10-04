@@ -1,0 +1,618 @@
+{
+  "sourceCommit": "736072450c26a7c67f07b1661f29d9a5ebaa14b1",
+  "sourceUrl": "https://github.com/Mojang/bedrock-samples/blob/736072450c26a7c67f07b1661f29d9a5ebaa14b1/resource_pack/textures/item_texture.json",
+  "texture_data": {
+    "apple_golden": {
+      "textures": "textures/items/apple_golden"
+    },
+    "beef_raw": {
+      "textures": "textures/items/beef_raw"
+    },
+    "book_normal": {
+      "textures": "textures/items/book_normal"
+    },
+    "boots": {
+      "textures": [
+        "textures/items/leather_boots",
+        "textures/items/chainmail_boots",
+        "textures/items/iron_boots",
+        "textures/items/gold_boots",
+        "textures/items/diamond_boots",
+        "textures/items/netherite_boots",
+        "textures/items/copper_boots"
+      ]
+    },
+    "carrot_golden": {
+      "textures": "textures/items/carrot_golden"
+    },
+    "chestplate": {
+      "textures": [
+        "textures/items/leather_chestplate",
+        "textures/items/chainmail_chestplate",
+        "textures/items/iron_chestplate",
+        "textures/items/gold_chestplate",
+        "textures/items/diamond_chestplate",
+        "textures/items/netherite_chestplate",
+        "textures/items/copper_chestplate"
+      ]
+    },
+    "beef_cooked": {
+      "textures": "textures/items/beef_cooked"
+    },
+    "chicken_cooked": {
+      "textures": "textures/items/chicken_cooked"
+    },
+    "porkchop_cooked": {
+      "textures": "textures/items/porkchop_cooked"
+    },
+    "chicken_raw": {
+      "textures": "textures/items/chicken_raw"
+    },
+    "clock_item": {
+      "textures": "textures/items/clock_item"
+    },
+    "compass_item": {
+      "textures": "textures/items/compass_item"
+    },
+    "book_enchanted": {
+      "textures": "textures/items/book_enchanted"
+    },
+    "axe": {
+      "textures": [
+        "textures/items/wood_axe",
+        "textures/items/stone_axe",
+        "textures/items/iron_axe",
+        "textures/items/gold_axe",
+        "textures/items/diamond_axe",
+        "textures/items/netherite_axe",
+        "textures/items/copper_axe"
+      ]
+    },
+    "helmet": {
+      "textures": [
+        "textures/items/leather_helmet",
+        "textures/items/chainmail_helmet",
+        "textures/items/iron_helmet",
+        "textures/items/gold_helmet",
+        "textures/items/diamond_helmet",
+        "textures/items/netherite_helmet",
+        "textures/items/copper_helmet"
+      ]
+    },
+    "hoe": {
+      "textures": [
+        "textures/items/wood_hoe",
+        "textures/items/stone_hoe",
+        "textures/items/iron_hoe",
+        "textures/items/gold_hoe",
+        "textures/items/diamond_hoe",
+        "textures/items/netherite_hoe",
+        "textures/items/copper_hoe"
+      ]
+    },
+    "sword": {
+      "textures": [
+        "textures/items/wood_sword",
+        "textures/items/stone_sword",
+        "textures/items/iron_sword",
+        "textures/items/gold_sword",
+        "textures/items/diamond_sword",
+        "textures/items/netherite_sword",
+        "textures/items/copper_sword"
+      ]
+    },
+    "pickaxe": {
+      "textures": [
+        "textures/items/wood_pickaxe",
+        "textures/items/stone_pickaxe",
+        "textures/items/iron_pickaxe",
+        "textures/items/gold_pickaxe",
+        "textures/items/diamond_pickaxe",
+        "textures/items/netherite_pickaxe",
+        "textures/items/copper_pickaxe"
+      ]
+    },
+    "shovel": {
+      "textures": [
+        "textures/items/wood_shovel",
+        "textures/items/stone_shovel",
+        "textures/items/iron_shovel",
+        "textures/items/gold_shovel",
+        "textures/items/diamond_shovel",
+        "textures/items/netherite_shovel",
+        "textures/items/copper_shovel"
+      ]
+    },
+    "leggings": {
+      "textures": [
+        "textures/items/leather_leggings",
+        "textures/items/chainmail_leggings",
+        "textures/items/iron_leggings",
+        "textures/items/gold_leggings",
+        "textures/items/diamond_leggings",
+        "textures/items/netherite_leggings",
+        "textures/items/copper_leggings"
+      ]
+    },
+    "minecart_normal": {
+      "textures": "textures/items/minecart_normal"
+    },
+    "minecart_chest": {
+      "textures": "textures/items/minecart_chest"
+    },
+    "minecart_command_block": {
+      "textures": "textures/items/minecart_command_block"
+    },
+    "minecart_hopper": {
+      "textures": "textures/items/minecart_hopper"
+    },
+    "minecart_tnt": {
+      "textures": "textures/items/minecart_tnt"
+    },
+    "porkchop_raw": {
+      "textures": "textures/items/porkchop_raw"
+    },
+    "potato_baked": {
+      "textures": "textures/items/potato_baked"
+    },
+    "potato_poisonous": {
+      "textures": "textures/items/potato_poisonous"
+    },
+    "rabbit_cooked": {
+      "textures": "textures/items/rabbit_cooked"
+    },
+    "seeds_wheat": {
+      "textures": "textures/items/seeds_wheat"
+    },
+    "seeds_beetroot": {
+      "textures": "textures/items/seeds_beetroot"
+    },
+    "seeds_melon": {
+      "textures": "textures/items/seeds_melon"
+    },
+    "seeds_pumpkin": {
+      "textures": "textures/items/seeds_pumpkin"
+    },
+    "slimeball": {
+      "textures": "textures/items/slimeball"
+    },
+    "book_writable": {
+      "textures": "textures/items/book_writable"
+    },
+    "book_written": {
+      "textures": "textures/items/book_written"
+    }
+  },
+  "verifiedItems": {
+    "minecraft:golden_apple": {
+      "atlasKey": "apple_golden",
+      "variant": 0,
+      "textureRef": "textures/items/apple_golden"
+    },
+    "minecraft:beef": {
+      "atlasKey": "beef_raw",
+      "variant": 0,
+      "textureRef": "textures/items/beef_raw"
+    },
+    "minecraft:book": {
+      "atlasKey": "book_normal",
+      "variant": 0,
+      "textureRef": "textures/items/book_normal"
+    },
+    "minecraft:chainmail_boots": {
+      "atlasKey": "boots",
+      "variant": 1,
+      "textureRef": "textures/items/chainmail_boots"
+    },
+    "minecraft:leather_boots": {
+      "atlasKey": "boots",
+      "variant": 0,
+      "textureRef": "textures/items/leather_boots"
+    },
+    "minecraft:diamond_boots": {
+      "atlasKey": "boots",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_boots"
+    },
+    "minecraft:golden_boots": {
+      "atlasKey": "boots",
+      "variant": 3,
+      "textureRef": "textures/items/gold_boots"
+    },
+    "minecraft:iron_boots": {
+      "atlasKey": "boots",
+      "variant": 2,
+      "textureRef": "textures/items/iron_boots"
+    },
+    "minecraft:golden_carrot": {
+      "atlasKey": "carrot_golden",
+      "variant": 0,
+      "textureRef": "textures/items/carrot_golden"
+    },
+    "minecraft:chainmail_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 1,
+      "textureRef": "textures/items/chainmail_chestplate"
+    },
+    "minecraft:leather_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 0,
+      "textureRef": "textures/items/leather_chestplate"
+    },
+    "minecraft:diamond_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_chestplate"
+    },
+    "minecraft:golden_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 3,
+      "textureRef": "textures/items/gold_chestplate"
+    },
+    "minecraft:iron_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 2,
+      "textureRef": "textures/items/iron_chestplate"
+    },
+    "minecraft:cooked_beef": {
+      "atlasKey": "beef_cooked",
+      "variant": 0,
+      "textureRef": "textures/items/beef_cooked"
+    },
+    "minecraft:cooked_chicken": {
+      "atlasKey": "chicken_cooked",
+      "variant": 0,
+      "textureRef": "textures/items/chicken_cooked"
+    },
+    "minecraft:cooked_porkchop": {
+      "atlasKey": "porkchop_cooked",
+      "variant": 0,
+      "textureRef": "textures/items/porkchop_cooked"
+    },
+    "minecraft:chicken": {
+      "atlasKey": "chicken_raw",
+      "variant": 0,
+      "textureRef": "textures/items/chicken_raw"
+    },
+    "minecraft:clock": {
+      "atlasKey": "clock_item",
+      "variant": 0,
+      "textureRef": "textures/items/clock_item"
+    },
+    "minecraft:compass": {
+      "atlasKey": "compass_item",
+      "variant": 0,
+      "textureRef": "textures/items/compass_item"
+    },
+    "minecraft:enchanted_book": {
+      "atlasKey": "book_enchanted",
+      "variant": 0,
+      "textureRef": "textures/items/book_enchanted"
+    },
+    "minecraft:diamond_axe": {
+      "atlasKey": "axe",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_axe"
+    },
+    "minecraft:golden_axe": {
+      "atlasKey": "axe",
+      "variant": 3,
+      "textureRef": "textures/items/gold_axe"
+    },
+    "minecraft:iron_axe": {
+      "atlasKey": "axe",
+      "variant": 2,
+      "textureRef": "textures/items/iron_axe"
+    },
+    "minecraft:stone_axe": {
+      "atlasKey": "axe",
+      "variant": 1,
+      "textureRef": "textures/items/stone_axe"
+    },
+    "minecraft:wooden_axe": {
+      "atlasKey": "axe",
+      "variant": 0,
+      "textureRef": "textures/items/wood_axe"
+    },
+    "minecraft:chainmail_helmet": {
+      "atlasKey": "helmet",
+      "variant": 1,
+      "textureRef": "textures/items/chainmail_helmet"
+    },
+    "minecraft:leather_helmet": {
+      "atlasKey": "helmet",
+      "variant": 0,
+      "textureRef": "textures/items/leather_helmet"
+    },
+    "minecraft:diamond_helmet": {
+      "atlasKey": "helmet",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_helmet"
+    },
+    "minecraft:golden_helmet": {
+      "atlasKey": "helmet",
+      "variant": 3,
+      "textureRef": "textures/items/gold_helmet"
+    },
+    "minecraft:iron_helmet": {
+      "atlasKey": "helmet",
+      "variant": 2,
+      "textureRef": "textures/items/iron_helmet"
+    },
+    "minecraft:diamond_hoe": {
+      "atlasKey": "hoe",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_hoe"
+    },
+    "minecraft:golden_hoe": {
+      "atlasKey": "hoe",
+      "variant": 3,
+      "textureRef": "textures/items/gold_hoe"
+    },
+    "minecraft:iron_hoe": {
+      "atlasKey": "hoe",
+      "variant": 2,
+      "textureRef": "textures/items/iron_hoe"
+    },
+    "minecraft:stone_hoe": {
+      "atlasKey": "hoe",
+      "variant": 1,
+      "textureRef": "textures/items/stone_hoe"
+    },
+    "minecraft:wooden_hoe": {
+      "atlasKey": "hoe",
+      "variant": 0,
+      "textureRef": "textures/items/wood_hoe"
+    },
+    "minecraft:netherite_sword": {
+      "atlasKey": "sword",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_sword"
+    },
+    "minecraft:netherite_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_pickaxe"
+    },
+    "minecraft:netherite_axe": {
+      "atlasKey": "axe",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_axe"
+    },
+    "minecraft:netherite_shovel": {
+      "atlasKey": "shovel",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_shovel"
+    },
+    "minecraft:netherite_hoe": {
+      "atlasKey": "hoe",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_hoe"
+    },
+    "minecraft:netherite_boots": {
+      "atlasKey": "boots",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_boots"
+    },
+    "minecraft:netherite_leggings": {
+      "atlasKey": "leggings",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_leggings"
+    },
+    "minecraft:netherite_chestplate": {
+      "atlasKey": "chestplate",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_chestplate"
+    },
+    "minecraft:netherite_helmet": {
+      "atlasKey": "helmet",
+      "variant": 5,
+      "textureRef": "textures/items/netherite_helmet"
+    },
+    "minecraft:chainmail_leggings": {
+      "atlasKey": "leggings",
+      "variant": 1,
+      "textureRef": "textures/items/chainmail_leggings"
+    },
+    "minecraft:leather_leggings": {
+      "atlasKey": "leggings",
+      "variant": 0,
+      "textureRef": "textures/items/leather_leggings"
+    },
+    "minecraft:diamond_leggings": {
+      "atlasKey": "leggings",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_leggings"
+    },
+    "minecraft:golden_leggings": {
+      "atlasKey": "leggings",
+      "variant": 3,
+      "textureRef": "textures/items/gold_leggings"
+    },
+    "minecraft:iron_leggings": {
+      "atlasKey": "leggings",
+      "variant": 2,
+      "textureRef": "textures/items/iron_leggings"
+    },
+    "minecraft:minecart": {
+      "atlasKey": "minecart_normal",
+      "variant": 0,
+      "textureRef": "textures/items/minecart_normal"
+    },
+    "minecraft:chest_minecart": {
+      "atlasKey": "minecart_chest",
+      "variant": 0,
+      "textureRef": "textures/items/minecart_chest"
+    },
+    "minecraft:command_block_minecart": {
+      "atlasKey": "minecart_command_block",
+      "variant": 0,
+      "textureRef": "textures/items/minecart_command_block"
+    },
+    "minecraft:hopper_minecart": {
+      "atlasKey": "minecart_hopper",
+      "variant": 0,
+      "textureRef": "textures/items/minecart_hopper"
+    },
+    "minecraft:tnt_minecart": {
+      "atlasKey": "minecart_tnt",
+      "variant": 0,
+      "textureRef": "textures/items/minecart_tnt"
+    },
+    "minecraft:diamond_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_pickaxe"
+    },
+    "minecraft:golden_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 3,
+      "textureRef": "textures/items/gold_pickaxe"
+    },
+    "minecraft:iron_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 2,
+      "textureRef": "textures/items/iron_pickaxe"
+    },
+    "minecraft:stone_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 1,
+      "textureRef": "textures/items/stone_pickaxe"
+    },
+    "minecraft:wooden_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 0,
+      "textureRef": "textures/items/wood_pickaxe"
+    },
+    "minecraft:porkchop": {
+      "atlasKey": "porkchop_raw",
+      "variant": 0,
+      "textureRef": "textures/items/porkchop_raw"
+    },
+    "minecraft:baked_potato": {
+      "atlasKey": "potato_baked",
+      "variant": 0,
+      "textureRef": "textures/items/potato_baked"
+    },
+    "minecraft:poisonous_potato": {
+      "atlasKey": "potato_poisonous",
+      "variant": 0,
+      "textureRef": "textures/items/potato_poisonous"
+    },
+    "minecraft:cooked_rabbit": {
+      "atlasKey": "rabbit_cooked",
+      "variant": 0,
+      "textureRef": "textures/items/rabbit_cooked"
+    },
+    "minecraft:wheat_seeds": {
+      "atlasKey": "seeds_wheat",
+      "variant": 0,
+      "textureRef": "textures/items/seeds_wheat"
+    },
+    "minecraft:beetroot_seeds": {
+      "atlasKey": "seeds_beetroot",
+      "variant": 0,
+      "textureRef": "textures/items/seeds_beetroot"
+    },
+    "minecraft:melon_seeds": {
+      "atlasKey": "seeds_melon",
+      "variant": 0,
+      "textureRef": "textures/items/seeds_melon"
+    },
+    "minecraft:pumpkin_seeds": {
+      "atlasKey": "seeds_pumpkin",
+      "variant": 0,
+      "textureRef": "textures/items/seeds_pumpkin"
+    },
+    "minecraft:diamond_shovel": {
+      "atlasKey": "shovel",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_shovel"
+    },
+    "minecraft:golden_shovel": {
+      "atlasKey": "shovel",
+      "variant": 3,
+      "textureRef": "textures/items/gold_shovel"
+    },
+    "minecraft:iron_shovel": {
+      "atlasKey": "shovel",
+      "variant": 2,
+      "textureRef": "textures/items/iron_shovel"
+    },
+    "minecraft:stone_shovel": {
+      "atlasKey": "shovel",
+      "variant": 1,
+      "textureRef": "textures/items/stone_shovel"
+    },
+    "minecraft:wooden_shovel": {
+      "atlasKey": "shovel",
+      "variant": 0,
+      "textureRef": "textures/items/wood_shovel"
+    },
+    "minecraft:slime_ball": {
+      "atlasKey": "slimeball",
+      "variant": 0,
+      "textureRef": "textures/items/slimeball"
+    },
+    "minecraft:diamond_sword": {
+      "atlasKey": "sword",
+      "variant": 4,
+      "textureRef": "textures/items/diamond_sword"
+    },
+    "minecraft:golden_sword": {
+      "atlasKey": "sword",
+      "variant": 3,
+      "textureRef": "textures/items/gold_sword"
+    },
+    "minecraft:iron_sword": {
+      "atlasKey": "sword",
+      "variant": 2,
+      "textureRef": "textures/items/iron_sword"
+    },
+    "minecraft:stone_sword": {
+      "atlasKey": "sword",
+      "variant": 1,
+      "textureRef": "textures/items/stone_sword"
+    },
+    "minecraft:wooden_sword": {
+      "atlasKey": "sword",
+      "variant": 0,
+      "textureRef": "textures/items/wood_sword"
+    },
+    "minecraft:writable_book": {
+      "atlasKey": "book_writable",
+      "variant": 0,
+      "textureRef": "textures/items/book_writable"
+    },
+    "minecraft:written_book": {
+      "atlasKey": "book_written",
+      "variant": 0,
+      "textureRef": "textures/items/book_written"
+    },
+    "minecraft:copper_sword": {
+      "atlasKey": "sword",
+      "variant": 6,
+      "textureRef": "textures/items/copper_sword"
+    },
+    "minecraft:copper_pickaxe": {
+      "atlasKey": "pickaxe",
+      "variant": 6,
+      "textureRef": "textures/items/copper_pickaxe"
+    },
+    "minecraft:copper_axe": {
+      "atlasKey": "axe",
+      "variant": 6,
+      "textureRef": "textures/items/copper_axe"
+    },
+    "minecraft:copper_shovel": {
+      "atlasKey": "shovel",
+      "variant": 6,
+      "textureRef": "textures/items/copper_shovel"
+    },
+    "minecraft:copper_hoe": {
+      "atlasKey": "hoe",
+      "variant": 6,
+      "textureRef": "textures/items/copper_hoe"
+    }
+  }
+}

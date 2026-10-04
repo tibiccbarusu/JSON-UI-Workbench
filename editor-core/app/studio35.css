@@ -1,0 +1,152 @@
+/* R35: コマンド・一覧・属性を分け、キャンバスへ視線を集める。 */
+.studio-workspace35 {
+  --bg: #f1f2f5; --fg: #243044; --muted: #59677b; --border: #cdd3dd;
+  --panel-bg: #fff; --panel-header-bg: #f8f9fb; --panel: #fff;
+  --text: #243044; --warning: #805020; --blocked: #943829;
+  --focus: #a4452d; --studio-surface: #e9ecf1; --studio-ribbon-bg: #fff;
+  background: var(--bg); color: var(--fg);
+}
+body { font-family: 'Segoe UI', 'Yu Gothic UI', 'Meiryo', sans-serif; }
+.topbar { background: #8e3e2b; color: #fff; border-bottom: 0; }
+.brand-mark { background: #fff; color: #8e3e2b; }
+.brand-product, .topbar .topnav a { color: #fff; }
+.topbar .topnav a:hover, .topbar .topnav a.active { background: #ffffff24; }
+.statusbar { background: #f8f9fb; color: #445267; }
+.statusbar #status-text[data-level='error'] { color: #943829; }
+.statusbar #status-text[data-level='warn'] { color: #805020; }
+.studio-workspace35 { --studio-ribbon-bg: #fff; color: #243044; }
+.studio-workspace35 .studio-quickbar { background: #f6f7fa; gap: 6px; padding: 5px 12px; }
+.studio-workspace35 .studio-tabline { background: #fff; }
+.studio-workspace35 .studio-ribbon-tabs > button { min-height: 35px; padding-inline: 18px; }
+.studio-workspace35 .studio-ribbon-tabs > button[aria-selected='true'] { background: #fff; color: #923e28; border-bottom-color: #ac4d34; }
+.studio-workspace35 .studio-ribbon-content { min-height: 82px; max-height: min(250px, 31dvh); padding: 9px 16px; gap: 14px; }
+.studio-workspace35 .studio-ribbon .btn-primary,
+.studio-workspace35 .btn-primary { background: #9b462f; border-color: #9b462f; color: #fff; }
+.studio-workspace35 .studio-ribbon .btn-primary:hover:not(:disabled),
+.studio-workspace35 .btn-primary:hover:not(:disabled) { background: #803721; border-color: #803721; }
+.studio-workspace35 .studio-command-group { min-height: 58px; }
+.studio-workspace35 .studio-command-buttons { max-width: 460px; }
+.studio-workspace35 .btn:not(.btn-primary) { color: #26364a; background: #fff; border: 1px solid #bdc8d6; }
+.studio-workspace35 .btn:not(.btn-primary):hover:not(:disabled) { color: #26364a; background: #edf2f8; border-color: #8296ae; }
+.studio-workspace35 .btn:disabled { opacity: .5; cursor: default; }
+.studio-workspace35 input, .studio-workspace35 select, .studio-workspace35 textarea { color: #223248; background-color: #fff; border-color: #aab7c8; }
+.studio-workspace35 .hint, .studio-workspace35 .muted { color: #5a687b; }
+.studio-workspace35 a { color: #235a93; }
+.studio-workspace35 .panel, .studio-workspace35 .tab-panel { background: #fff; color: #243044; }
+.studio-workspace35 .panel-header { background: #f8f9fb; border-color: #d6dce5; }
+.studio-workspace35 .panel-title { color: #34455b; font-size: 13px; }
+.studio-workspace35 .panel-header .panel-header-btn { display: none; }
+.studio-workspace35 > .editor-layout { background: #e5e8ed; padding: 8px; }
+.studio-workspace35 #panel-center > .panel { border-color: #c0c9d5; }
+.studio-workspace35 .canvas-stage { background-color: #d9dfe7; }
+.studio-workspace35 .studio-canvas-quicktools { gap: 5px; }
+.studio-workspace35 .studio-current-definition { color: #45566d; font-size: 12px; }
+.studio-workspace35 .studio-element-row26 { color: #334258; border-color: transparent; }
+.studio-workspace35 .studio-element-row26:hover { background: #f0f4f9; }
+.studio-workspace35 .studio-element-row26[aria-selected='true'] { background: #fbeee7; border-color: #c97554; color: #73331d; }
+.studio-workspace35 .studio-element-row26.is-selected { background: #fbeee7; border-color: #c97554; }
+.studio-workspace35 .studio-element-row26 button { color: #31465f; }
+.studio-workspace35 .studio-element-select26 > small { color: #61748c; }
+.studio-workspace35 .studio-element-lock26[aria-pressed='true'] { color: #7a4219; background: #fff0d8; }
+.studio-workspace35 .studio-navigation-tabs26 { background: #f6f8fb; border-color: #ced8e4; }
+.studio-workspace35 .studio-navigation-tabs26 > .btn[aria-pressed='true'] { background: #fbeee7; border-color: #c97554; color: #73331d; }
+.studio-workspace35 .tree-import { background: #fff; }
+.studio-workspace35 .import-loader { border-color: #d5dde7; }
+.studio-workspace35 .workspace-picker > label { color: #344c65; }
+.studio-workspace35 .workspace-picker-search,
+.studio-workspace35 .screen-open-select { color: #263a53; background: #fff; border-color: #aab9cb; }
+.studio-workspace35 .workspace-picker-search::placeholder { color: #708096; }
+.studio-workspace35 .workspace-selection-card { background: #f0f4fa; border-left-color: #9e543b; }
+.studio-workspace35 .workspace-profile { color: #325875; background: #e9f1f8; }
+.studio-workspace35 .workspace-profile.is-pocket { color: #795020; background: #fff0d8; }
+.studio-workspace35 #panel-center .canvas-shell { background: #d9dfe7; }
+.studio-workspace35 .preview-fidelity { color: #405971; background: #f0f5fa; }
+.studio-workspace35 .preview-fidelity.is-limited { color: #755021; background: #fff5df; }
+.studio-workspace35 .preview-fidelity.is-error { color: #82382b; background: #ffefec; }
+.studio-workspace35 .studio-geometry26 > label { color: #40516a; }
+.studio-workspace35 .studio-geometry26 input { color: #213650; background: #fff; border-color: #aab9ca; }
+.studio-workspace35 .studio-details > summary { color: #354a63; background: #f7f9fc; border-color: #c7d1de; }
+.studio-workspace35 .studio-details-content { color: #26394e; background: #fff; border-color: #c4cfdd; }
+.studio-workspace35 .studio-inspector26 > .studio-details > .studio-details-content { padding: 10px; }
+.studio-workspace35 .workspace-error { color: #792e22; background: #fff2ed; border-color: #d69a86; }
+.studio-workspace35 .workspace-edit-policy { color: #3c4d63; background: #f7f9fc; border-color: #c6d0dc; }
+.studio-workspace35 .studio-selection-summary26 { color: #364e69; background: #f5f7fb; border-color: #d3dce8; }
+/* 旧テーマの固定色を残すと、明るい文字や暗い背景だけが継承から分離する。 */
+.studio-workspace35 :is(.workspace-step, .screen-open-section, .workspace-help-card,
+  .native-model-settings, .pack-export-settings, .canvas-toolbar-primary, .logs-filters, .logs-actions) {
+  color: var(--fg); background: #f7f9fc; border-color: #c7d1de;
+}
+.studio-workspace35 .workspace-step.is-current { color: #73331d; background: #fbeee7; border-color: #c97554; }
+.studio-workspace35 .workspace-step-number { color: #45566d; background: #fff; border-color: #aab7c8; }
+.studio-workspace35 .workspace-step:is(.is-current, .is-done) .workspace-step-number { color: #73331d; background: #fbeee7; border-color: #bd684b; }
+.studio-workspace35 :is(.workspace-help-card > strong, .native-model-settings > summary,
+  .workspace-selection-card > code) { color: #344c65; }
+.studio-workspace35 .workspace-help-card p { color: var(--muted); }
+.studio-workspace35 .workspace-error > span { color: #792e22; }
+.studio-workspace35 .native-model-settings-error { color: #943829; }
+.studio-workspace35 .pack-export-icon-status { color: #805020; }
+.studio-workspace35 .workspace-text-button { color: #235a93; }
+.studio-workspace35 .workspace-text-button:hover { color: #18436f; }
+.studio-workspace35 :is(.workspace-text-button kbd, .workspace-shortcuts kbd, .workspace-diagnostic-link) {
+  color: #45566d; background: #eef2f7; border-color: #c7d1de;
+}
+.studio-workspace35 .workspace-diagnostic-link.has-warnings { color: #805020; }
+.studio-workspace35 .workspace-diagnostic-link.has-errors { color: #943829; }
+.studio-workspace35 .fidelity-notice { color: #755021; background: #fff5df; }
+.studio-workspace35 .fidelity-notice.is-blocked { color: #82382b; background: #ffefec; }
+.studio-workspace35 .canvas-error-overlay { color: #792e22; background: #fff2ed; border-color: #d69a86; }
+.studio-workspace35 .canvas-empty-overlay { color: #755021; background: #fff5df; border-color: #c59b54; }
+.studio-workspace35 :is(.canvas-error-overlay, .canvas-empty-overlay) span { color: #5a687b; }
+.studio-workspace35 .studio-details > summary:hover { color: #354a63; background: #edf2f8; }
+.studio-workspace35 .workspace-picker-search::placeholder { color: #59677b; opacity: 1; }
+
+/* 原文・JSONの面は暗色を維持し、syntax token も同じ局所変数で揃える。
+   リボンの旧 input/textarea 規則より具体的なセレクタを併記する。 */
+.studio-workspace35 :is(.code-block, .ui-defs-json, .global-vars-json, .workspace-source-text,
+  .workspace-property-value, .preview-state-json, .global-vars-json-input, .workspace-export-report),
+.studio-workspace35 .studio-ribbon :is(.code-block, .ui-defs-json, .global-vars-json, .workspace-source-text,
+  .workspace-property-value, .preview-state-json, .global-vars-json-input, .workspace-export-report) {
+  --bg: #18212c; --panel: #18212c; --fg: #e8f0f4; --text: #e8f0f4; --muted: #afb8c6;
+  --json-key: #82b6f5; --json-string: #63d8a0; --json-number: #da9ef1;
+  --json-boolean: #ffa38f; --json-null: #ffa38f; --json-invalid: #ff8b93;
+  background: #18212c; color: #e8f0f4; border-color: #516174; caret-color: #e8f0f4;
+}
+/* ゲーム内 edit_box のDOM代理はCanvas描画と重なるため透明を維持する。 */
+.studio-workspace35 .preview-editbox-overlay { background: transparent; color: transparent; caret-color: #e8f0f4; }
+.studio-insert35 { display: flex; flex: 1; align-items: flex-start; flex-wrap: wrap; gap: 18px; min-width: 0; }
+.studio-insert-tools35 { display: flex; gap: 6px; }
+.studio-workspace35 .studio-insert-tool35 { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; min-width: 70px; min-height: 65px; padding: 7px 10px; border-color: transparent; }
+.studio-workspace35 .studio-insert-tool35[aria-pressed='true'] { color: #8a3922; border-color: #bd684b; background: #fcf0e9; }
+.studio-insert-symbol35 { font-size: 26px; height: 28px; line-height: 28px; font-weight: 500; color: #486687; }
+.studio-insert-symbol35.symbol-label { font-family: Georgia, serif; }
+.studio-insert-guide35 { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex: 1 1 240px; max-width: 540px; font-size: 12px; line-height: 1.55; color: #5b6b7f; }
+.studio-insert-guide35 > strong { font-size: 13px; color: #344862; }
+.studio-insert-parent35 { color: #8a452b; overflow-wrap: anywhere; }
+.studio-insert-status35 { overflow-wrap: anywhere; }
+.studio-appearance35 { display: flex; flex-direction: column; gap: 8px; padding: 12px 0; border-top: 1px solid #d9e0e9; }
+.studio-appearance35 > label { font-weight: 600; font-size: 13px; }
+.studio-appearance-input35 { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #aab7c8; border-radius: 4px; font: inherit; resize: vertical; }
+.studio-appearance35 > .hint { margin: 0; font-size: 12px; line-height: 1.6; }
+.studio-workspace35 #studio-edit-options35[open], .studio-workspace35 #studio-insert-options35[open] { flex: 1 1 100%; }
+.studio-edit-hint35 { font-size: 12px; color: #526780; margin: 2px 0; flex-basis: 100%; }
+.studio-workspace35 .studio-ribbon .studio-details-content > label { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.studio-context-menu { background: #fff; color: #25384f; border-color: #c2ccda; box-shadow: 0 8px 24px #243a592c; }
+.studio-context-menu > button:hover, .studio-context-menu > button:focus, .studio-context-menu > button:focus-visible { color: #223750; background: #eaf0f8; outline: 2px solid #9b6247; outline-offset: -2px; }
+.studio-context-menu > strong { border-color: #d4dce6; }
+.studio-context-menu kbd { color: #59677b; }
+.studio-context-menu > button:disabled { color: #8b95a4; }
+.studio-progress26 { color: #34465d; }
+.studio-progress26 > a { color: #245a94; }
+.studio-progress26[data-slow='true'] { color: #8d4d18; }
+.studio-workspace35 :is(button, input, select, textarea, summary, a):focus-visible { outline: 2px solid #a44b32; outline-offset: 2px; }
+@media (max-width: 1100px) {
+  .studio-workspace35 .studio-ribbon-tabs > button { padding-inline: 12px; }
+  .studio-workspace35 .studio-insert-guide35 { flex-basis: 210px; }
+  .studio-workspace35 #studio-layout-restore28:disabled { display: none; }
+}
+@media (max-width: 900px) {
+  .studio-workspace35 .studio-ribbon-content { max-height: 30dvh; }
+  .studio-workspace35 .studio-insert-guide35 { flex-basis: 100%; }
+  .studio-workspace35 .studio-insert35 { gap: 8px; }
+  .studio-workspace35 .studio-insert-tool35 { min-width: 60px; min-height: 58px; }
+}

@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {parseLangFile} from '../src/assets/lang-table.js';
+test('上限ちょうどの末尾 LF/CRLF/空行/コメントは完全な表',()=>{for(const tail of ['','\n','\r\n','\n\n','\n# comment','\n \n# c\ninvalid\n=bad']){const text='key=value'+tail,r=parseLangFile(text,{maxEntries:1});assert.equal(r.stats.truncated,false,JSON.stringify(tail));assert.equal(r.stats.entries,1);assert.equal(r.table.key,'value');}});
+test('実在する次エントリだけで切り、上限後の重複でも上限を維持',()=>{for(const next of ['two=value','key=override']){const r=parseLangFile('key=value\n#c\n'+next,{maxEntries:1});assert.equal(r.stats.truncated,true);assert.equal(r.stats.entries,1);assert.equal(r.table.key,'value');assert.equal(r.table.two,undefined);}});
+test('ゼロ予算は空・無効行にfalse、有効エントリにtrue',()=>{for(const text of ['','\n#comment\r\ninvalid\n=bad']){const r=parseLangFile(text,{maxEntries:0});assert.equal(r.stats.truncated,false);assert.equal(r.stats.entries,0);}assert.equal(parseLangFile('a=b',{maxEntries:0}).stats.truncated,true);});
+test('既定12万エントリぴったりと末尾改行を受理し、超過を拒否',()=>{const body=Array.from({length:120000},(_,i)=>`key.${i}=文字${i}`).join('\n')+'\n';const at=parseLangFile(body);assert.equal(at.stats.entries,120000);assert.equal(at.stats.truncated,false);assert.equal(at.table['key.119999'],'文字119999');const over=parseLangFile(body+'extra=value\n');assert.equal(over.stats.truncated,true);assert.equal(over.table.extra,undefined);});
+test('BOM・値内イコール・inlineコメント・重複統計を保持',()=>{const r=parseLangFile('\uFEFFa=one=two ###comment\na=last\n',{maxEntries:2});assert.equal(r.table.a,'last');assert.equal(r.stats.duplicates,1);assert.equal(r.stats.entries,2);assert.equal(r.stats.truncated,false);assert.equal(Object.getPrototypeOf(r.table),null);});

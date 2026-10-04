@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { applyStudioLayout28,renderStudioLayoutTools28 } from '../src/ui/studio-layout28.js';
+const start=()=>({leftOpen:true,rightOpen:true,leftView26:'elements',rightView:'references',compactRibbon26:false,tab:'edit',pendingOperations:[{type:'move'}],revision:'unchanged'});
+test('R28: 集中表示を複数回指定しても最初のパネル配置へ戻れる',()=>{const ui=start(),before=structuredClone(ui);applyStudioLayout28(ui,'focus');applyStudioLayout28(ui,'focus');assert(!ui.leftOpen&&!ui.rightOpen&&ui.compactRibbon26);applyStudioLayout28(ui,'restore');delete ui.layoutRestore28;assert.deepEqual(ui,before);});
+test('R28: 表示プリセットは編集状態を変えず、900px以下では1サイドパネル',()=>{for(const width of [800,900,1100,1440])for(const preset of ['browse','properties','focus']){const ui=start();const operations=ui.pendingOperations;applyStudioLayout28(ui,preset,width);assert.equal(ui.pendingOperations,operations);assert.equal(ui.revision,'unchanged');assert.equal(ui.tab,'edit');if(width<=900)assert(!(ui.leftOpen&&ui.rightOpen));}});
+test('R28: 保存配置なしの復元も一覧中心へ復帰し、不明プリセットは拒否',()=>{const ui=start();applyStudioLayout28(ui,'restore');assert(ui.leftOpen&&!ui.rightOpen&&!ui.compactRibbon26);assert.throws(()=>applyStudioLayout28(ui,'unknown'),TypeError);});
+test('R28: 領域ボタンは識別可能で表示切替コールバックのみを実行',()=>{const called=[],h=(tag,props={},children=[])=>({tag,props,children});const group=renderStudioLayoutTools28(h,x=>called.push(x));assert.equal(group.props.role,'group');assert.equal(group.children.length,3);for(const b of group.children)b.props.onClick();assert.deepEqual(called,['browse','properties','focus']);});

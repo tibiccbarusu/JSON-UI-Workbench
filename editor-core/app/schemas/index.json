@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "kind": "schema",
+      "path": "schemas/jsonui-element.schema.json"
+    },
+    {
+      "kind": "schema",
+      "path": "schemas/jsonui-screen.schema.json"
+    },
+    {
+      "kind": "schema",
+      "path": "schemas/jsonui-ui_defs.schema.json"
+    },
+    {
+      "kind": "schema",
+      "path": "schemas/jsonui-global_variables.schema.json"
+    },
+    {
+      "kind": "meta",
+      "path": "schemas/jsonui-metadata.json"
+    }
+  ],
+  "generated_at_utc": "2026-09-03T13:56:20.447Z"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "jsonui-workbench",
+  "version": "0.16.1",
+  "private": true,
+  "type": "module",
+  "main": "./local-node/api.mjs",
+  "exports": {
+    ".": "./local-node/api.mjs",
+    "./api": "./local-node/api.mjs",
+    "./http": "./local-node/api-server.mjs",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "jsonui": "./local-node/cli.mjs",
+    "jsonui-api": "./local-node/api-server.mjs"
+  },
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "scripts": {
+    "start": "node local-node/cli.mjs",
+    "gui": "node local-node/launcher.mjs",
+    "api": "node local-node/api-server.mjs",
+    "test": "node scripts/release/test-release.mjs",
+    "test:node": "node --test local-node/tests/*.test.mjs",
+    "cli": "node local-node/cli.mjs",
+    "test:workspace": "node --test --test-concurrency=1 local-node/tests/*13.test.mjs",
+    "test:release": "node scripts/release/test-release.mjs",
+    "test:archive": "node --test --test-concurrency=2 editor-core/tests/*.test.mjs local-node/tests/*.test.mjs",
+    "check:package": "node local-node/preflight28.cjs",
+    "package:public": "python scripts/release/package_public.py",
+    "check:public": "node scripts/release/audit-public.mjs"
+  },
+  "description": "JSON UI Workbench — CLI and programmatic renderer for Bedrock JSON UI, with an experimental visual editor",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "optionalDependencies": {
+    "@napi-rs/canvas": "0.1.100"
+  }
+}

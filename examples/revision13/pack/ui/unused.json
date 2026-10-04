@@ -1,0 +1,23 @@
+{
+  "namespace": "demo13_unused",
+  "unused_screen": {
+    "type": "screen",
+    "size": [
+      80,
+      80
+    ],
+    "controls": [
+      {
+        "unused_image": {
+          "type": "image",
+          "texture": "textures/demo/unused",
+          "size": [
+            40,
+            40
+          ]
+        }
+      }
+    ]
+  },
+  "temporary_derived@demo13_widgets.temporary_base": {}
+}

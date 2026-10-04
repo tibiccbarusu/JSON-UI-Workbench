@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "JSON UI 0.9.0 自作デモ",
+    "description": "自己完結のCLI/編集検証用。公式バニラやゲーム内画面置換ではありません。",
+    "uuid": "ca889183-41b3-4af4-92b2-2845c6bd6a1f",
+    "version": [
+      0,
+      9,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "a83033ec-fd21-43ee-8c8c-e061be066d8a",
+      "version": [
+        0,
+        9,
+        0
+      ]
+    }
+  ]
+}

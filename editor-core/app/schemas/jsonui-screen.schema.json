@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "additionalProperties": {
+    "$ref": "./jsonui-element.schema.json#/definitions/UiElement"
+  },
+  "description": "Schema for a Bedrock JSON UI screen file. This expects a root namespace and element objects keyed by control name.",
+  "patternProperties": {
+    "@": {
+      "$ref": "./jsonui-element.schema.json#/definitions/InheritedOverrideBody"
+    }
+  },
+  "properties": {
+    "$schema": {
+      "description": "Optional schema dialect reference.",
+      "type": "string"
+    },
+    "format_version": {
+      "description": "Optional format version (varies by pack).",
+      "type": [
+        "number",
+        "string"
+      ]
+    },
+    "namespace": {
+      "description": "Root namespace (required by editor validation).",
+      "type": "string"
+    }
+  },
+  "required": [
+    "namespace"
+  ],
+  "title": "JSONUI screen file (Bedrock JSON UI; editor subset)",
+  "type": "object"
+}

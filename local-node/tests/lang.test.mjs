@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { randomUUID } from 'node:crypto';
+import { createLocalServer } from '../server.mjs';
+import { makeZip, manifest } from './fixtures.mjs';
+test('Node言語合成はsource優先と編集overrideを保持し不正localeを拒否',async t=>{
+ const app=await createLocalServer({port:0});t.after(()=>app.close());
+ const base=`http://127.0.0.1:${app.port}/api/node/`,cap=await(await fetch(base+'capabilities')).json();
+ const headers={'X-JSONUI-Token':cap.token,'Content-Type':'application/json'};
+ const upload=async lang=>{const id=randomUUID();const r=await fetch(base+'packs',{method:'POST',headers:{...headers,'Content-Type':'application/zip','X-JSONUI-Upload-ID':id},body:makeZip({'manifest.json':manifest,'texts/ja_JP.lang':lang})});assert.equal(r.status,200);return id;};
+ const vanilla=await upload('\ufeffname=基底\nbase.only=基底専用\nname=後勝ち\n__proto__=literal\n'),imported=await upload('name=上書き\nextra=追加\n');
+ const sources=[{kind:'imported',id:imported},{kind:'vanilla',id:vanilla}];
+ const post=async data=>fetch(base+'lang',{method:'POST',headers,body:JSON.stringify(data)});
+ const data=await(await post({locale:'ja_JP',sources})).json();
+ assert.equal(data.table.name,'上書き');assert.equal(data.table['base.only'],'基底専用');assert.equal(data.table.__proto__,'literal');assert.equal(data.stats.vanilla.duplicates,1);assert.equal(data.processing,'node-worker');
+ sources[0].overrides={'texts/ja_JP.lang':'name=編集値\n'};
+ assert.equal((await(await post({locale:'ja_JP',sources})).json()).table.name,'編集値');
+ assert.equal((await post({locale:'../ja_JP',sources})).status,400);
+ assert.equal((await post({locale:'ja_JP',sources:[{kind:'unknown',id:imported}]})).status,400);
+ const missing=await(await post({locale:'en_US',sources})).json();assert.deepEqual(missing.table,{});
+});

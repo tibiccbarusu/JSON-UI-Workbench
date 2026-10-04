@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JSON UI Workbench — Reference Pack Demo</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 16px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+          Noto Sans, Arial, sans-serif;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 8px;
+      }
+      .hint {
+        color: #666;
+        font-size: 13px;
+        margin: 0 0 12px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      label {
+        font-size: 13px;
+      }
+      input[type="text"] {
+        width: min(780px, 100%);
+        padding: 6px 8px;
+      }
+      .btn {
+        padding: 6px 10px;
+        border: 1px solid #999;
+        background: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      .grid {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .panel {
+        border: 1px solid #999;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .panel h2 {
+        margin: 0;
+        padding: 8px 10px;
+        font-size: 13px;
+        background: rgba(127, 127, 127, 0.15);
+      }
+      .panel .body {
+        padding: 10px;
+        font-size: 13px;
+      }
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 12px;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+      }
+      .ok {
+        color: #067d17;
+      }
+      .err {
+        color: #b00020;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JSON UI Workbench — Reference Pack Demo</h1>
+    <p class="hint">
+      Purpose: verify <span class="mono">HttpPackSource</span> timeout+retry+cache
+      and in-flight de-duplication, plus a user-uploaded Vanilla ZIP fallback.
+      The default URL is a pinned official sample; select resources matching your target game version.
+    </p>
+
+    <div class="row">
+      <label>
+        Base URL (GitHub raw):
+        <input
+          id="baseUrl"
+          type="text"
+          spellcheck="false"
+          value="https://raw.githubusercontent.com/Mojang/bedrock-samples/v1.26.50.4/resource_pack/"
+        />
+      </label>
+    </div>
+
+    <div class="row" style="margin-top: 8px">
+      <label>
+        Path:
+        <input
+          id="path"
+          type="text"
+          class="mono"
+          spellcheck="false"
+          value="ui/_ui_defs.json"
+        />
+      </label>
+    </div>
+
+    <div class="row" style="margin-top: 8px">
+      <button id="btnReadPrimary" class="btn">Read text (primary)</button>
+      <button id="btnReadConcurrent" class="btn">
+        Read text x2 concurrently (primary)
+      </button>
+      <button id="btnClear" class="btn">Clear cache + reset stats</button>
+    </div>
+
+    <div class="row" style="margin-top: 12px">
+      <label>
+        Vanilla ZIP fallback:
+        <input id="zipFile" type="file" accept=".zip" />
+      </label>
+      <button id="btnReadFallback" class="btn" disabled>
+        Read text (fallback wrapper)
+      </button>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2>Result</h2>
+        <div class="body">
+          <div id="status" class="mono"></div>
+          <div style="height: 10px"></div>
+          <pre id="output" class="mono"></pre>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>HTTP stats (from HttpPackSource)</h2>
+        <div class="body">
+          <pre id="stats" class="mono"></pre>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { HttpPackSource } from "../../src/pack-io/http-pack-source.js";
+      import { ZipReader } from "../../src/pack-io/zip-reader.js";
+      import { ZipPackSource } from "../../src/pack-io/zip-pack-source.js";
+      import { FallbackPackSource } from "../../src/pack-io/fallback-pack-source.js";
+
+      const $ = (id) => /** @type {any} */ (document.getElementById(id));
+      const baseUrlEl = $("baseUrl");
+      const pathEl = $("path");
+      const zipFileEl = $("zipFile");
+      const btnReadPrimary = $("btnReadPrimary");
+      const btnReadConcurrent = $("btnReadConcurrent");
+      const btnReadFallback = $("btnReadFallback");
+      const btnClear = $("btnClear");
+      const statusEl = $("status");
+      const outputEl = $("output");
+      const statsEl = $("stats");
+
+      /** @type {HttpPackSource|null} */
+      let http = null;
+
+      /** @type {ZipReader|null} */
+      let zipReader = null;
+      /** @type {ZipPackSource|null} */
+      let zipSource = null;
+      /** @type {FallbackPackSource|null} */
+      let fallback = null;
+
+      function setStatus(msg, kind = "") {
+        statusEl.textContent = msg;
+        statusEl.className = `mono ${kind}`.trim();
+      }
+
+      function setOutput(text) {
+        outputEl.textContent = String(text || "");
+      }
+
+      function updateStats() {
+        if (!http) {
+          statsEl.textContent = "(no HttpPackSource yet)";
+          return;
+        }
+        statsEl.textContent = JSON.stringify(http.getStats(), null, 2);
+      }
+
+      function recreateHttp() {
+        try {
+          http = new HttpPackSource({
+            id: "vanilla_http",
+            baseUrl: baseUrlEl.value,
+            // Conservative defaults; tweak here if needed.
+            timeoutMs: 8000,
+            retry: { maxRetries: 2, backoffBaseMs: 200, backoffMaxMs: 4000 },
+          });
+          setStatus("HttpPackSource ready.");
+        } catch (e) {
+          http = null;
+          setStatus(`HttpPackSource error: ${e?.message || e}`, "err");
+        }
+        updateStats();
+        rebuildFallback();
+      }
+
+      function rebuildFallback() {
+        if (!http || !zipSource) {
+          fallback = null;
+          btnReadFallback.disabled = true;
+          return;
+        }
+        fallback = new FallbackPackSource({
+          id: "vanilla_ref",
+          primary: http,
+          fallback: zipSource,
+        });
+        btnReadFallback.disabled = false;
+      }
+
+      async function ensureZipLoaded(file) {
+        if (!file) return;
+        zipReader = new ZipReader();
+        await zipReader.openFromFile(file);
+        zipSource = new ZipPackSource({ id: "vanilla_zip", zipReader });
+        rebuildFallback();
+      }
+
+      async function readTextFrom(source) {
+        const p = pathEl.value;
+        setStatus(`Reading ${p} ...`);
+        setOutput("");
+
+        const started = performance.now();
+        const text = await source.readText(p);
+        const ms = Math.round(performance.now() - started);
+        const preview = text.length > 4000 ? `${text.slice(0, 4000)}\n\n... (truncated)` : text;
+        setStatus(`OK (${ms}ms)`, "ok");
+        setOutput(preview);
+        updateStats();
+      }
+
+      async function handlePrimaryRead(concurrent) {
+        if (!http) recreateHttp();
+        if (!http) return;
+
+        if (!concurrent) {
+          await readTextFrom(http);
+          return;
+        }
+
+        const p = pathEl.value;
+        setStatus(`Concurrent read x2: ${p} ...`);
+        setOutput("");
+
+        const started = performance.now();
+        const [a] = await Promise.all([http.readText(p), http.readText(p)]);
+        const ms = Math.round(performance.now() - started);
+        const preview = a.length > 4000 ? `${a.slice(0, 4000)}\n\n... (truncated)` : a;
+        setStatus(`OK (${ms}ms)`, "ok");
+        setOutput(preview);
+        updateStats();
+      }
+
+      btnReadPrimary.addEventListener("click", async () => {
+        try {
+          await handlePrimaryRead(false);
+        } catch (e) {
+          setStatus(`ERROR: ${e?.message || e}`, "err");
+          setOutput(e?.stack || "");
+          updateStats();
+        }
+      });
+
+      btnReadConcurrent.addEventListener("click", async () => {
+        try {
+          await handlePrimaryRead(true);
+        } catch (e) {
+          setStatus(`ERROR: ${e?.message || e}`, "err");
+          setOutput(e?.stack || "");
+          updateStats();
+        }
+      });
+
+      btnClear.addEventListener("click", () => {
+        if (http) {
+          http.clearCache();
+          http.resetStats();
+        }
+        setStatus("Cache cleared + stats reset.");
+        setOutput("");
+        updateStats();
+      });
+
+      btnReadFallback.addEventListener("click", async () => {
+        try {
+          if (!fallback) {
+            setStatus("Upload a Vanilla ZIP first.", "err");
+            return;
+          }
+          await readTextFrom(fallback);
+        } catch (e) {
+          setStatus(`ERROR: ${e?.message || e}`, "err");
+          setOutput(e?.stack || "");
+          updateStats();
+        }
+      });
+
+      zipFileEl.addEventListener("change", async () => {
+        const file = zipFileEl.files?.[0];
+        if (!file) return;
+        try {
+          setStatus(`Loading ZIP: ${file.name} ...`);
+          await ensureZipLoaded(file);
+          setStatus(`ZIP loaded: ${file.name} (fallback enabled)`, "ok");
+        } catch (e) {
+          zipReader = null;
+          zipSource = null;
+          fallback = null;
+          btnReadFallback.disabled = true;
+          setStatus(`ZIP load failed: ${e?.message || e}`, "err");
+        }
+        updateStats();
+      });
+
+      baseUrlEl.addEventListener("change", () => recreateHttp());
+
+      // Initial setup.
+      recreateHttp();
+    </script>
+  </body>
+</html>

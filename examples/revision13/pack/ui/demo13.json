@@ -1,0 +1,184 @@
+{
+  "namespace": "demo13",
+  "home": {
+    "type": "screen",
+    "size": [
+      320,
+      240
+    ],
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "texture": "textures/demo/panel",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "layer": -2,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            0,
+            0
+          ],
+          "keep_ratio": false
+        }
+      },
+      {
+        "title@demo13_widgets.title": {}
+      },
+      {
+        "note": {
+          "type": "label",
+          "size": [
+            260,
+            24
+          ],
+          "font_type": "unicode",
+          "font_scale_factor": 1.5,
+          "text_alignment": "left",
+          "localize": true,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            24,
+            66
+          ],
+          "text": "demo13.note"
+        }
+      },
+      {
+        "swatch": {
+          "type": "image",
+          "texture": "textures/demo/input",
+          "size": [
+            270,
+            42
+          ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            24,
+            108
+          ],
+          "keep_ratio": false
+        }
+      },
+      {
+        "sound_button": {
+          "type": "button",
+          "size": [
+            150,
+            32
+          ],
+          "sound_name": "demo13.click",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            24,
+            168
+          ],
+          "controls": [
+            {
+              "background": {
+                "type": "image",
+                "texture": "textures/demo/button",
+                "size": [
+                  "100%",
+                  "100%"
+                ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  0,
+                  0
+                ],
+                "keep_ratio": false
+              }
+            },
+            {
+              "caption": {
+                "type": "label",
+                "size": [
+                  134,
+                  26
+                ],
+                "font_type": "unicode",
+                "font_scale_factor": 1.5,
+                "text_alignment": "left",
+                "localize": true,
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [
+                  8,
+                  3
+                ],
+                "text": "demo13.sound",
+                "layer": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "second": {
+    "type": "screen",
+    "size": [
+      320,
+      240
+    ],
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "texture": "textures/demo/input",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            0,
+            0
+          ],
+          "layer": -1,
+          "keep_ratio": false
+        }
+      },
+      {
+        "title@demo13_widgets.title": {
+          "text": "demo13.second",
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            24,
+            30
+          ]
+        }
+      },
+      {
+        "note": {
+          "type": "label",
+          "size": [
+            260,
+            24
+          ],
+          "font_type": "unicode",
+          "font_scale_factor": 1.5,
+          "text_alignment": "left",
+          "localize": true,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [
+            24,
+            84
+          ],
+          "text": "demo13.note"
+        }
+      }
+    ]
+  }
+}

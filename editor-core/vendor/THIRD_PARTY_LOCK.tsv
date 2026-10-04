@@ -1,0 +1,7 @@
+package	version	source	source_package_sha256	file	file_sha256	license
+@zip.js/zip.js	2.8.16	npm:@zip.js/zip.js@2.8.16	b20b30826148ff1fd0b7c84db4e5a2f5711035ac424eb9d8571a56afb9850b3d	zip.js-2.8.16/zip.min.js	f0db625dc6100a49c320d551a39098500c7dca12b1553e693d4af5028aa3faf8	BSD-3-Clause
+@zip.js/zip.js	2.8.16	npm:@zip.js/zip.js@2.8.16	b20b30826148ff1fd0b7c84db4e5a2f5711035ac424eb9d8571a56afb9850b3d	zip.js-2.8.16/zip-web-worker.js	e6869537ca97fa389bcb7ef5b27ed1f0b1c46a3a7a61aa97dac1ae1f542b2b71	BSD-3-Clause
+@zip.js/zip.js	2.8.16	npm:@zip.js/zip.js@2.8.16	b20b30826148ff1fd0b7c84db4e5a2f5711035ac424eb9d8571a56afb9850b3d	zip.js-2.8.16/zip-module.wasm	d5f896af3951ccf51c8ac79e2871eab92a55b891efeadc67d4057277cb87a154	BSD-3-Clause
+@zip.js/zip.js	2.8.16	npm:@zip.js/zip.js@2.8.16	b20b30826148ff0b7c84db4e5a2f5711035ac424eb9d8571a56afb9850b3d	zip.js-2.8.16/LICENSE	1b7ebc8d7889ed25491484ab2b102370742ca6c0b26650a0c62cc2269b579b84	BSD-3-Clause
+jsonc-parser	3.3.1	npm:jsonc-parser@3.3.1	4a0315b8671e7463bae7af7c142cdf19e9aa7ba39eb36dc2df383b8648e3cbc9	jsonc-parser-3.3.1/main.js	6dc132e2e792a9616688ff93d10dd671c1fbcfa3301d76bff3e81193d049337d	MIT
+jsonc-parser	3.3.1	npm:jsonc-parser@3.3.1	4a0315b8671e7463bae7af7c142cdf19e9aa7ba39eb36dc2df383b8648e3cbc9	jsonc-parser-3.3.1/LICENSE.md	c3a24c02d678e5f0711623dcf3ab3f243b273c2633f638a1fa8e35fb7c7f8e4d	MIT

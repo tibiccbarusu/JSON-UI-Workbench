@@ -1,0 +1,11 @@
+{
+  "namespace": "demo13_pocket",
+  "screen": {
+    "type": "screen",
+    "size": [
+      320,
+      240
+    ],
+    "controls": []
+  }
+}

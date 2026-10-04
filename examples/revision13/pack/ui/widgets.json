@@ -1,0 +1,28 @@
+{
+  "namespace": "demo13_widgets",
+  "title": {
+    "type": "label",
+    "size": [
+      260,
+      24
+    ],
+    "font_type": "unicode",
+    "font_scale_factor": 1.5,
+    "text_alignment": "left",
+    "localize": true,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [
+      24,
+      24
+    ],
+    "text": "demo13.title"
+  },
+  "temporary_base": {
+    "type": "panel",
+    "size": [
+      8,
+      8
+    ]
+  }
+}

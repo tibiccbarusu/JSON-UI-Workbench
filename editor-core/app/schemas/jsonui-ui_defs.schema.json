@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "additionalProperties": true,
+  "description": "Schema for ui/_ui_defs.json. Controls which UI screen JSON files are loaded by the game.",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "format_version": {
+      "type": "number"
+    },
+    "ui_defs": {
+      "items": {
+        "description": "Path to a UI JSON file (usually under ui/).",
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "ui_defs"
+  ],
+  "title": "ui/_ui_defs.json (Bedrock JSON UI; editor subset)",
+  "type": "object"
+}

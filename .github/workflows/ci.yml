@@ -1,0 +1,40 @@
+name: Public source checks
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Verify PNG backend and round-trip pixels
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { loadRasterBackend } from './local-node/frame-raster13.mjs';
+          const backend = loadRasterBackend();
+          assert.ok(backend, 'PNG backend is required for CI; optional dependency installation must not silently skip raster tests.');
+          const canvas = backend.createCanvas(2, 2);
+          const context = canvas.getContext('2d');
+          context.fillStyle = '#0c2238';
+          context.fillRect(0, 0, 2, 2);
+          const png = canvas.toBuffer('image/png');
+          assert.deepEqual(png.subarray(0, 8), Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+          const decoded = await backend.loadImage(png);
+          assert.equal(decoded.width, 2);
+          assert.equal(decoded.height, 2);
+          const restored = backend.createCanvas(2, 2).getContext('2d');
+          restored.drawImage(decoded, 0, 0);
+          assert.deepEqual(Array.from(restored.getImageData(0, 0, 2, 2).data), Array(4).fill([12, 34, 56, 255]).flat());
+          console.log(JSON.stringify({ raster_backend: backend.name, version: backend.version, source: backend.source, encoded_bytes: png.length, smoke: 'PNG encode/decode/pixels passed' }));
+          NODE
+      - run: node scripts/release/audit-public.mjs
+      - run: npm run test:release

@@ -1,0 +1,6 @@
+{
+  "type": "move",
+  "path": "ui/manual_demo.json",
+  "pointer": "/screen/controls/2/card",
+  "offset": [36, 56]
+}

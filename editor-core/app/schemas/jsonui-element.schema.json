@@ -1,0 +1,2714 @@
+{
+  "$ref": "#/definitions/UiElement",
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "definitions": {
+    "AnchorPoint": {
+      "anyOf": [
+        {
+          "enum": [
+            "top_left",
+            "top_middle",
+            "top_right",
+            "left_middle",
+            "center",
+            "right_middle",
+            "bottom_left",
+            "bottom_middle",
+            "bottom_right"
+          ],
+          "type": "string"
+        },
+        {
+          "description": "Runtime expression or forward-compatible anchor choice.",
+          "minLength": 1,
+          "type": "string"
+        }
+      ],
+      "description": "Anchor point enum (editor subset)."
+    },
+    "Binding": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI binding entry (subset; unknown fields allowed).",
+      "properties": {
+        "binding_collection_name": {
+          "type": "string"
+        },
+        "binding_collection_prefix": {
+          "type": "string"
+        },
+        "binding_condition": {
+          "type": "string"
+        },
+        "binding_name": {
+          "type": "string"
+        },
+        "binding_name_override": {
+          "type": "string"
+        },
+        "binding_type": {
+          "type": "string"
+        },
+        "ignored": {
+          "type": "boolean"
+        },
+        "resolve_sibling_scope": {
+          "type": "boolean"
+        },
+        "source_control_name": {
+          "type": "string"
+        },
+        "source_property_name": {
+          "type": "string"
+        },
+        "target_property_name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ControlMap": {
+      "additionalProperties": {
+        "$ref": "#/definitions/UiElement"
+      },
+      "description": "Map of named child controls. Only inherited or variable-backed keys may omit a direct type.",
+      "patternProperties": {
+        "@": {
+          "$ref": "#/definitions/InheritedOverrideBody"
+        },
+        "^\\$": {
+          "$ref": "#/definitions/InheritedOverrideBody"
+        }
+      },
+      "type": "object"
+    },
+    "InheritedOverrideBody": {
+      "additionalProperties": true,
+      "description": "Override body whose effective type is supplied by the @base name on its containing property.",
+      "type": "object"
+    },
+    "NamedControlEntry": {
+      "additionalProperties": {
+        "$ref": "#/definitions/UiElement"
+      },
+      "maxProperties": 1,
+      "minProperties": 1,
+      "patternProperties": {
+        "@": {
+          "$ref": "#/definitions/InheritedOverrideBody"
+        },
+        "^\\$": {
+          "$ref": "#/definitions/InheritedOverrideBody"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "UiElement": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UiElement_screen"
+        },
+        {
+          "$ref": "#/definitions/UiElement_panel"
+        },
+        {
+          "$ref": "#/definitions/UiElement_collection_panel"
+        },
+        {
+          "$ref": "#/definitions/UiElement_label"
+        },
+        {
+          "$ref": "#/definitions/UiElement_button"
+        },
+        {
+          "$ref": "#/definitions/UiElement_dropdown"
+        },
+        {
+          "$ref": "#/definitions/UiElement_image"
+        },
+        {
+          "$ref": "#/definitions/UiElement_input_panel"
+        },
+        {
+          "$ref": "#/definitions/UiElement_stack_panel"
+        },
+        {
+          "$ref": "#/definitions/UiElement_grid"
+        },
+        {
+          "$ref": "#/definitions/UiElement_scroll_view"
+        },
+        {
+          "$ref": "#/definitions/UiElement_edit_box"
+        },
+        {
+          "$ref": "#/definitions/UiElement_toggle"
+        },
+        {
+          "$ref": "#/definitions/UiElement_scroll_track"
+        },
+        {
+          "$ref": "#/definitions/UiElement_scrollbar_box"
+        },
+        {
+          "$ref": "#/definitions/UiElement_unsupported"
+        }
+      ]
+    },
+    "UiElement_button": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=button). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "font_size": {
+          "anyOf": [
+            {
+              "enum": [
+                "small",
+                "normal",
+                "large",
+                "extra_large"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "normal",
+          "description": "Font Size"
+        },
+        "font_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "default",
+                "unicode",
+                "rune",
+                "smooth",
+                "MinecraftTen"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "default",
+          "description": "Font Type"
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "shadow": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Shadow"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "default": "",
+          "description": "Text",
+          "type": "string"
+        },
+        "text_alignment": {
+          "anyOf": [
+            {
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "left",
+          "description": "Text Align"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "button",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: button",
+      "type": "object"
+    },
+    "UiElement_collection_panel": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=collection_panel). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "collection_panel",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: collection_panel",
+      "type": "object"
+    },
+    "UiElement_dropdown": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=dropdown). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "font_size": {
+          "anyOf": [
+            {
+              "enum": [
+                "small",
+                "normal",
+                "large",
+                "extra_large"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "normal",
+          "description": "Font Size"
+        },
+        "font_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "default",
+                "unicode",
+                "rune",
+                "smooth",
+                "MinecraftTen"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "default",
+          "description": "Font Type"
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "shadow": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Shadow"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "default": "",
+          "description": "Text",
+          "type": "string"
+        },
+        "text_alignment": {
+          "anyOf": [
+            {
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "left",
+          "description": "Text Align"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "dropdown",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: dropdown",
+      "type": "object"
+    },
+    "UiElement_edit_box": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=edit_box). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "font_size": {
+          "anyOf": [
+            {
+              "enum": [
+                "small",
+                "normal",
+                "large",
+                "extra_large"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "normal",
+          "description": "Font Size"
+        },
+        "font_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "default",
+                "unicode",
+                "rune",
+                "smooth",
+                "MinecraftTen"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "default",
+          "description": "Font Type"
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "shadow": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Shadow"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "default": "",
+          "description": "Text",
+          "type": "string"
+        },
+        "text_alignment": {
+          "anyOf": [
+            {
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "left",
+          "description": "Text Align"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "edit_box",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: edit_box",
+      "type": "object"
+    },
+    "UiElement_grid": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=grid). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "grid",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: grid",
+      "type": "object"
+    },
+    "UiElement_image": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=image). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "image",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: image",
+      "type": "object"
+    },
+    "UiElement_input_panel": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=input_panel). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "input_panel",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: input_panel",
+      "type": "object"
+    },
+    "UiElement_label": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=label). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "font_size": {
+          "anyOf": [
+            {
+              "enum": [
+                "small",
+                "normal",
+                "large",
+                "extra_large"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "normal",
+          "description": "Font Size"
+        },
+        "font_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "default",
+                "unicode",
+                "rune",
+                "smooth",
+                "MinecraftTen"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "default",
+          "description": "Font Type"
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "shadow": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": false,
+          "description": "Shadow"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "default": "",
+          "description": "Text",
+          "type": "string"
+        },
+        "text_alignment": {
+          "anyOf": [
+            {
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Runtime expression or forward-compatible engine choice.",
+              "minLength": 1,
+              "type": "string"
+            }
+          ],
+          "default": "left",
+          "description": "Text Align"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "label",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: label",
+      "type": "object"
+    },
+    "UiElement_panel": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=panel). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "panel",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: panel",
+      "type": "object"
+    },
+    "UiElement_screen": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=screen). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "screen",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: screen",
+      "type": "object"
+    },
+    "UiElement_scroll_track": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=scroll_track). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "scroll_track",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: scroll_track",
+      "type": "object"
+    },
+    "UiElement_scroll_view": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=scroll_view). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "scroll_view",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: scroll_view",
+      "type": "object"
+    },
+    "UiElement_scrollbar_box": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=scrollbar_box). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "scrollbar_box",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: scrollbar_box",
+      "type": "object"
+    },
+    "UiElement_stack_panel": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=stack_panel). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "stack_panel",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: stack_panel",
+      "type": "object"
+    },
+    "UiElement_toggle": {
+      "additionalProperties": true,
+      "description": "Bedrock JSON UI element (type=toggle). Editable property hints are generated from the editor registry.",
+      "properties": {
+        "anchor_from": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "anchor_to": {
+          "$ref": "#/definitions/AnchorPoint"
+        },
+        "bindings": {
+          "description": "Bindings (subset; unknown fields allowed).",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "anyOf": [
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/NamedControlEntry"
+                  },
+                  {
+                    "$ref": "#/definitions/UiElement"
+                  },
+                  {
+                    "description": "String control reference (template).",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/definitions/ControlMap"
+            }
+          ],
+          "description": "Child controls (array or map)."
+        },
+        "offset": {
+          "additionalItems": false,
+          "default": [
+            0,
+            0
+          ],
+          "description": "Position (offset)",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": -10000,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "size": {
+          "additionalItems": false,
+          "default": [
+            "default",
+            "default"
+          ],
+          "description": "Size",
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "anyOf": [
+                {
+                  "maximum": 10000,
+                  "minimum": 0,
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "text": {
+          "description": "Text (commonly used by label/button/edit_box).",
+          "type": "string"
+        },
+        "texture": {
+          "description": "Texture key/path (commonly used by image controls).",
+          "type": "string"
+        },
+        "type": {
+          "const": "toggle",
+          "description": "Bedrock control type."
+        },
+        "visible": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "description": "Runtime variable or expression.",
+              "type": "string"
+            }
+          ],
+          "default": true,
+          "description": "Visible"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: toggle",
+      "type": "object"
+    },
+    "UiElement_unsupported": {
+      "additionalProperties": true,
+      "description": "A valid engine element type not modeled by this editor build. Unknown fields are preserved.",
+      "properties": {
+        "type": {
+          "minLength": 1,
+          "not": {
+            "enum": [
+              "screen",
+              "panel",
+              "collection_panel",
+              "label",
+              "button",
+              "dropdown",
+              "image",
+              "input_panel",
+              "stack_panel",
+              "grid",
+              "scroll_view",
+              "edit_box",
+              "toggle",
+              "scroll_track",
+              "scrollbar_box"
+            ]
+          },
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "UI element: unsupported or future type",
+      "type": "object"
+    }
+  },
+  "description": "Union schema covering supported Bedrock JSON UI element types for this editor. Not a full engine spec.",
+  "title": "JSONUI element (Bedrock JSON UI; editor subset)"
+}
